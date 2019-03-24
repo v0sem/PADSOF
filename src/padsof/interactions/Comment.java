@@ -1,4 +1,4 @@
-package padsof.comment;
+package padsof.interactions;
 
 import padsof.user.User;
 

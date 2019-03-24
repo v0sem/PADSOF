@@ -1,13 +1,16 @@
 package padsof.user;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+import padsof.Status;
 
 public class User {
 
 	private UserType userType;
 	
-	private Date birthDate;
+	private LocalDate birthDate;
 	
 	private String nick;
 	
@@ -21,7 +24,7 @@ public class User {
 	
 	private ArrayList<User> follows;
 
-	public User(String name, Date date, String nick, String password) {
+	public User(String name, LocalDate date, String nick, String password) {
 		
 		this.userType = UserType.STANDARD;
 		this.blocked = false;
@@ -32,69 +35,89 @@ public class User {
 		this.songCount = 0;
 	}
 
-	public UserType getUserType() {
-		return userType;
-	}
-
+	/************************ SETTERS *****************************/
+	
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
-
-	public Date getBirthDate() {
-		return birthDate;
+	
+	/************************* GETTERS *****************************/
+	
+	public UserType getUserType() {
+		return userType;
 	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	
+	public LocalDate getBirthDate() {
+		return birthDate;
 	}
 
 	public String getNick() {
 		return nick;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Boolean getBlocked() {
 		return blocked;
-	}
-
-	public void setBlocked(Boolean blocked) {
-		this.blocked = blocked;
 	}
 
 	public int getSongCount() {
 		return songCount;
 	}
-
-	public void setSongCount(int songCount) {
-		this.songCount = songCount;
-	}
-
-	public ArrayList<User> getFollows() {
-		return follows;
-	}
-
-	public void setFollows(ArrayList<User> follows) {
-		this.follows = follows;
+	
+	/******************* OTHER GETTERS *************************/
+	
+	public void block() {
+		this.blocked = true;
 	}
 	
+	public void unblock() {
+		this.blocked = false;
+	}
 	
+	public void increaseSongCount() {
+		this.songCount++;
+	}
+	
+	/******************* OTHER SETTERS *************************/
+	
+	public Status follow(User followee) {
+		
+		if(followee == null || this.follows.contains(followee)) {
+			return Status.ERROR;
+		}
+		
+		this.follows.add(followee);
+		
+		return Status.OK;
+	}
+	
+	public Status unfollow(User followee) {
+		
+		if(followee == null || !this.follows.contains(followee)) {
+			return Status.ERROR;
+		}
+		
+		this.follows.remove(followee);
+		
+		return Status.OK;
+	}
+	
+	/***************** CHECKERS *******************/
+	
+	public Boolean isOverEighteen() {
+		
+		 LocalDate hoy = LocalDate.now();
+		
+		if(hoy.isBefore(this.birthDate.plus(18,ChronoUnit.YEARS)))
+			return true;
+	
+		return false;
+	}
 }
