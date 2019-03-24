@@ -82,7 +82,7 @@ public class User {
 	}
 	
 	public void increaseSongCount() {
-		this.songCount++;
+		this.songCount--;
 	}
 	
 	/******************* OTHER SETTERS *************************/
