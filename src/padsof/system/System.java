@@ -1,54 +1,153 @@
 package padsof.system;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import padsof.Status;
 import padsof.playable.PlayableObject;
 import padsof.user.User;
-import padsof.user.UserType;
 
 public class System {
 
-	private User adminUser;
+	private static System instance = null;
 	
-	private User anonUser;
+	private User adminUser = null;
+	
+	private User loggedUser = null;
+	
+	private static long anonSongCount;
 	
 	private ArrayList<User> userList;
 	
 	private ArrayList<PlayableObject> playableObjectList;
 	
-	public System() throws ParseException{
-		
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			
-		this.adminUser = new User("admin", format.parse("01/01/1000"), "admin", "admin");
-		adminUser.setUserType(UserType.ADMIN);
-		this.anonUser = new User("anon", format.parse("01/01/1000"), "anon", "");	
-		adminUser.setUserType(UserType.ANON);
+	public System() {
 		
 	}
+	
+	public static System getInstance() {
+		if(instance == null)
+			instance = new System();
+		
+		return instance;
+	}
 
+	/************************** Getters ***************************/
+	
 	public User getAdminUser() {
+	
 		return adminUser;
 	}
-
-	public User getAnonUser() {
-		return anonUser;
+	
+	public User getLoggedUser() {
+		
+		return loggedUser;
 	}
 
-	public ArrayList<User> getUserList() {
-		return userList;
+	public Long getAnonSongCount() {
+		
+		return anonSongCount;
+	}
+	
+	/*************************** Setters ***************************/
+	
+	public void setAnonSongCount(Long count) {
+		
+		anonSongCount = count;
 	}
 
-	public void setUserList(ArrayList<User> userList) {
-		this.userList = userList;
+	/********************** Adding to Lists ************************/
+	
+	public Status addUser(User user) {
+		if(user != null) {
+			this.userList.add(user);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
+	}
+	
+	public Status addPlayableObject(PlayableObject play) {
+		
+		if(play != null) {
+			this.playableObjectList.add(play);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
+	}
+	
+	/******************* Removing from lists *****************/
+	
+	public Status deleteUser(User user) {
+		
+		if(user != null) {
+			this.userList.remove(user);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 
-	public ArrayList<PlayableObject> getPlayableObjectList() {
-		return playableObjectList;
+	public Status deletePlayableObject(PlayableObject play) {
+		
+		if(play != null) {
+			this.playableObjectList.remove(play);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
-
-	public void setPlayableObjectList(ArrayList<PlayableObject> playableObjectList) {
-		this.playableObjectList = playableObjectList;
+	
+	/************************ User related *********************/
+	
+	public Status register(String userName, String userNick, Date date, String userPass) {
+		
+		return Status.OK;
 	}
+	
+	public Status login(String userName, String userPass) {
+		
+		return Status.OK;
+	}
+	
+	public Status logout(User user) {
+		
+		return Status.OK;
+	}
+	
+	/************************* Song Related ********************/
+	
+	public Status search(String query, Boolean title, Boolean author, Boolean album) {
+		
+		Status flag = null;
+		
+		if(title) {
+			flag = searchTitle(query);
+		}
+		if(author) {
+			flag = searchAuthor(query);
+		}
+		if(album) {
+			flag = searchAlbum(query);
+		}
+		
+		return flag;
+	}
+	
+	private Status searchTitle(String songTitle) {
+		
+		return Status.OK;
+	}
+	
+	private Status searchAuthor(String songAuthor) {
+		
+		return Status.OK;
+	}
+	
+	private Status searchAlbum(String songAlbum) {
+		
+		return Status.OK;
+	}
+	
 }
