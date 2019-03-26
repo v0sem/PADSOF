@@ -1,6 +1,9 @@
 package padsof.user;
 
 import java.util.ArrayList;
+
+import es.uam.eps.padsof.telecard.*;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
