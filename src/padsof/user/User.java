@@ -120,4 +120,19 @@ public class User {
 	
 		return false;
 	}
+	/*************** PREMIUM *******************/
+	public Status goPremium(String cardNumber, Double amount) {
+
+		if(!TeleChargeAndPaySystem.isValidCardNumber(cardNumber))
+			return Status.ERROR;
+		
+		try {
+			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", amount);
+		}
+		catch(OrderRejectedException e) {
+			return Status.ERROR;
+		}
+		
+		return Status.OK;
+	}
 }
