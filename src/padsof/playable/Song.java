@@ -2,11 +2,12 @@ package padsof.playable;
 
 import padsof.Status;
 import padsof.user.User;
+import padsof.system.System;
 
 import java.io.FileNotFoundException;
 
 import pads.musicPlayer.*;
-import pads.musicPlayer.exceptions.Mp3PlayerException;
+import pads.musicPlayer.exceptions.*;
 
 public class Song extends CommentableObject{
 
@@ -15,13 +16,24 @@ public class Song extends CommentableObject{
 	private SongState state;
 	
 	private String fileName;
-	
-	//TODO: Change dis please
-	private Exception myWigglyDick;
+
+	public Song (String title, String fileName) throws Exception {
+		
+		super(title);
+		
+		if (Mp3Player.isValidMp3File(fileName) == false)
+		{
+			throw new Mp3InvalidFileException(fileName);
+		}
+		
+		this.explicit = false;
+		this.state = SongState.REVISION_PENDING;
+		this.fileName = fileName;
+	}
 
 	@Override
-	public Status play(User u) {	
-		if (this.canUserPlay(u) == false) {
+	public Status play() {	
+		if (this.canUserPlay() == false) {
 			return Status.ERROR;
 		}
 		
@@ -33,7 +45,7 @@ public class Song extends CommentableObject{
 			// notin
 		}
 		
-		u.increaseSongCount();
+		System.getInstance().getLoggedUser().increaseSongCount();
 		
 		return Status.OK;
 	}
@@ -68,19 +80,19 @@ public class Song extends CommentableObject{
 	}
 
 	@Override
-	protected Boolean canUserPlay(User u) {
+	protected Boolean canUserPlay() {
 		// Check if song is in a playable state
 		if (state != SongState.ACCEPTED) {
 			return false;
 		}
 		
 		// Check if user can play the song
-		if (u.getSongCount() <= 0) {
+		if (System.getInstance().getLoggedUser().getSongCount() <= 0) {
 			return false;
 		}
 		
 		// Check if kids are listening
-		if (explicit == true && !u.isOverEighteen()) {
+		if (explicit == true && !System.getInstance().getLoggedUser().isOverEighteen()) {
 			return false;
 		}
 		
@@ -96,18 +108,5 @@ public class Song extends CommentableObject{
 		}
 		
 		return null;
-	}
-
-	public Song (User author, String title, String fileName) throws Exception {
-		super(author, title);
-		
-		if (Mp3Player.isValidMp3File(fileName) == false)
-		{
-			throw myWigglyDick;
-		}
-		
-		this.explicit = false;
-		this.state = SongState.REVISION_PENDING;
-		this.fileName = fileName;
 	}
 }

@@ -1,11 +1,13 @@
 package padsof.system;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import padsof.Status;
@@ -20,28 +22,30 @@ public class System {
 	
 	private User adminUser = null;
 	
-	private User loggedUser = null;
+	private User loggedUser = null; //mientras este a null, estamos en anon
 	
-	private User anonUser = new User("anon", LocalDate.now(), "anon", "1234");
-	
-	private static long anonSongCount;
+	private long anonSongCount;
 	
 	private ArrayList<User> userList;
 	
 	private ArrayList<PlayableObject> playableObjectList;
 	
-	private ArrayList<PlayableObject> searchResult;
-	
 	public System() {
-		
-		this.userList = new ArrayList<User>();
-		this.playableObjectList = new ArrayList<PlayableObject>();
-		this.searchResult = new ArrayList<PlayableObject>();
+		//si existe un archivo para cargarlo, lo carga
+		if (new File("System.bal").isFile()) {
+			this.loadData();
+		}
+		else {
+			this.userList = new ArrayList<User>();
+			this.playableObjectList = new ArrayList<PlayableObject>();
+			this.anonSongCount = 1000;
+			this.adminUser = new User("Admin User", LocalDate.of(1980, Month.JANUARY, 1), "admin", "admin");
+			this.adminUser.setUserType(UserType.ADMIN);
+			this.userList.add(this.adminUser);
+		}
 	}
 	
 	public static System getInstance() {
-		
-		instance = loadData();
 		
 		if(instance == null)
 			instance = new System();
@@ -49,14 +53,19 @@ public class System {
 		return instance;
 	}
 
-	public static System loadData(){
-		try {   
-			String fileName= "System.bal";
-			FileInputStream fin = new FileInputStream(fileName);
+	public System loadData(){
+		try {
+			FileInputStream fin = new FileInputStream("System.bal");
 			ObjectInputStream ois = new ObjectInputStream(fin);
-			System system = (System) ois.readObject();
+			System loadedSystem = (System) ois.readObject();
+
+			this.adminUser = loadedSystem.adminUser;
+			this.loggedUser = loadedSystem.adminUser;
+			this.playableObjectList = loadedSystem.playableObjectList;
+			this.userList = loadedSystem.userList;
+			
 			ois.close();
-			return system;
+			return loadedSystem;
 		}
 		catch(IOException | ClassNotFoundException r) {
 			return null;
@@ -72,11 +81,6 @@ public class System {
 	public User getLoggedUser() {
 		
 		return loggedUser;
-	}
-	
-	public User getAnonUser() {
-		
-		return anonUser;
 	}
 
 	public Long getAnonSongCount() {
@@ -178,8 +182,7 @@ public class System {
 					adminUser = u;
 				else
 					loggedUser = u;
-				
-				anonUser = null;
+
 				return Status.OK;
 			}
 		}
@@ -199,30 +202,26 @@ public class System {
 			//TODO: Print there was a problem or smth
 		}
 		
-		anonUser = new User("anon", LocalDate.now(), "anon", "1234");
-		
 		return Status.OK;
 	}
 	
 	/************************* Song Related ********************/
 	
-	public Status search(String query, Boolean title, Boolean author, Boolean album) {
+	public ArrayList<PlayableObject> search(String query, Boolean title, Boolean author, Boolean album) {
 		
-		Status flag = null;
-		
-		this.searchResult.clear();
+		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
 		
 		if(title) {
-			this.searchResult.addAll(searchTitle(query));
+			search.addAll(searchTitle(query));
 		}
 		if(author) {
-			this.searchResult.addAll(searchAuthor(query));
+			search.addAll(searchAuthor(query));
 		}
 		if(album) {
-			this.searchResult.addAll(searchAlbum(query));
+			search.addAll(searchAlbum(query));
 		}
 		
-		return flag;
+		return search;
 	}
 	
 	private ArrayList<PlayableObject> searchTitle(String songTitle) {

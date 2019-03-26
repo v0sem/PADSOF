@@ -3,7 +3,6 @@ package padsof.playable;
 import java.util.ArrayList;
 
 import padsof.Status;
-import padsof.user.User;
 
 public class Album extends CommentableObject{
 	
@@ -12,9 +11,9 @@ public class Album extends CommentableObject{
 	private ArrayList<Song> songList;
 
 	@Override
-	public Status play(User u) {
+	public Status play() {
 		for (Song s : songList)	{
-			if (s.play(u) == Status.ERROR) {
+			if (s.play() == Status.ERROR) {
 				continue;
 			}
 		}
@@ -22,7 +21,7 @@ public class Album extends CommentableObject{
 	}
 
 	@Override
-	protected Boolean canUserPlay(User u) {
+	protected Boolean canUserPlay() {
 		return true;
 	}
 
@@ -51,8 +50,8 @@ public class Album extends CommentableObject{
 		return year;
 	}
 
-	public Album(User author, String title, int year) {
-		super(author, title);
+	public Album(String title, int year) {
+		super(title);
 		this.year = year;
 	}
 }

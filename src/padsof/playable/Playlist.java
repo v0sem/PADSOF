@@ -3,16 +3,19 @@ package padsof.playable;
 import java.util.ArrayList;
 
 import padsof.Status;
-import padsof.user.User;
 
 public class Playlist extends PlayableObject {
 
 	private ArrayList<PlayableObject> playableObjectList;
+	
+	public Playlist(String title) {
+		super(title);
+	}
 
 	@Override
-	public Status play(User u) {
+	public Status play() {
 		for (PlayableObject p : playableObjectList)	{
-			if (p.play(u) == Status.ERROR) {
+			if (p.play() == Status.ERROR) {
 				continue;
 			}
 		}
@@ -20,7 +23,7 @@ public class Playlist extends PlayableObject {
 	}
 
 	@Override
-	protected Boolean canUserPlay(User u) {
+	protected Boolean canUserPlay() {
 		return true;
 	}
 
@@ -43,9 +46,5 @@ public class Playlist extends PlayableObject {
 	public Status deletePlayableObject(PlayableObject poo) {
 		playableObjectList.remove(poo);
 		return Status.OK;
-	}
-
-	public Playlist(User author, String title) {
-		super(author, title);
 	}
 }
