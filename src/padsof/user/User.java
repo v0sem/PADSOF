@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 
 import padsof.Status;
 
-public class User {
+public class User implements java.io.Serializable {
 
 	private UserType userType;
 	

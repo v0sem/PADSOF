@@ -1,14 +1,18 @@
 package padsof.playable;
 
 import padsof.Status;
+import padsof.sistem.Sistem;
 import padsof.user.User;
-import padsof.system.System;
 
-public abstract class PlayableObject {
+public abstract class PlayableObject implements java.io.Serializable {
 	
 	public PlayableObject(String title) {
-		this.author = System.getInstance().getLoggedUser();
-		this.title = title;
+		User u = Sistem.getInstance().getLoggedUser();
+		if (u != null) {
+			this.author = u;
+		}
+
+		this.title = title;	
 	}
 
 	private User author;

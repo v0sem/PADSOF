@@ -1,8 +1,8 @@
 package padsof.playable;
 
 import padsof.Status;
+import padsof.sistem.Sistem;
 import padsof.user.User;
-import padsof.system.System;
 
 import java.io.FileNotFoundException;
 
@@ -17,14 +17,12 @@ public class Song extends CommentableObject{
 	
 	private String fileName;
 
-	public Song (String title, String fileName) throws Exception {
-		
+	public Song (String title, String fileName) {
+		// TODO: debemos permitir crear cancion sin que usr haya iniciado sesion? pondra autor a null
 		super(title);
 		
 		if (Mp3Player.isValidMp3File(fileName) == false)
-		{
-			throw new Mp3InvalidFileException(fileName);
-		}
+			java.lang.System.out.println("eres un poco burro tu"); // TODO: dis
 		
 		this.explicit = false;
 		this.state = SongState.REVISION_PENDING;
@@ -45,8 +43,11 @@ public class Song extends CommentableObject{
 			// notin
 		}
 		
-		System.getInstance().getLoggedUser().increaseSongCount();
-		
+		User u;
+		if((u = Sistem.getInstance().getLoggedUser()) != null) {
+			u.increaseSongCount();
+		}
+			
 		return Status.OK;
 	}
 	
@@ -86,14 +87,18 @@ public class Song extends CommentableObject{
 			return false;
 		}
 		
-		// Check if user can play the song
-		if (System.getInstance().getLoggedUser().getSongCount() <= 0) {
-			return false;
+		if(Sistem.getInstance().getLoggedUser() != null) {
+			// Check if user can play the song
+			if (Sistem.getInstance().getLoggedUser().getSongCount() <= 0) {
+				return false;
+			}
+			// Check if kids are listening
+			if (explicit == true && !Sistem.getInstance().getLoggedUser().isOverEighteen()) {
+				return false;
+			}
 		}
-		
-		// Check if kids are listening
-		if (explicit == true && !System.getInstance().getLoggedUser().isOverEighteen()) {
-			return false;
+		else if (Sistem.getInstance().getAnonSongCount() <= 0  ||  explicit == true) {
+				return false;
 		}
 		
 		return true;
