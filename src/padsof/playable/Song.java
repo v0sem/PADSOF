@@ -1,3 +1,8 @@
+/**
+ * Esta clase es la unidad minima playable
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ */
+
 package padsof.playable;
 
 import padsof.Status;
@@ -12,14 +17,32 @@ import pads.musicPlayer.exceptions.*;
 
 public class Song extends CommentableObject{
 
+	/**
+	 * Guarda si la cancion tiene contenido explicito o no
+	 */
 	private Boolean explicit;
-	
+
+	/**
+	 * Guarda el estado de la cancion (REVISION_PENDING, ACCEPTED, REJECTED, REPORTED)
+	 */
 	private SongState state;
 	
+	/**
+	 * Path del MP3 de la cancion
+	 */
 	private String fileName;
 
+	/**
+	 * Aqui se guarda la fecha en la que se reporto la cancion
+	 */
 	private LocalDate reportedDate;
 	
+	/**
+	 * Constructor de cancion
+	 * @param title titulo de la cancion a crear
+	 * @param fileName path de la cancion a crear
+	 * @return objeto creado
+	 */
 	public Song (String title, String fileName) {
 		// TODO: debemos permitir crear cancion sin que usr haya iniciado sesion? pondra autor a null
 		super(title);
@@ -31,7 +54,11 @@ public class Song extends CommentableObject{
 		this.state = SongState.REVISION_PENDING;
 		this.fileName = fileName;
 	}
-
+	
+	/**
+	 * Permite reproducir una cancion
+	 * @return status de la operacion
+	 */
 	@Override
 	public Status play() {	
 		if (this.canUserPlay() == false) {
@@ -58,35 +85,68 @@ public class Song extends CommentableObject{
 		return Status.OK;
 	}
 	
+	/**
+	 * Permite reportar canciones
+	 * @param u usuario que esta reportando la cancion
+	 * @return status de la operacion
+	 */
 	public Status report(User u) {
 		this.setState(SongState.REPORTED);
 		return Status.OK;
 	}
-
+	
+	/**
+	 * Getter de explicit
+	 * @return devuleve si es explicita o no
+	 */
 	public Boolean getExplicit() {
 		return explicit;
 	}
 
+	/**
+	 * Setter del estado explicito de la cancion
+	 * @param explicit nuevo valor del campo explicito de la cancion
+	 */
 	public void setExplicit(Boolean explicit) {
 		this.explicit = explicit;
 	}
 
+	/**
+	 * Getter de explicit
+	 * @return devuleve si es explicita o no
+	 */
 	public SongState getState() {
 		return state;
 	}
 
+	/**
+	 * Setter del estado de la cancion
+	 * @param state nuevo estado de la cancion
+	 */
 	public void setState(SongState state) {
 		this.state = state;
 	}
 
+	/**
+	 * Getter de explicit
+	 * @return devuleve si es explicita o no
+	 */
 	public String getFileName() {
 		return fileName;
 	}
-
+	
+	/**
+	 * Setter del path del MP3
+	 * @param fileName path nuevo
+	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
+	
+	/**
+	 * Comprueba que el usuario puede reproducir la cancion
+	 * @return devuelve true si se puede reproducir o false si no
+	 */
 	@Override
 	protected Boolean canUserPlay() {
 		// Check if song is in a playable state
@@ -111,6 +171,10 @@ public class Song extends CommentableObject{
 		return true;
 	}
 
+	/**
+	 * Calcula la longitud de la cancion
+	 * @return devuleve la longitud o null si no existe la cancion
+	 */
 	@Override
 	public Float getLength() {
 		try {
@@ -121,7 +185,11 @@ public class Song extends CommentableObject{
 		
 		return null;
 	}
-	
+
+	/**
+	 * Getter de la fecha en que se reporto la cancion
+	 * @return devuleve la fecha o null si no se ha reportado
+	 */
 	public LocalDate getReportedDate() {
 		return reportedDate;
 	}

@@ -1,3 +1,8 @@
+/**
+ * Esta clase define listas privadas de canciones. No es lo mismo que album.
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ */
+
 package padsof.playable;
 
 import java.util.ArrayList;
@@ -6,12 +11,24 @@ import padsof.Status;
 
 public class Playlist extends PlayableObject {
 
+	/**
+	 * Lista de canciones u otros objectos reproducibles que forman parte de esta playlist
+	 */
 	private ArrayList<PlayableObject> playableObjectList;
 	
+	/**
+	 * Constructor de playlist
+	 * @param title titulo del playlist
+	 * @return objeto creado
+	 */
 	public Playlist(String title) {
 		super(title);
 	}
-
+	
+	/**
+	 * Permite reproducir una playlist
+	 * @return status de la operacion
+	 */
 	@Override
 	public Status play() {
 		for (PlayableObject p : playableObjectList)	{
@@ -21,12 +38,20 @@ public class Playlist extends PlayableObject {
 		}
 		return Status.OK;
 	}
-
+	
+	/**
+	 * Comprueba si el usuario logeado puede reproducir la playlist
+	 * @return boolean de la operacion
+	 */
 	@Override
 	protected Boolean canUserPlay() {
 		return true;
 	}
-
+	
+	/**
+	 * Calcula la longitud del playlist
+	 * @return float con el tiempo total
+	 */
 	@Override
 	public Float getLength() {
 		float total = 0;
@@ -38,13 +63,23 @@ public class Playlist extends PlayableObject {
 		return total;
 	}
 	
-	public Status addPlayableObject(PlayableObject poo) {
-		playableObjectList.add(poo);
+	/**
+	 * Permite agregar nuevas canciones a una playlist
+	 * @param s cancion nueva
+	 * @return status de la operacion
+	 */
+	public Status addPlayableObject(PlayableObject s) {
+		playableObjectList.add(s);
 		return Status.OK;
 	}
 	
-	public Status deletePlayableObject(PlayableObject poo) {
-		playableObjectList.remove(poo);
+	/**
+	 * Permite borrar canciones de una playlist
+	 * @param s cancion que queremos borrar
+	 * @return status de la operacion
+	 */
+	public Status deletePlayableObject(PlayableObject s) {
+		playableObjectList.remove(s);
 		return Status.OK;
 	}
 }
