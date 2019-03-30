@@ -24,9 +24,15 @@ public class User implements java.io.Serializable {
 	
 	private Boolean blocked;
 	
-	private int songCount;
+	private long songCount;
 	
 	private ArrayList<User> follows;
+
+	private LocalDate premiumDate;
+	
+	private LocalDate registeredDate;
+
+	private String cardNumber;
 	
 	private long songsPlayCount;
 
@@ -39,13 +45,22 @@ public class User implements java.io.Serializable {
 		this.nick = nick;
 		this.password = password;
 		this.songCount = 0;
+		
+		// Save date of registed
+		this.registeredDate = LocalDate.now();
+		
 		this.songsPlayCount = 0;
+		
 	}
 
 	/************************ SETTERS *****************************/
 	
 	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}	
+	
+	public void setSongCount(long maxRegisteredSong) {
+		this.songCount = maxRegisteredSong;
 	}
 	
 	/************************* GETTERS *****************************/
@@ -74,8 +89,20 @@ public class User implements java.io.Serializable {
 		return blocked;
 	}
 
-	public int getSongCount() {
+	public long getSongCount() {
 		return songCount;
+	}
+	
+	public LocalDate getPremiumDate() {
+		return premiumDate;
+	}
+	
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public LocalDate getRegisteredDate() {
+		return registeredDate;
 	}
 	
 	/******************* OTHER SETTERS *************************/
@@ -136,13 +163,19 @@ public class User implements java.io.Serializable {
 		return false;
 	}
 	/*************** PREMIUM *******************/
-	public Status goPremium(String cardNumber, Double amount) {
+	public Status goPremium(String cardNumber) {
 
+		Sistem sis = Sistem.getInstance();
+		
 		if(!TeleChargeAndPaySystem.isValidCardNumber(cardNumber))
 			return Status.ERROR;
 		
 		try {
-			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", amount);
+			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", sis.getPremiumPrice());
+			// Save card number to recharge in 30 days
+			this.cardNumber = cardNumber;
+			// Update premium date
+			this.premiumDate = LocalDate.now();
 		}
 		catch(OrderRejectedException e) {
 			return Status.ERROR;
@@ -150,5 +183,13 @@ public class User implements java.io.Serializable {
 		
 		this.userType = UserType.PREMIUM;
 		return Status.OK;
+	}
+
+	public void setRegisterdDate(LocalDate today) {
+		this.registeredDate = today;
+	}
+
+	public long getSongPlaycount() {
+		return this.songsPlayCount;
 	}
 }
