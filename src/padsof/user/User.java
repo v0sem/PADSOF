@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import padsof.Status;
+import padsof.sistem.Sistem;
 
 public class User implements java.io.Serializable {
 
@@ -77,7 +78,7 @@ public class User implements java.io.Serializable {
 		return songCount;
 	}
 	
-	/******************* OTHER GETTERS *************************/
+	/******************* OTHER SETTERS *************************/
 	
 	public void block() {
 		this.blocked = true;
@@ -93,9 +94,13 @@ public class User implements java.io.Serializable {
 	
 	public void increaseSongPlaycount() {
 		this.songsPlayCount++;
+		
+		if(this.songsPlayCount >= Sistem.getInstance().getPlaysToPremium())
+			this.userType = UserType.PREMIUM;
+			
 	}
 	
-	/******************* OTHER SETTERS *************************/
+	/******************* LIST SETTERS *************************/
 	
 	public Status follow(User followee) {
 		
@@ -143,6 +148,7 @@ public class User implements java.io.Serializable {
 			return Status.ERROR;
 		}
 		
+		this.userType = UserType.PREMIUM;
 		return Status.OK;
 	}
 }
