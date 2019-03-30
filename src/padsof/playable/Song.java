@@ -91,17 +91,29 @@ public class Song extends CommentableObject{
 	 * @param u usuario que esta reportando la cancion
 	 * @return status de la operacion
 	 */
-	public Status report(User u) {
+	public Status report() {
+		
+		Sistem sis = Sistem.getInstance();
 		// Cancion pasa a estado reportado
 		this.setState(SongState.REPORTED);
 
+		User u = sis.getLoggedUser();
+		
 		// Nuevo reporte con la cancion y el usuario que denuncia
-		Sistem.getInstance().addReport(new Report(this, u));
+		if(u != null)
+			Sistem.getInstance().addReport(new Report(this, u));
+		else
+			return Status.ERROR;
 
 		return Status.OK;
 	}
 	
 	public Status reject() {
+		Sistem sis = Sistem.getInstance();
+		
+		if(sis.getAdminUser() != sis.getLoggedUser())
+			return Status.ERROR;
+		
 		this.rejectedDate = LocalDate.now();
 		this.setState(SongState.REJECTED);
 		
