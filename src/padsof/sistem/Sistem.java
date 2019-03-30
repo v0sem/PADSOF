@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import padsof.Status;
 import padsof.playable.Album;
 import padsof.playable.PlayableObject;
+import padsof.playable.Playlist;
+import padsof.playable.Song;
 import padsof.user.User;
 import padsof.user.UserType;
 
@@ -23,23 +25,28 @@ public class Sistem implements java.io.Serializable {
 	
 	private ArrayList<User> userList;
 	
-	private ArrayList<PlayableObject> playableObjectList;
+	private ArrayList<Song> songList;
+	
+	private ArrayList<Album> albumList;
+	
+	private ArrayList<Playlist> playlistList;
 	
 	public Sistem() {
-		/* TODO: FIX FILE WRITE / READ (System.bal), then uncomment this
-		
+	
 		//si existe un archivo para cargarlo, lo carga
 		if (new File("System.bal").exists()) {
 			this.loadData();
 		}
-		else { */
+		else {
 			this.userList = new ArrayList<User>();
-			this.playableObjectList = new ArrayList<PlayableObject>();
+			this.songList = new ArrayList<Song>();
+			this.albumList = new ArrayList<Album>();
+			this.playlistList = new ArrayList<Playlist>();
 			this.anonSongCount = 1000;
 			this.adminUser = new User("Admin User", LocalDate.of(1980, Month.JANUARY, 1), "admin", "admin");
 			this.adminUser.setUserType(UserType.ADMIN);
 			this.userList.add(this.adminUser);
-		//}
+		}
 	}
 	
 	public static Sistem getInstance() {
@@ -58,7 +65,9 @@ public class Sistem implements java.io.Serializable {
 
 			this.adminUser = loadedSystem.adminUser;
 			this.loggedUser = loadedSystem.adminUser;
-			this.playableObjectList = loadedSystem.playableObjectList;
+			this.songList = loadedSystem.songList;
+			this.albumList = loadedSystem.albumList;
+			this.playlistList = loadedSystem.playlistList;
 			this.userList = loadedSystem.userList;
 			
 			ois.close();
@@ -103,10 +112,30 @@ public class Sistem implements java.io.Serializable {
 		return Status.ERROR;
 	}
 	
-	public Status addPlayableObject(PlayableObject play) {
+	public Status addSong(Song s) {
 		
-		if(play != null) {
-			this.playableObjectList.add(play);
+		if(s != null) {
+			this.songList.add(s);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
+	}
+	
+	public Status addAlbum(Album a) {
+		
+		if(a != null) {
+			this.albumList.add(a);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
+	}
+	
+	public Status addPlaylist(Playlist pl) {
+		
+		if(pl != null) {
+			this.playlistList.add(pl);
 			return Status.OK;
 		}
 		
@@ -125,10 +154,30 @@ public class Sistem implements java.io.Serializable {
 		return Status.ERROR;
 	}
 
-	public Status deletePlayableObject(PlayableObject play) {
+	public Status deleteSong(Song s) {
 		
-		if(play != null) {
-			this.playableObjectList.remove(play);
+		if(s != null) {
+			this.songList.remove(s);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
+	}
+	
+	public Status deleteAlbum(Album a) {
+		
+		if(a != null) {
+			this.albumList.remove(a);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
+	}
+
+	public Status deletePlaylist(Playlist pl) {
+		
+		if(pl != null) {
+			this.playlistList.remove(pl);
 			return Status.OK;
 		}
 		
@@ -191,14 +240,14 @@ public class Sistem implements java.io.Serializable {
 	public Status logout() {
 		
 		loggedUser = null;
-		/* TODO: FIX FILE WRITE / READ (System.bal), then uncomment this 
+		
 		try {
 			saveData();
 		} 
 		catch(IOException e) {
 			return Status.ERROR;
 		}
-		*/
+		
 		return Status.OK;
 	}
 	
@@ -228,46 +277,53 @@ public class Sistem implements java.io.Serializable {
 		return search;
 	}
 	
-	private ArrayList<PlayableObject> searchTitle(String songTitle) {
+	private ArrayList<PlayableObject> searchTitle(String title) {
 		
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
 		
-		for(PlayableObject play : this.playableObjectList ) {
-			if(songTitle.equals(play.getTitle()))
-				search.add(play);
+		for(Song s : this.songList) {
+			if(title.equals(s.getTitle()))
+				search.add(s);
+		}
+		
+		for(Album a : this.albumList) {
+			if(title.equals(a.getTitle()))
+				search.add(a);
 		}
 		
 		return search;
 	}
 	
-	private ArrayList<PlayableObject> searchAuthor(String songAuthor) {
+	private ArrayList<PlayableObject> searchAuthor(String author) {
 		
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
 		
-		for(PlayableObject play : this.playableObjectList ) {
-			if(songAuthor.equals(play.getAuthor().getName()))
-				search.add(play);
+		for(Song s : this.songList) {
+			if(author.equals(s.getAuthor().getName()))
+				search.add(s);
+		}
+		
+		for(Album a : this.albumList) {
+			if(author.equals(a.getAuthor().getName()))
+				search.add(a);
 		}
 		
 		return search;
 	}
 	
-	private ArrayList<PlayableObject> searchAlbum(String songAlbum) {
+	private ArrayList<PlayableObject> searchAlbum(String albumTitle) {
 		
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
-		
-		for(PlayableObject play : this.playableObjectList ) {
-			if(play.getClass() == Album.class && 
-			songAlbum.equals(play.getTitle()))
-				search.add(play);
+				
+		for(Album a : this.albumList) {
+			if(albumTitle.equals(a.getTitle()))
+				search.add(a);
 		}
 		
 		return search;
 	}
-	
 	/******************* SAVE STATE ***********************/
 	
-	// TODO: FIX DIS FUNC
 	public void saveData()throws IOException{
 	    String fileName= "System.bal";
 	    FileOutputStream fos = new FileOutputStream(fileName);
