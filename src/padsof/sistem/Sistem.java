@@ -85,7 +85,7 @@ public class Sistem implements java.io.Serializable {
 			Sistem loadedSystem = (Sistem) ois.readObject();
 
 			this.adminUser = loadedSystem.adminUser;
-			this.loggedUser = loadedSystem.adminUser;
+			this.loggedUser = loadedSystem.loggedUser;
 			this.songList = loadedSystem.songList;
 			this.albumList = loadedSystem.albumList;
 			this.playlistList = loadedSystem.playlistList;
