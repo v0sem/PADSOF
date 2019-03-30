@@ -44,9 +44,10 @@ public abstract class CommentableObject extends PlayableObject{
 	 */
 	public Status addComment(String text) {
 		Sistem sis = Sistem.getInstance();
+		User u = sis.getLoggedUser();
 		
-		if(text.length() > 0) {
-			this.commentList.add(new Comment(text, sis.getLoggedUser()));
+		if(text.length() > 0 && u != null) {
+			this.commentList.add(new Comment(text, u));
 			return Status.OK;
 		}
 		
@@ -60,10 +61,11 @@ public abstract class CommentableObject extends PlayableObject{
 	 */
 	public Status removeComment(String text) {
 		Sistem sis = Sistem.getInstance();
+		User u = sis.getLoggedUser();
 		
 		for(Comment com : this.commentList) {
 			if(text.contentEquals(com.getText()) && 
-					(com.getAuthor() == sis.getLoggedUser() || sis.getLoggedUser().getUserType() == UserType.ADMIN)){
+					(com.getAuthor() == u ||u.getUserType() == UserType.ADMIN)){
 				this.commentList.remove(com);
 				return Status.OK;
 			}
