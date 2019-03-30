@@ -69,8 +69,12 @@ public class Playlist extends PlayableObject {
 	 * @return status de la operacion
 	 */
 	public Status addPlayableObject(PlayableObject s) {
-		playableObjectList.add(s);
-		return Status.OK;
+		if(s != null) {
+			playableObjectList.add(s);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 	
 	/**
@@ -79,7 +83,11 @@ public class Playlist extends PlayableObject {
 	 * @return status de la operacion
 	 */
 	public Status deletePlayableObject(PlayableObject s) {
-		playableObjectList.remove(s);
-		return Status.OK;
+		if(s != null) {
+			if(playableObjectList.remove(s));
+				return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 }
