@@ -26,6 +26,8 @@ public class User implements java.io.Serializable {
 	private int songCount;
 	
 	private ArrayList<User> follows;
+	
+	private long songsPlayCount;
 
 	public User(String name, LocalDate date, String nick, String password) {
 		
@@ -36,6 +38,7 @@ public class User implements java.io.Serializable {
 		this.nick = nick;
 		this.password = password;
 		this.songCount = 0;
+		this.songsPlayCount = 0;
 	}
 
 	/************************ SETTERS *****************************/
@@ -86,6 +89,10 @@ public class User implements java.io.Serializable {
 	
 	public void increaseSongCount() {
 		this.songCount--;
+	}
+	
+	public void increaseSongPlaycount() {
+		this.songsPlayCount++;
 	}
 	
 	/******************* OTHER SETTERS *************************/
