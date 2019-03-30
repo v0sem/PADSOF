@@ -31,6 +31,14 @@ public class Sistem implements java.io.Serializable {
 	
 	private ArrayList<Playlist> playlistList;
 	
+	private double premiumPrice;
+	
+	private long maxAnonSong;
+	
+	private long maxRegisteredSong;
+	
+	private long playsToPremium;
+	
 	public Sistem() {
 	
 		//si existe un archivo para cargarlo, lo carga
@@ -42,10 +50,14 @@ public class Sistem implements java.io.Serializable {
 			this.songList = new ArrayList<Song>();
 			this.albumList = new ArrayList<Album>();
 			this.playlistList = new ArrayList<Playlist>();
-			this.anonSongCount = 1000;
+			this.maxRegisteredSong = 1000; 
+			this.maxAnonSong = 1000;
+			this.anonSongCount = this.maxAnonSong;
 			this.adminUser = new User("Admin User", LocalDate.of(1980, Month.JANUARY, 1), "admin", "admin");
 			this.adminUser.setUserType(UserType.ADMIN);
 			this.userList.add(this.adminUser);
+			this.premiumPrice = 19.99;
+			this.playsToPremium = 10000;
 		}
 	}
 	
@@ -94,11 +106,45 @@ public class Sistem implements java.io.Serializable {
 		return anonSongCount;
 	}
 	
+	public double getPremiumPrice() {
+		return premiumPrice;
+	}
+	
+	public long getMaxAnonSong() {
+		return maxAnonSong;
+	}
+
+	public long getMaxRegisteredSong() {
+		return maxRegisteredSong;
+	}
+	
+	public long getPlaysToPremium() {
+		return playsToPremium;
+	}
+	
 	/*************************** Setters ***************************/
 	
-	public void setAnonSongCount(Long count) {
+	public void increaseAnonSongCount() {
 		
-		anonSongCount = count;
+		anonSongCount--;
+	}
+	
+	public void setMaxAnonSong(long count) {
+		
+		maxAnonSong = count;
+	}
+
+	public void setPremiumPrice(double premiumPrice) {
+		this.premiumPrice = premiumPrice;
+	}
+
+	public void setMaxRegisteredSong(long maxRegisteredSong) {
+		this.maxRegisteredSong = maxRegisteredSong;
+	}
+
+
+	public void setPlaysToPremium(long playsToPremium) {
+		this.playsToPremium = playsToPremium;
 	}
 
 	/********************** Adding to Lists ************************/
