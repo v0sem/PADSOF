@@ -24,7 +24,7 @@ public class User implements java.io.Serializable {
 	
 	private Boolean blocked;
 	
-	private int songCount;
+	private long songCount;
 	
 	private ArrayList<User> follows;
 
@@ -59,8 +59,8 @@ public class User implements java.io.Serializable {
 		this.userType = userType;
 	}	
 	
-	public void setSongCount(int songCount) {
-		this.songCount = songCount;
+	public void setSongCount(long maxRegisteredSong) {
+		this.songCount = maxRegisteredSong;
 	}
 	
 	/************************* GETTERS *****************************/
@@ -89,7 +89,7 @@ public class User implements java.io.Serializable {
 		return blocked;
 	}
 
-	public int getSongCount() {
+	public long getSongCount() {
 		return songCount;
 	}
 	

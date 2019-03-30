@@ -31,8 +31,6 @@ public class Sistem implements java.io.Serializable {
 	private ArrayList<Album> albumList;
 	
 	private ArrayList<Playlist> playlistList;
-
-	private Double premiumPrice;
 	
 	private LocalDate songCountDate;
 	
@@ -131,7 +129,7 @@ public class Sistem implements java.io.Serializable {
     		// reset date
     		this.loggedUser.setRegisterdDate(today);
     		// reset count
-    		this.loggedUser.setSongCount(maxRegisterdSong);
+    		this.loggedUser.setSongCount(this.maxRegisteredSong);
     	}
 		
 		// Check if premium users have to pay again
