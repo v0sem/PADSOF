@@ -3,6 +3,7 @@ package padsof;
 import java.time.LocalDate;
 import java.time.Month;
 
+import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Song;
 import padsof.sistem.Sistem;
@@ -18,7 +19,7 @@ public class TestGlobal {
 		
 		// Register Toto and log in
 		if(sis.register("Toto", "toto", LocalDate.of(1980, Month.JANUARY, 1), "1234") == Status.ERROR)
-			System.out.println("error de register");
+			System.out.println("Error en register (el nick o nombre ya existen)");
 		if(sis.login("toto", "1111") == Status.OK || sis.login("itsame", "mario") == Status.OK)
 			System.out.println("Login is not working properly");	
 		if(sis.login("toto", "1234") == Status.ERROR)
@@ -28,7 +29,7 @@ public class TestGlobal {
 		
 		// Toto going to upload Africa. Memes are coming		
 		Song s1 = new Song("Africa", "music/africa.mp3");
-		sis.addPlayableObject(s1); // Is uploaded as REVISION_PENDING
+		sis.addSong(s1); // Should be uploaded as REVISION_PENDING
 		
 		// Toto logs out, enough has been done
 		if(sis.logout() == Status.ERROR  ||  sis.getLoggedUser() != null)
@@ -60,10 +61,10 @@ public class TestGlobal {
 			System.out.println("Login is not working properly");
 		else
 			System.out.println("Logged in successfully as " + sis.getLoggedUser().getName() + " (@" + sis.getLoggedUser().getNick() + ")");
-		// como aniadimos albumes ?? sis.what
-		// quiza deberiamos cambiar la lista de playables por 
-		// una de canciones, otra de albumes y otra de playlists no se si tb
-		
+		sis.addAlbum(new Album("Africa - Single", 2001));
+		// Check search by album...
+		// ...
+		// To be continued
 	}
 
 }
