@@ -3,6 +3,7 @@ package padsof.playable;
 import java.util.ArrayList;
 
 import padsof.Status;
+import padsof.sistem.Sistem;
 
 public class Album extends CommentableObject{
 	
@@ -22,6 +23,9 @@ public class Album extends CommentableObject{
 
 	@Override
 	protected Boolean canUserPlay() {
+		if(Sistem.getInstance().getLoggedUser() == null)
+			return false;
+		
 		return true;
 	}
 
@@ -37,13 +41,21 @@ public class Album extends CommentableObject{
 	}
 	
 	public Status addSong(Song poo) {
-		songList.add(poo);
-		return Status.OK;
+		if(poo != null) {
+			songList.add(poo);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 	
 	public Status deleteSong(Song poo) {
-		songList.remove(poo);
-		return Status.OK;
+		if(poo != null) {
+			if(songList.remove(poo));
+				return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 
 	public int getYear() {
