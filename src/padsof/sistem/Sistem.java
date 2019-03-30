@@ -109,12 +109,12 @@ public class Sistem implements java.io.Serializable {
 		int diff;
 		
 		// Check songs reported and delete dem
-		for(Song s : this.songList) {
-			period = Period.between(today, s.getRejectedDate());
+		for(Report r : this.reportList) {
+			period = Period.between(today, r.getDecisionDate());
 	    	diff = period.getDays();
 	    	
 	    	if (diff >= 3)
-	    		this.songList.remove(s);
+	    		this.reportList.remove(r);
 		}
 		
 		// Check anon song counts
