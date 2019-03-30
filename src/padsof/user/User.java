@@ -163,13 +163,15 @@ public class User implements java.io.Serializable {
 		return false;
 	}
 	/*************** PREMIUM *******************/
-	public Status goPremium(String cardNumber, Double amount) {
+	public Status goPremium(String cardNumber) {
 
+		Sistem sis = Sistem.getInstance();
+		
 		if(!TeleChargeAndPaySystem.isValidCardNumber(cardNumber))
 			return Status.ERROR;
 		
 		try {
-			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", amount);
+			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", sis.getPremiumPrice());
 			// Save card number to recharge in 30 days
 			this.cardNumber = cardNumber;
 			// Update premium date
@@ -185,5 +187,9 @@ public class User implements java.io.Serializable {
 
 	public void setRegisterdDate(LocalDate today) {
 		this.registeredDate = today;
+	}
+
+	public long getSongPlaycount() {
+		return this.songsPlayCount;
 	}
 }

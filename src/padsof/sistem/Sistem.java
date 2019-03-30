@@ -140,6 +140,9 @@ public class Sistem implements java.io.Serializable {
 	    	diff = period.getDays();
 			
 	    	if (diff >= 30) {
+	    		// Demote user first
+	    		this.loggedUser.setUserType(UserType.STANDARD);
+	    		
 	    		// Check if we have the credit card number from last payment
 	    		if (this.loggedUser.getCardNumber() == null) {
 	    			System.out.println("Credit card not provided...?");
@@ -147,7 +150,7 @@ public class Sistem implements java.io.Serializable {
 	    		}
 	    		
 	    		// If we do, pay the saved price with last credit card
-	    		this.loggedUser.goPremium(this.loggedUser.getCardNumber(), this.premiumPrice);
+	    		this.loggedUser.goPremium(this.loggedUser.getCardNumber());
 	    	}
 		}
 	}
