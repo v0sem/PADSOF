@@ -8,6 +8,7 @@ package padsof.playable;
 import java.util.ArrayList;
 
 import padsof.Status;
+import padsof.sistem.Sistem;
 
 public class Album extends CommentableObject{
 	
@@ -52,6 +53,9 @@ public class Album extends CommentableObject{
 	 */
 	@Override
 	protected Boolean canUserPlay() {
+		if(Sistem.getInstance().getLoggedUser() == null)
+			return false;
+		
 		return true;
 	}
 
@@ -76,8 +80,12 @@ public class Album extends CommentableObject{
 	 * @return status de la operacion
 	 */
 	public Status addSong(Song s) {
-		songList.add(s);
-		return Status.OK;
+		if(s !=  null) {
+			songList.add(s);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 
 	/**
@@ -86,8 +94,12 @@ public class Album extends CommentableObject{
 	 * @return status de la operacion
 	 */
 	public Status deleteSong(Song s) {
-		songList.remove(s);
-		return Status.OK;
+		if(s !=  null) {
+			if(songList.remove(s));
+				return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 
 	/**
