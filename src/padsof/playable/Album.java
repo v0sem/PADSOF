@@ -80,8 +80,12 @@ public class Album extends CommentableObject{
 	 * @return status de la operacion
 	 */
 	public Status addSong(Song s) {
-		songList.add(s);
-		return Status.OK;
+		if(s !=  null) {
+			songList.add(s);
+			return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 
 	/**
@@ -90,8 +94,12 @@ public class Album extends CommentableObject{
 	 * @return status de la operacion
 	 */
 	public Status deleteSong(Song s) {
-		songList.remove(s);
-		return Status.OK;
+		if(s !=  null) {
+			if(songList.remove(s));
+				return Status.OK;
+		}
+		
+		return Status.ERROR;
 	}
 
 	/**
