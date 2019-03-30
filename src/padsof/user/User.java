@@ -26,6 +26,12 @@ public class User implements java.io.Serializable {
 	private int songCount;
 	
 	private ArrayList<User> follows;
+	
+	private LocalDate premiumDate;
+	
+	private LocalDate registeredDate;
+
+	private String cardNumber;
 
 	public User(String name, LocalDate date, String nick, String password) {
 		
@@ -36,12 +42,19 @@ public class User implements java.io.Serializable {
 		this.nick = nick;
 		this.password = password;
 		this.songCount = 0;
+		
+		// Save date of registed
+		this.registeredDate = LocalDate.now();
 	}
 
 	/************************ SETTERS *****************************/
 	
 	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}	
+	
+	public void setSongCount(int songCount) {
+		this.songCount = songCount;
 	}
 	
 	/************************* GETTERS *****************************/
@@ -72,6 +85,18 @@ public class User implements java.io.Serializable {
 
 	public int getSongCount() {
 		return songCount;
+	}
+	
+	public LocalDate getPremiumDate() {
+		return premiumDate;
+	}
+	
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public LocalDate getRegisteredDate() {
+		return registeredDate;
 	}
 	
 	/******************* OTHER GETTERS *************************/
@@ -131,11 +156,19 @@ public class User implements java.io.Serializable {
 		
 		try {
 			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", amount);
+			// Save card number to recharge in 30 days
+			this.cardNumber = cardNumber;
+			// Update premium date
+			this.premiumDate = LocalDate.now();
 		}
 		catch(OrderRejectedException e) {
 			return Status.ERROR;
 		}
 		
 		return Status.OK;
+	}
+
+	public void setRegisterdDate(LocalDate today) {
+		this.registeredDate = today;
 	}
 }

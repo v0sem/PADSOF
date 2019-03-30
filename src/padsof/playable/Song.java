@@ -5,6 +5,7 @@ import padsof.sistem.Sistem;
 import padsof.user.User;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 
 import pads.musicPlayer.*;
 import pads.musicPlayer.exceptions.*;
@@ -17,6 +18,8 @@ public class Song extends CommentableObject{
 	
 	private String fileName;
 
+	private LocalDate reportedDate;
+	
 	public Song (String title, String fileName) {
 		// TODO: debemos permitir crear cancion sin que usr haya iniciado sesion? pondra autor a null
 		super(title);
@@ -113,5 +116,9 @@ public class Song extends CommentableObject{
 		}
 		
 		return null;
+	}
+	
+	public LocalDate getReportedDate() {
+		return reportedDate;
 	}
 }
