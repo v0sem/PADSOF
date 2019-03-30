@@ -3,6 +3,7 @@ package padsof.sistem;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 import java.util.ArrayList;
 
 import padsof.Status;
@@ -14,7 +15,7 @@ import padsof.user.User;
 import padsof.user.UserType;
 
 public class Sistem implements java.io.Serializable {
-
+	
 	private static Sistem instance = null;
 	
 	private User adminUser = null;
@@ -30,6 +31,10 @@ public class Sistem implements java.io.Serializable {
 	private ArrayList<Album> albumList;
 	
 	private ArrayList<Playlist> playlistList;
+
+	private Double premiumPrice;
+	
+	private LocalDate songCountDate;
 	
 	private double premiumPrice;
 	
@@ -50,12 +55,18 @@ public class Sistem implements java.io.Serializable {
 			this.songList = new ArrayList<Song>();
 			this.albumList = new ArrayList<Album>();
 			this.playlistList = new ArrayList<Playlist>();
+			
+			this.songCountDate = LocalDate.now();
+			
 			this.maxRegisteredSong = 1000; 
 			this.maxAnonSong = 1000;
+			
 			this.anonSongCount = this.maxAnonSong;
+			
 			this.adminUser = new User("Admin User", LocalDate.of(1980, Month.JANUARY, 1), "admin", "admin");
 			this.adminUser.setUserType(UserType.ADMIN);
 			this.userList.add(this.adminUser);
+			
 			this.premiumPrice = 19.99;
 			this.playsToPremium = 10000;
 		}
@@ -89,6 +100,60 @@ public class Sistem implements java.io.Serializable {
 			return null;
 		}
 	}
+	
+	public void checkDate() {
+		LocalDate today = LocalDate.now();
+		Period period;
+		int diff;
+		
+		// Check songs reported and delete dem
+		for(Song s : this.songList) {
+			period = Period.between(today, s.getReportedDate());
+	    	diff = period.getDays();
+	    	
+	    	if (diff >= 3)
+	    		this.songList.remove(s);
+		}
+		
+		// Check anon song counts
+		period = Period.between(today, this.songCountDate);
+    	diff = period.getDays();
+    	
+    	if (diff >= 30) {
+    		this.anonSongCount = maxAnonSong;
+    	}
+    	
+    	// Check registered song counts
+    	period = Period.between(today, this.loggedUser.getRegisteredDate());
+    	diff = period.getDays();
+    	
+    	if (diff >= 30) {
+    		// reset date
+    		this.loggedUser.setRegisterdDate(today);
+    		// reset count
+    		this.loggedUser.setSongCount(maxRegisterdSong);
+    	}
+		
+		// Check if premium users have to pay again
+		if (this.loggedUser.getUserType() == UserType.PREMIUM)
+		{
+			// User is premium, check for payment
+			period = Period.between(today, this.loggedUser.getPremiumDate());
+	    	diff = period.getDays();
+			
+	    	if (diff >= 30) {
+	    		// Check if we have the credit card number from last payment
+	    		if (this.loggedUser.getCardNumber() == null) {
+	    			System.out.println("Credit card not provided...?");
+	    			return;
+	    		}
+	    		
+	    		// If we do, pay the saved price with last credit card
+	    		this.loggedUser.goPremium(this.loggedUser.getCardNumber(), this.premiumPrice);
+	    	}
+		}
+	}
+	
 	/************************** Getters ***************************/
 	
 	public User getAdminUser() {
