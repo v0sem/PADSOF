@@ -6,6 +6,7 @@
 package padsof.playable;
 
 import padsof.Status;
+import padsof.interactions.Report;
 import padsof.sistem.Sistem;
 import padsof.user.User;
 
@@ -35,7 +36,7 @@ public class Song extends CommentableObject{
 	/**
 	 * Aqui se guarda la fecha en la que se reporto la cancion
 	 */
-	private LocalDate reportedDate;
+	private LocalDate rejectedDate;
 	
 	/**
 	 * Constructor de cancion
@@ -91,7 +92,19 @@ public class Song extends CommentableObject{
 	 * @return status de la operacion
 	 */
 	public Status report(User u) {
+		// Cancion pasa a estado reportado
 		this.setState(SongState.REPORTED);
+
+		// Nuevo reporte con la cancion y el usuario que denuncia
+		Sistem.getInstance().addReport(new Report(this, u));
+
+		return Status.OK;
+	}
+	
+	public Status reject() {
+		this.rejectedDate = LocalDate.now();
+		this.setState(SongState.REJECTED);
+		
 		return Status.OK;
 	}
 	
@@ -190,7 +203,7 @@ public class Song extends CommentableObject{
 	 * Getter de la fecha en que se reporto la cancion
 	 * @return devuleve la fecha o null si no se ha reportado
 	 */
-	public LocalDate getReportedDate() {
-		return reportedDate;
+	public LocalDate getRejectedDate() {
+		return rejectedDate;
 	}
 }

@@ -63,7 +63,7 @@ public abstract class CommentableObject extends PlayableObject{
 		
 		for(Comment com : this.commentList) {
 			if(text.contentEquals(com.getText()) && 
-					(com.getAuthor() == sis.getLoggedUser() || auth.getUserType() == UserType.ADMIN)){
+					(com.getAuthor() == sis.getLoggedUser() || sis.getLoggedUser().getUserType() == UserType.ADMIN)){
 				this.commentList.remove(com);
 				return Status.OK;
 			}

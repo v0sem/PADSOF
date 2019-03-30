@@ -7,6 +7,7 @@ import java.time.Period;
 import java.util.ArrayList;
 
 import padsof.Status;
+import padsof.interactions.Report;
 import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Playlist;
@@ -32,6 +33,8 @@ public class Sistem implements java.io.Serializable {
 	
 	private ArrayList<Playlist> playlistList;
 	
+	private ArrayList<Report> reportList;
+	
 	private LocalDate songCountDate;
 	
 	private double premiumPrice;
@@ -53,6 +56,7 @@ public class Sistem implements java.io.Serializable {
 			this.songList = new ArrayList<Song>();
 			this.albumList = new ArrayList<Album>();
 			this.playlistList = new ArrayList<Playlist>();
+			this.reportList = new ArrayList<Report>();
 			
 			this.songCountDate = LocalDate.now();
 			
@@ -106,7 +110,7 @@ public class Sistem implements java.io.Serializable {
 		
 		// Check songs reported and delete dem
 		for(Song s : this.songList) {
-			period = Period.between(today, s.getReportedDate());
+			period = Period.between(today, s.getRejectedDate());
 	    	diff = period.getDays();
 	    	
 	    	if (diff >= 3)
@@ -434,6 +438,29 @@ public class Sistem implements java.io.Serializable {
 		
 		return search;
 	}
+	
+
+	/******************** Report related ******************/
+	public Status addReport(Report r) {
+
+		if(r != null) {
+			this.reportList.add(r);
+			return Status.OK;
+		}
+
+		return Status.ERROR;
+	}
+
+	public Status deleteReport(Report r) {
+
+		if(r != null) {
+			this.reportList.remove(r);
+			return Status.OK;
+		}
+
+		return Status.ERROR;
+	}
+
 	/******************* SAVE STATE ***********************/
 	
 	public void saveData()throws IOException{
