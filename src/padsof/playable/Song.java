@@ -101,9 +101,34 @@ public class Song extends CommentableObject{
 		return Status.OK;
 	}
 	
+	/*
+	 * Permite rechazar una cancion pendiente de validacion
+	 */
 	public Status reject() {
+		
 		this.rejectedDate = LocalDate.now();
 		this.setState(SongState.REJECTED);
+		
+		return Status.OK;
+	}
+	
+	/*
+	 * Permite aceptar una cancion pendiente de validacion
+	 */
+	public Status accept() {
+		
+		this.setState(SongState.ACCEPTED);
+		
+		return Status.OK;
+	}
+	
+	/*
+	 * Permite aceptar (pero solo para mayores de 18) una cancion pendiente de validacion
+	 */
+	public Status acceptExplicit() {
+		
+		this.explicit = true;
+		this.setState(SongState.ACCEPTED);
 		
 		return Status.OK;
 	}
