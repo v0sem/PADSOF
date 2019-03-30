@@ -339,6 +339,9 @@ public class Sistem implements java.io.Serializable {
 	
 	public Status login(String userName, String userPass) {
 		
+		if(loggedUser != null)
+			return Status.ERROR;
+		
 		for(User u : userList) {
 			if(userName.equals(u.getNick()) && userPass.equals(u.getPassword())) {
 				if(u.getUserType() == UserType.ADMIN) {
