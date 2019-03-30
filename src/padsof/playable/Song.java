@@ -49,8 +49,12 @@ public class Song extends CommentableObject{
 		User u;
 		if((u = Sistem.getInstance().getLoggedUser()) != null) {
 			u.increaseSongCount();
+		} else {
+			Sistem.getInstance().increaseAnonSongCount();
 		}
-			
+		
+		this.getAuthor().increaseSongPlaycount();
+		
 		return Status.OK;
 	}
 	
