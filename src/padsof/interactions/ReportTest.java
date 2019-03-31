@@ -2,8 +2,12 @@ package padsof.interactions;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.Test;
 
+import padsof.Status;
 import padsof.playable.Song;
 import padsof.sistem.Sistem;
 import padsof.user.User;
@@ -11,23 +15,35 @@ import padsof.user.User;
 public class ReportTest {
 	Sistem sis = Sistem.getInstance();
 	Song s1 = new Song("Africa", "music/africa.mp3");
-	User u = sis.getLoggedUser();
-	Report r = new Report(s1, u);
-	
 	
 	@Test
 	public void testReport() {
+		if (sis.register("Mr Crabs", "crabs", LocalDate.of(1970, Month.APRIL, 20), "1111") == Status.ERROR) {
+			sis.login("crabs", "1111");
+		}
+		User u = sis.getLoggedUser();
+		Report r = new Report(s1, u);
 		assertNull(r.getDecisionDate());
 	}
 
 	@Test
 	public void testReject() {
+		if (sis.register("Mr Crabs", "crabs", LocalDate.of(1970, Month.APRIL, 20), "1111") == Status.ERROR) {
+			sis.login("crabs", "1111");
+		}
+		User u = sis.getLoggedUser();
+		Report r = new Report(s1, u);
 		r.reject();
 		assertNotNull(r.getDecisionDate());
 	}
 
 	@Test
 	public void testAccept() {
+		if (sis.register("Mr Crabs", "crabs", LocalDate.of(1970, Month.APRIL, 20), "1111") == Status.ERROR) {
+			sis.login("crabs", "1111");
+		}
+		User u = sis.getLoggedUser();
+		Report r = new Report(s1, u);
 		r.accept();
 		assertTrue(u.getBlocked());
 	}

@@ -11,7 +11,8 @@ import padsof.Status;
 
 public class SistemTest {
 	
-	Sistem test = Sistem.getInstance();
+	// TODO: borrar el .bal
+    Sistem test = Sistem.getInstance();
 	
 	@Test
 	public void testSistem() {
@@ -52,15 +53,17 @@ public class SistemTest {
 
 	@Test
 	public void testLogin() {
+		test.register("Antonio", "antonio", LocalDate.of(1970, Month.APRIL, 20), "1111");
+		test.register("Pablo", "pablo", LocalDate.of(1970, Month.APRIL, 20), "1234");
 		// Valid login
-		assertEquals(Status.OK, test.login("crabs", "1111"));
+		assertEquals(Status.OK, test.login("antonio", "1111"));
 		// Shouldn't be able to login when someone is logged in
-		assertEquals(Status.ERROR, test.login("mango", "1234"));
+		assertEquals(Status.ERROR, test.login("pablo", "1234"));
 		// Login after logout
 		test.logout();
 		assertEquals(Status.ERROR, test.login("nonExistentNick", "1111"));
-		assertEquals(Status.ERROR, test.login("mango", "invalidPass"));
-		assertEquals(Status.OK, test.login("mango", "1234"));
+		assertEquals(Status.ERROR, test.login("pablo", "invalidPass"));
+		assertEquals(Status.OK, test.login("pablo", "1234"));
 	}
 	
 	@Test
@@ -71,7 +74,7 @@ public class SistemTest {
 	
 	@Test
 	public void testAdminIsLogged() {
-		assertEquals(false, test.adminIsLogged());
+		test.logout();
 		test.login("admin", "admin");
 		assertEquals(true, test.adminIsLogged());
 		test.logout();
