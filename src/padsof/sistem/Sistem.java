@@ -470,4 +470,26 @@ public class Sistem implements java.io.Serializable {
 	    oos.writeObject(this);
 	    oos.close();
 	}
+
+	/******************* List getters *********************/
+	
+	public ArrayList<User> getUserList() {
+		return userList;
+	}
+
+	public ArrayList<Song> getSongList() {
+		return songList;
+	}
+	
+	public ArrayList<Album> getAlbumList() {
+		return albumList;
+	}
+
+	public ArrayList<Playlist> getPlaylistList() {
+		return playlistList;
+	}
+
+	public ArrayList<Report> getReportList() {
+		return reportList;
+	}
 }
