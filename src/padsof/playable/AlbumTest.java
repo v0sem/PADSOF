@@ -37,12 +37,6 @@ public class AlbumTest {
 		Sistem.getInstance().login("toto", "1234");
 		
 		assertEquals(Status.OK, album.play());
-		
-		Sistem.getInstance().logout();
-		
-		album.deleteSong(s);
-		album.deleteSong(d);
-		album.deleteSong(f);
 	}
 
 	@Test
@@ -53,13 +47,11 @@ public class AlbumTest {
 		
 		assertFalse(album.canUserPlay());
 		
+		Sistem.getInstance().register("Toto", "toto", 
+				LocalDate.of(1980, Month.JANUARY, 1), "1234");
 		Sistem.getInstance().login("toto", "1234");
 		
 		assertTrue(album.canUserPlay());
-		
-		album.deleteSong(s);
-		album.deleteSong(d);
-		album.deleteSong(f);
 	}
 
 	@Test
@@ -68,7 +60,6 @@ public class AlbumTest {
 		
 		assertEquals(Status.ERROR, album.addSong(fake));
 		assertEquals(Status.OK, album.addSong(s));
-		album.deleteSong(s);
 	}
 
 	@Test

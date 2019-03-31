@@ -22,7 +22,6 @@ class CommentableObjectTest {
 				LocalDate.of(1980, Month.JANUARY, 1), "1234");
 		sis.login("toto", "1234");
 		assertEquals(Status.OK, test.addComment("This is a test"));
-		sis.logout();
 	}
 
 	@Test
