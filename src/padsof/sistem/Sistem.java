@@ -7,6 +7,7 @@ import java.time.Period;
 import java.util.ArrayList;
 
 import padsof.Status;
+import padsof.interactions.Notification;
 import padsof.interactions.Report;
 import padsof.playable.Album;
 import padsof.playable.PlayableObject;
@@ -367,8 +368,12 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status addSong(Song s) {
 		
-		if(s != null) {
+		if(s != null && loggedUser != null) {
 			this.songList.add(s);
+			for(User u : loggedUser.getIsFollowed()) {
+				u.notificate(new Notification(
+						loggedUser.getNick() + " subió una nueva canción", loggedUser, s));
+			}
 			return Status.OK;
 		}
 		
@@ -383,8 +388,12 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status addAlbum(Album a) {
 		
-		if(a != null) {
+		if(a != null && loggedUser != null) {
 			this.albumList.add(a);
+			for(User u : loggedUser.getIsFollowed()) {
+				u.notificate(new Notification(
+						loggedUser.getNick() + " subió un nuevo album", loggedUser, a));
+			}
 			return Status.OK;
 		}
 		
@@ -399,8 +408,12 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status addPlaylist(Playlist pl) {
 		
-		if(pl != null) {
+		if(pl != null && loggedUser != null) {
 			this.playlistList.add(pl);
+			for(User u : loggedUser.getIsFollowed()) {
+				u.notificate(new Notification(
+						loggedUser.getNick() + " subió una nueva playlist", loggedUser, pl));
+			}
 			return Status.OK;
 		}
 		
