@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import padsof.Status;
+import padsof.interactions.Notification;
 import padsof.sistem.Sistem;
 
 public class User implements java.io.Serializable {
@@ -51,6 +52,20 @@ public class User implements java.io.Serializable {
 	 * Lista de usuarios a los que sigue este usuario
 	 */
 	private ArrayList<User> follows;
+	
+	/**
+	 * Lista de usuarios que sigen a este usuario
+	 */
+	private ArrayList<User> isFollowed;
+	
+	/**
+	 * Lista de notificaciones
+	 */
+	private ArrayList<Notification> notifications;
+	
+	/**
+	 * Lista de notificaciones para el usuario
+	 */
 
 	/**
 	 * Fecha en que el usuario renovo el premium
@@ -88,6 +103,9 @@ public class User implements java.io.Serializable {
 		this.nick = nick;
 		this.password = password;
 		this.songCount = 0;
+		this.follows = new ArrayList<User>();
+		this.isFollowed = new ArrayList<User>();
+		this.notifications = new ArrayList<Notification>();
 		
 		// Save date of registed
 		this.registeredDate = LocalDate.now();
@@ -243,6 +261,7 @@ public class User implements java.io.Serializable {
 		}
 		
 		this.follows.add(followee);
+		followee.isFollowed.add(this);
 		
 		return Status.OK;
 	}
@@ -259,6 +278,23 @@ public class User implements java.io.Serializable {
 		}
 		
 		this.follows.remove(followee);
+		followee.isFollowed.remove(this);
+		
+		return Status.OK;
+	}
+	
+	/**
+	 * Anade una notificacion para que el usuario pueda verla
+	 * 
+	 * @param n la notificacion
+	 * 
+	 * @return ERROR si la notificacion es null
+	 */
+	public Status notificate(Notification n) {
+		if(n == null)
+			return Status.ERROR;
+		
+		this.notifications.add(n);
 		
 		return Status.OK;
 	}
@@ -322,4 +358,9 @@ public class User implements java.io.Serializable {
 	public long getSongPlaycount() {
 		return this.songsPlayCount;
 	}
+
+	public ArrayList<User> getIsFollowed() {
+		return isFollowed;
+	}
+
 }
