@@ -43,11 +43,12 @@ public class UserTest {
 	}
 
 	@Test
-	public void testIncreaseSongCount() {
-		long initialSongCount = test.getSongCount();
-		test.increaseSongCount();
-		assertEquals(initialSongCount + 1, test.getSongCount());
-	}
+    public void testIncreaseSongCount() {
+        test.setSongCount(10);
+        long initialSongCount = test.getSongCount();
+        test.increaseSongCount();
+        assertEquals(initialSongCount, test.getSongCount() + 1);
+    }
 
 	@Test
 	public void testIncreaseSongPlaycount() {

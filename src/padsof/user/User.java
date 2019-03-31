@@ -309,7 +309,7 @@ public class User implements java.io.Serializable {
 		
 		 LocalDate hoy = LocalDate.now();
 		
-		if(hoy.isBefore(this.birthDate.plus(18,ChronoUnit.YEARS)))
+		if(hoy.isAfter(this.birthDate.plus(18,ChronoUnit.YEARS)))
 			return true;
 	
 		return false;
