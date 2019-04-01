@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import padsof.playable.*;
 import padsof.sistem.Sistem;
 import padsof.user.User;
+import padsof.user.UserType;
 
 public class TestGlobal {
 	private static String userName1Test = "Toto";
@@ -87,7 +88,7 @@ public class TestGlobal {
 		sis.logout();
 		
 		// Login again as normal user
-		if (sis.login(userNick1Test, "1234") == Status.ERROR)
+		if (sis.login(userNick1Test, passwordTest) == Status.ERROR)
 			System.out.println("[ERROR] Login is not working properly");
 		else
 			System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
@@ -185,6 +186,18 @@ public class TestGlobal {
 		else {
 			System.out.println("[ERROR] Report is not in system");
 		}
+		
+		sis.logout();
+		
+		sis.login(userNick1Test, passwordTest);
+		
+		// Just in case, turn to standard
+		sis.getLoggedUser().setUserType(UserType.STANDARD);
+		
+		// Buy premium
+		sis.getLoggedUser().goPremium("4115528259915985");
+		
+		System.out.println("[INFO] User status > " + sis.getLoggedUser().getUserType());
 		
 		sis.logout();
 	}
