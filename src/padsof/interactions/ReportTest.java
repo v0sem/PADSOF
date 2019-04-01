@@ -40,13 +40,16 @@ public class ReportTest {
 
 	@Test
 	public void testAccept() {
-		if (sis.register("Mr Crabs", "crabs", LocalDate.of(1970, Month.APRIL, 20), "1111") == Status.ERROR) {
-			sis.login("crabs", "1111");
-		}
+		sis.register("Mr Crabs", "crabs", LocalDate.of(1970, Month.APRIL, 20), "1111");
+		sis.login("crabs", "1111");
+		
 		User u = sis.getLoggedUser();
+		if (u == null)
+			System.out.println("User not logged in, error in testAccept.");
+		
 		Report r = new Report(s1, u);
 		r.accept();
-		assertTrue(u.getBlocked());
+		assertTrue(s1.getAuthor().getBlocked());
 	}
 
 }
