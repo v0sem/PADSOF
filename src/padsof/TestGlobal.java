@@ -200,6 +200,15 @@ public class TestGlobal {
 		System.out.println("[INFO] User status > " + sis.getLoggedUser().getUserType());
 		
 		sis.logout();
+		
+		// Demonstrate the loading funcion (the save was executed in logout)
+		sis.loadData();
+		
+		// Check search by author as before
+		System.out.println("[INFO] Results of searching by author \"" + userName1Test + "\":");
+		for (PlayableObject p : sis.search(userName1Test, false, true, false)) {
+			System.out.println("\t> " + p.getTitle());
+		}
 	}
 
 }
