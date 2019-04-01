@@ -7,6 +7,7 @@ package padsof.interactions;
 
 import java.time.LocalDate;
 
+import fechasimulada.FechaSimulada;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.sistem.Sistem;
@@ -25,53 +26,68 @@ public class Report implements java.io.Serializable {
 
 		this.reportedSong = reportedSong;
 		this.reporter = reporter;
+		this.closed = false;
 	}
 
-	/*
+	/**
 	 * Cancion que ha sido reportada por plagio
 	 */
 	private Song reportedSong;
 
-	/*
+	/**
 	 * Usuario que ha reportado plagio en una cancion
 	 */
 	private User reporter;
 
-	/*
+	/**
 	 * Fecha en que el admin acepta o rechaza el reporte de plagio
 	 */
 	private LocalDate decisionDate;
 
 	/**
+	 * Indica si el administrador ya ha decidido si acepta o rechaza el reporte
+	 */
+	private Boolean closed;
+
+	/**
 	 * Permite rechazar un reporte (cuando una denuncia de plagio es falso)
 	 */
 	public void reject() {
-
-		// se banea al denunciante algunos dias (fechasimulada)
-		decisionDate = LocalDate.now();
-
+		// se banea al denunciante (solo durante algunos dias -> checkDate)
+		decisionDate = FechaSimulada.getHoy();
+		reporter.block();
+		// se cierra el reporte
+		this.closed = true;
 		// cancion pasa de reportada a visible
 		reportedSong.setState(SongState.ACCEPTED);
 	}
 
-	/*
+	/**
 	 * Permite aceptar un reporte (cuando una denuncia de plagio es verdadera)
 	 */
 	public void accept() {
-
 		// banear al plagiador
-		reporter.block();
-
+		reportedSong.getAuthor().block();
 		// cancion se borra por plagio (article 13)
 		Sistem.getInstance().deleteSong(reportedSong);
+		// Borra el reporte
+		Sistem.getInstance().deleteReport(this);
 	}
 
-	/*
+	/**
 	 * Getter de decisionDate
 	 * 
 	 * @return devuelve la fecha en que admin acepta o rechaza reporte
 	 */
 	public LocalDate getDecisionDate() {
 		return decisionDate;
+	}
+
+	public Boolean getClosed() {
+		return closed;
+	}
+
+	public User getReporter() {
+		return reporter;
 	}
 }

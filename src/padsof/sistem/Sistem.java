@@ -6,6 +6,7 @@ import java.time.Month;
 import java.time.Period;
 import java.util.ArrayList;
 
+import fechasimulada.FechaSimulada;
 import padsof.Status;
 import padsof.interactions.Notification;
 import padsof.interactions.Report;
@@ -182,24 +183,29 @@ public class Sistem implements java.io.Serializable {
 	 * del resultado
 	 */
 	public void checkDate() {
-		LocalDate today = LocalDate.now();
+		LocalDate today = FechaSimulada.getHoy();
 		Period period;
-		int diff;
 
 		// Check songs reported and delete dem
 		for (Report r : this.reportList) {
-			period = Period.between(today, r.getDecisionDate());
-			diff = period.getDays();
+			if (r.getClosed() == true) {
+				period = Period.between(r.getDecisionDate(), today);
+				// #DEBUG:
+				System.out.println("Fecha de decision: " + r.getDecisionDate() + " Hoy: " + today);
 
-			if (diff >= 3)
-				this.reportList.remove(r);
+				// Unblock the user if 30 days have passed
+				if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
+					r.getReporter().unblock();
+					this.reportList.remove(r);
+				}
+			}
+
 		}
 
 		// Check anon song counts
 		period = Period.between(today, this.songCountDate);
-		diff = period.getDays();
 
-		if (diff >= 30) {
+		if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
 			this.anonSongCount = maxAnonSong;
 		}
 
@@ -208,9 +214,8 @@ public class Sistem implements java.io.Serializable {
 
 		// Check registered song counts
 		period = Period.between(today, this.loggedUser.getRegisteredDate());
-		diff = period.getDays();
 
-		if (diff >= 30) {
+		if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
 			// reset date
 			this.loggedUser.setRegisterdDate(today);
 			// reset count
@@ -219,11 +224,14 @@ public class Sistem implements java.io.Serializable {
 
 		// Check if premium users have to pay again
 		if (this.loggedUser.getUserType() == UserType.PREMIUM) {
+			// If they are privileged, no need to ask them to pay
+			if (this.loggedUser.getSongPlaycount() > this.playsToPremium)
+				return;
+
 			// User is premium, check for payment
 			period = Period.between(today, this.loggedUser.getPremiumDate());
-			diff = period.getDays();
 
-			if (diff >= 30) {
+			if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
 				// Demote user first
 				this.loggedUser.setUserType(UserType.STANDARD);
 
@@ -381,11 +389,11 @@ public class Sistem implements java.io.Serializable {
 
 		if (s != null && loggedUser != null) {
 			this.songList.add(s);
-			
+
 			for (User u : loggedUser.getIsFollowed()) {
 				u.notificate(new Notification(loggedUser.getNick() + " subi� una nueva canci�n", loggedUser, s));
 			}
-			
+
 			return Status.OK;
 		}
 
