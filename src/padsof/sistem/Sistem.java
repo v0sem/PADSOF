@@ -209,7 +209,7 @@ public class Sistem implements java.io.Serializable {
 		}
 
 		// Check anon song counts
-		period = Period.between(today, this.songCountDate);
+		period = Period.between(this.songCountDate, today);
 
 		if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
 			this.anonSongCount = maxAnonSong;
