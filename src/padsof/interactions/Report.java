@@ -1,8 +1,3 @@
-/**
- * Reporte de plagio con la cancion denunciada y el usuario que la denuncio
- * @author David Palomo, Pablo Sanchez, Antonio Solana
- */
-
 package padsof.interactions;
 
 import java.time.LocalDate;
@@ -12,6 +7,11 @@ import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.sistem.Sistem;
 import padsof.user.User;
+
+/**
+ * Reporte de plagio con la cancion denunciada y el usuario que la denuncio
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ */
 
 public class Report implements java.io.Serializable {
 
