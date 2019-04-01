@@ -59,7 +59,7 @@ public class Song extends CommentableObject {
 		super(title);
 
 		if (Mp3Player.isValidMp3File(fileName) == false)
-			System.out.println("File path is incorrect");
+			System.out.println("[ERROR] File path is incorrect");
 		
 		File oldPath = new File(fileName);
 		String oldName = oldPath.getName();
@@ -68,7 +68,7 @@ public class Song extends CommentableObject {
 		try {
 			Files.copy(oldPath.toPath(), newPath.toPath());
 		} catch (IOException e) {
-			System.out.println("Failed to copy MP3 to local library, file probably already in the library");
+			System.out.println("[ERROR] Failed to copy MP3 to local library, file probably already in the library");
 		}
 
 		this.explicit = false;
@@ -94,7 +94,7 @@ public class Song extends CommentableObject {
 			this.songPlayer = player;
 			player.play();
 		} catch (FileNotFoundException | Mp3PlayerException e) {
-			System.out.println("Error playing the song");
+			System.out.println("[ERROR] Error playing the song");
 		}
 
 		// Remove one from song count of the logged user (unless admin or premium)

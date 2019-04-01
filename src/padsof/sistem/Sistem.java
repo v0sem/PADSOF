@@ -194,12 +194,9 @@ public class Sistem implements java.io.Serializable {
 		for (Report r : this.reportList) {
 			if (r.getClosed() == true) {
 				period = Period.between(r.getDecisionDate(), today);
-				// #DEBUG:
-				System.out.println("Fecha de decision: " + r.getDecisionDate() + " Hoy: " + today);
 
 				// Unblock the user if 30 days have passed
 				if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
-					System.out.println("Unblock user and removing report");
 					r.getReporter().unblock();
 					reportsToRemove.add(r);
 				}
@@ -246,7 +243,7 @@ public class Sistem implements java.io.Serializable {
 
 				// Check if we have the credit card number from last payment
 				if (this.loggedUser.getCardNumber() == null) {
-					System.out.println("Credit card not provided...?");
+					System.out.println("[ERROR] Credit card not provided...?");
 					return;
 				}
 
@@ -534,7 +531,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	private Boolean userNickExists(String userNick) {
 		if (this.userList == null || userNick == null) {
-			System.out.println("User list o userNick son null");
+			System.out.println("[ERROR] User list o userNick son null");
 			return false;
 		}
 
@@ -555,7 +552,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	private Boolean userNameExists(String userName) {
 		if (this.userList == null || userName == null) {
-			System.out.println("User list o userName son null");
+			System.out.println("[ERROR] User list o userName son null");
 			return false;
 		}
 		for (User user : this.userList) {
@@ -629,7 +626,7 @@ public class Sistem implements java.io.Serializable {
 		try {
 			saveData();
 		} catch (IOException e) {
-			System.out.println(e);
+			System.out.println("[ERROR] " + e);
 			return Status.ERROR;
 		}
 

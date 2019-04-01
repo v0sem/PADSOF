@@ -20,7 +20,7 @@ public abstract class PlayableObject implements java.io.Serializable {
 	public PlayableObject(String title) {
 		User u = Sistem.getInstance().getLoggedUser();
 		if (u == null) {
-			System.out.println("No user logged in, defaulting to admin user");
+			System.out.println("[INFO] No user logged in, defaulting to admin user");
 			this.author = Sistem.getInstance().getAdminUser();
 		} else {
 			this.author = u;

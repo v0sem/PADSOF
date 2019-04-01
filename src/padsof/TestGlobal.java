@@ -35,7 +35,7 @@ public class TestGlobal {
 		// Try real login
 		sis.login(userNick1Test, passwordTest);
 
-		System.out.println("Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
+		System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
 				+ sis.getLoggedUser().getNick() + ")");
 
 		// Create new song and add it (revision pending)
@@ -55,7 +55,7 @@ public class TestGlobal {
 
 		// Check how the song was uploaded
 		System.out.println(
-				"\nNow Playing:\n  " + s1.getAuthor().getName() + " - " + s1.getTitle() + " [" + s1.getLength() + "]");
+				"\n[INFO] Now Playing:\n  " + s1.getAuthor().getName() + " - " + s1.getTitle() + " [" + s1.getLength() + "]");
 		
 		// Give the user 10 second to listen
 		try {
@@ -64,19 +64,22 @@ public class TestGlobal {
 			e.printStackTrace();
 		}
 		
+		// Stop it
 		s1.stop();
+		
+		System.out.println("\n[INFO] Stopping song");
 
 		// Check search by title
+		System.out.println("\\n[INFO] Results of searching by title \"Africa\":");
 		for (PlayableObject p : sis.search("Africa", true, false, false)) {
-			System.out.println("Results of searching by title \"Africa\":");
 			System.out.println("\t> " + p.getTitle());
 		}
 		
-		System.out.println("Number of results --> " + sis.search("Africa", true, false, false).size());
+		System.out.println("\\n[INFO] Number of results: " + sis.search("Africa", true, false, false).size());
 		
 		// Check search by author
+		System.out.println("[INFO] Results of searching by author \"" + userName1Test + "\":");
 		for (PlayableObject p : sis.search(userName1Test, false, true, false)) {
-			System.out.println("Results of searching by author \"" + userName1Test + "\":");
 			System.out.println("\t> " + p.getTitle());
 		}
 
@@ -85,9 +88,9 @@ public class TestGlobal {
 		
 		// Login again as normal user
 		if (sis.login(userNick1Test, "1234") == Status.ERROR)
-			System.out.println("Login is not working properly");
+			System.out.println("[ERROR] Login is not working properly");
 		else
-			System.out.println("Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
+			System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
 					+ sis.getLoggedUser().getNick() + ")");
 		
 		// Add new album
@@ -97,19 +100,19 @@ public class TestGlobal {
 		// Search our album
 		ArrayList<PlayableObject> result = sis.search("Africa - Single", false, false, true);
 		if(result.size() < 1) {
-			System.out.println("Search is not working properly");
+			System.out.println("[ERROR] Search is not working properly");
 		}
 		else {
-			System.out.println("Found Album" + result.get(0).getTitle());
+			System.out.println("[INFO] Found Album" + result.get(0).getTitle());
 		}
 		
 		// Adding song to album
 		album.addSong(s1);
 		if(Math.abs(album.getLength() % s1.getLength()) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
-			System.out.println("Added song correctly");
+			System.out.println("[INFO] Added song correctly");
 		}
 		else {
-			System.out.println("Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
+			System.out.println("[ERROR] Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
 		}
 		
 		// Add new Playlist
@@ -117,20 +120,20 @@ public class TestGlobal {
 		sis.addPlaylist(pl);
 		
 		if(sis.getPlaylistList().contains(pl)) {
-			System.out.println("Playlist " + pl.getTitle() + " was correctly added to the system");
+			System.out.println("[INFO] Playlist " + pl.getTitle() + " was correctly added to the system");
 		}
 		else {
-			System.out.println("Playlist " + pl.getTitle() + " was not added to the sistem");
+			System.out.println("[ERROR] Playlist " + pl.getTitle() + " was not added to the sistem");
 		}
 		
 		// Add items to the playlist and check that they are all in
 		pl.addPlayableObject(s1);
 		pl.addPlayableObject(album);
 		if(Math.abs(pl.getLength() % (album.getLength() + s1.getLength())) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
-			System.out.println("Added " + s1.getTitle() + " and " + album.getTitle() + " correctly to " + pl.getTitle());
+			System.out.println("[INFO] Added " + s1.getTitle() + " and " + album.getTitle() + " correctly to " + pl.getTitle());
 		}
 		else {
-			System.out.println("Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
+			System.out.println("[ERROR] Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
 		}
 		
 		sis.logout();
@@ -141,15 +144,15 @@ public class TestGlobal {
 		sis.getLoggedUser().follow(sis.getUserList().get(1));
 		
 		if (sis.logout() == Status.ERROR)
-			System.out.println("Problem logging out...");
+			System.out.println("[ERROR] Problem logging out...");
 		
 		sis.login(userNick1Test, passwordTest);
 		
 		if(sis.getLoggedUser().getIsFollowed().size() == 1) {
-			System.out.println(sis.getLoggedUser().getName() + " is being followed by " + sis.getLoggedUser().getIsFollowed().get(0).getName());
+			System.out.println("[INFO] " + sis.getLoggedUser().getName() + " is being followed by " + sis.getLoggedUser().getIsFollowed().get(0).getName());
 		}
 		else {
-			System.out.println("There was something wrong when following");
+			System.out.println("[ERROR] There was something wrong when following");
 		}
 		
 		sis.addSong(new Song("All Star", "music" + File.separator + "som.mp3"));
@@ -159,10 +162,10 @@ public class TestGlobal {
 		
 		// Checking the notification
 		if(sis.getLoggedUser().getNotifications().size() > 0) {
-			System.out.println(sis.getLoggedUser().getName() + " recieved --> " + sis.getLoggedUser().getNotifications().get(0).getNotificationText());
+			System.out.println("[INFO] " + sis.getLoggedUser().getName() + " recieved --> " + sis.getLoggedUser().getNotifications().get(0).getNotificationText());
 		}
 		else {
-			System.out.println("There was something wrong with the notifications");
+			System.out.println("[ERROR] There was something wrong with the notifications");
 		}
 		
 		// Reporting new song because is Smash Mouth's song
@@ -170,17 +173,17 @@ public class TestGlobal {
 		Song s2 = (Song) result.get(0);
 		
 		if(s2.report() == Status.OK) {
-			System.out.println(s2.getTitle() + " reported");
+			System.out.println("[INFO] " + s2.getTitle() + " reported");
 		}
 		else {
-			System.out.println("There was something wrong with the report");
+			System.out.println("[ERROR] There was something wrong with the report");
 		}
 		
 		if(sis.getReportList().size() > 0) {
-			System.out.println("Report is in system");
+			System.out.println("[INFO] Report is in system");
 		}
 		else {
-			System.out.println("Report is not in system");
+			System.out.println("[ERROR] Report is not in system");
 		}
 		
 		sis.logout();

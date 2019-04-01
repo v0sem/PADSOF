@@ -45,7 +45,7 @@ public class ReportTest {
 		
 		User u = sis.getLoggedUser();
 		if (u == null)
-			System.out.println("User not logged in, error in testAccept.");
+			System.out.println("[ERROR] User not logged in, error in testAccept.");
 		
 		Report r = new Report(s1, u);
 		r.accept();
