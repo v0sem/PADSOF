@@ -116,7 +116,7 @@ public class Sistem implements java.io.Serializable {
 			this.playlistList = new ArrayList<Playlist>();
 			this.reportList = new ArrayList<Report>();
 
-			this.songCountDate = LocalDate.now();
+			this.songCountDate = FechaSimulada.getHoy();
 
 			this.maxRegisteredSong = 1000;
 			this.maxAnonSong = 1000;
@@ -280,7 +280,7 @@ public class Sistem implements java.io.Serializable {
 	 * 
 	 * @return numero de reproducciones que le quedan a los usuarios anonimos
 	 */
-	public Long getAnonSongCount() {
+	public long getAnonSongCount() {
 
 		return anonSongCount;
 	}
@@ -329,6 +329,16 @@ public class Sistem implements java.io.Serializable {
 	public void increaseAnonSongCount() {
 
 		anonSongCount--;
+	}
+	
+	/**
+	 * Setter de anonSongCount
+	 * 
+	 * @param count nuevo maximo
+	 */
+	public void setAnonSongCount(long count) {
+
+		this.anonSongCount = count;
 	}
 
 	/**

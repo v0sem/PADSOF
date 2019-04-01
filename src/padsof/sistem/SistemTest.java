@@ -41,7 +41,9 @@ public class SistemTest {
 		Long initialSongCount = test.getAnonSongCount();
 		test.increaseAnonSongCount();
 		// Yes, songCounts should go backwards
-		assertEquals(0, test.getAnonSongCount().compareTo(initialSongCount - 1));
+		assertEquals(test.getAnonSongCount(), initialSongCount - 1);
+		// Leave count as it was
+		test.setAnonSongCount(initialSongCount);
 	}
 
 	@Test
@@ -100,10 +102,11 @@ public class SistemTest {
 		// If 30 days have passed since they paid premium, get they money again (if they
 		// are not privileged)
 
-		FechaSimulada.restablecerHoyReal();
+		//FechaSimulada.restablecerHoyReal();
 		System.out.println(FechaSimulada.getHoy());
 		test.logout();
-		test.register("Honest Man", "thetruth", LocalDate.of(1970, Month.APRIL, 20), "1111");
+		User uHonest = new User("Honest Man", LocalDate.of(1970, Month.APRIL, 20), "thetruth", "1111");
+		test.addUser(uHonest);
 		Song s1 = new Song("Very Original Song", "music/bejito.mp3");
 		test.addSong(s1);
 
@@ -123,9 +126,17 @@ public class SistemTest {
 		// admin rejects the report: song was not plagio
 		for (Report r : test.getReportList())
 			r.reject();
+		test.logout();
 		assertEquals(SongState.ACCEPTED, s1.getState());
 		assertTrue(uLiar.getBlocked());
-
+		
+		// Anon plays song to decrease anonSongCount by 1
+		s1.play();
+		
+		// User plays song to decrease individual SongCount by 1
+		test.login("thetruth", "1111");
+		s1.play();
+		
 		// 30 days later
 		FechaSimulada.avanzar(40);
 		System.out.println(FechaSimulada.getHoy());
@@ -133,8 +144,10 @@ public class SistemTest {
 		Sistem.getInstance().checkDate();
 
 		assertFalse(uLiar.getBlocked());
-
-		test.logout();
 		test.deleteUser(uLiar);
+		
+		// SongCounts should be updated
+		assertEquals(test.getMaxRegisteredSong(), uHonest.getSongCount());
+		assertEquals(test.getAnonSongCount(), test.getMaxAnonSong());
 	}
 }
