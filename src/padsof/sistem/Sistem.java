@@ -187,6 +187,7 @@ public class Sistem implements java.io.Serializable {
 		Period period;
 
 		// Check songs reported and delete dem
+		ArrayList<Report> reportsToRemove = new ArrayList<Report>();
 		for (Report r : this.reportList) {
 			if (r.getClosed() == true) {
 				period = Period.between(r.getDecisionDate(), today);
@@ -195,11 +196,16 @@ public class Sistem implements java.io.Serializable {
 
 				// Unblock the user if 30 days have passed
 				if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
+					System.out.println("Unblock user and removing report");
 					r.getReporter().unblock();
-					this.reportList.remove(r);
+					reportsToRemove.add(r);
 				}
 			}
+		}
 
+		// Remove all report we found
+		for (Report r : reportsToRemove) {
+			this.reportList.remove(r);
 		}
 
 		// Check anon song counts

@@ -235,7 +235,9 @@ public class User implements java.io.Serializable {
 	 * Desbloquea al usuario
 	 */
 	public void unblock() {
+		System.out.println(this.name + " is unblocked >> " + blocked);
 		this.blocked = false;
+		System.out.println(this.name + " is unblocked >> " + blocked);
 	}
 	
 	/** 

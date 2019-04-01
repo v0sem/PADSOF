@@ -3,6 +3,7 @@ package padsof.sistem;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -123,15 +124,15 @@ public class SistemTest {
 		for (Report r : test.getReportList())
 			r.reject();
 		assertEquals(SongState.ACCEPTED, s1.getState());
-		assertEquals(true, uLiar.getBlocked());
+		assertTrue(uLiar.getBlocked());
 
 		// 30 days later
-		FechaSimulada.avanzar(30);
+		FechaSimulada.avanzar(40);
 		System.out.println(FechaSimulada.getHoy());
-
-		assertEquals(false, uLiar.getBlocked());
 		
 		Sistem.getInstance().checkDate();
+
+		assertFalse(uLiar.getBlocked());
 
 		test.logout();
 		test.deleteUser(uLiar);
