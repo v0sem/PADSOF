@@ -60,7 +60,7 @@ public class TestGlobal {
 		
 		// Give the user 10 second to listen
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -141,7 +141,8 @@ public class TestGlobal {
 		// Admin starts following Toto
 		sis.getLoggedUser().follow(sis.getUserList().get(1));
 		
-		sis.logout();
+		if (sis.logout() == Status.ERROR)
+			System.out.println("Problem logging out...");
 		
 		sis.login(userNick1Test, passwordTest);
 		

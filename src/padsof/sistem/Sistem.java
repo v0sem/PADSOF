@@ -619,6 +619,7 @@ public class Sistem implements java.io.Serializable {
 		try {
 			saveData();
 		} catch (IOException e) {
+			System.out.println(e);
 			return Status.ERROR;
 		}
 

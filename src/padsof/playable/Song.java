@@ -21,7 +21,7 @@ public class Song extends CommentableObject {
 	/**
 	 * Guarda el player de esta cancion
 	 */
-	private Mp3Player songPlayer;
+	private transient Mp3Player songPlayer;
 	
 	/**
 	 * Guarda si la cancion tiene contenido explicito o no
