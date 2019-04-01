@@ -11,7 +11,10 @@ import padsof.sistem.Sistem;
 import padsof.user.User;
 import padsof.user.UserType;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 
 import pads.musicPlayer.*;
@@ -57,6 +60,16 @@ public class Song extends CommentableObject {
 
 		if (Mp3Player.isValidMp3File(fileName) == false)
 			System.out.println("File path is incorrect");
+		
+		File oldPath = new File(fileName);
+		String oldName = oldPath.getName();
+		File newPath = new File("music" + File.separator + oldName);
+				
+		try {
+			Files.copy(oldPath.toPath(), newPath.toPath());
+		} catch (IOException e) {
+			System.out.println("Failed to copy MP3 to local library, file probably already in the library");
+		}
 
 		this.explicit = false;
 		this.state = SongState.REVISION_PENDING;
