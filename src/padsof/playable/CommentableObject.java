@@ -62,11 +62,10 @@ public abstract class CommentableObject extends PlayableObject{
 	 */
 	public Status removeComment(String text) {
 		Sistem sis = Sistem.getInstance();
-		User u = sis.getLoggedUser();
 		
 		for(Comment com : this.commentList) {
 			if(text.contentEquals(com.getText()) && 
-					(com.getAuthor() == u ||u.getUserType() == UserType.ADMIN)){
+					(com.getAuthor() == sis.getLoggedUser() || sis.adminIsLogged())){
 				this.commentList.remove(com);
 				return Status.OK;
 			}
