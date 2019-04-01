@@ -136,8 +136,10 @@ public class Song extends CommentableObject {
 		return Status.OK;
 	}
 
-	/*
+	/**
 	 * Permite rechazar una cancion pendiente de validacion
+	 * 
+	 * @return ERROR si el usuario loggeado no es un admin
 	 */
 	public Status reject() {
 		Sistem sis = Sistem.getInstance();
@@ -151,8 +153,10 @@ public class Song extends CommentableObject {
 		return Status.OK;
 	}
 
-	/*
-	 * Permite aceptar una cancion pendiente de validacion
+	/**
+	 * Marca una cancion como aceptada
+	 * 
+	 * @return ERROR si el usuario loggeado no es un admin
 	 */
 	public Status accept() {
 		Sistem sis = Sistem.getInstance();
@@ -164,12 +168,17 @@ public class Song extends CommentableObject {
 		return Status.OK;
 	}
 
-	/*
-	 * Permite aceptar (pero solo para mayores de 18) una cancion pendiente de
-	 * validacion
+	/**
+	 *  Permite aceptar (pero solo para mayores de 18) una cancion pendiente de
+	 *  validacion
+	 *  
+	 * @return ERROR si el usuario loggeado no es admin
 	 */
 	public Status acceptExplicit() {
-
+		Sistem sis = Sistem.getInstance();
+		if (!sis.adminIsLogged())
+			return Status.ERROR;
+		
 		this.explicit = true;
 		this.setState(SongState.ACCEPTED);
 
