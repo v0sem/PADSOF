@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import fechasimulada.FechaSimulada;
 import padsof.Status;
+import padsof.playable.Album;
+import padsof.playable.Playlist;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.user.User;
@@ -41,7 +43,9 @@ public class SistemTest {
 		Long initialSongCount = test.getAnonSongCount();
 		test.increaseAnonSongCount();
 		// Yes, songCounts should go backwards
-		assertEquals(0, test.getAnonSongCount().compareTo(initialSongCount - 1));
+		assertEquals(test.getAnonSongCount(), initialSongCount - 1);
+		// Leave count as it was
+		test.setAnonSongCount(initialSongCount);
 	}
 
 	@Test
@@ -100,10 +104,11 @@ public class SistemTest {
 		// If 30 days have passed since they paid premium, get they money again (if they
 		// are not privileged)
 
-		FechaSimulada.restablecerHoyReal();
+		//FechaSimulada.restablecerHoyReal();
 		System.out.println(FechaSimulada.getHoy());
 		test.logout();
-		test.register("Honest Man", "thetruth", LocalDate.of(1970, Month.APRIL, 20), "1111");
+		User uHonest = new User("Honest Man", LocalDate.of(1970, Month.APRIL, 20), "thetruth", "1111");
+		test.addUser(uHonest);
 		Song s1 = new Song("Very Original Song", "music/bejito.mp3");
 		test.addSong(s1);
 
@@ -123,9 +128,17 @@ public class SistemTest {
 		// admin rejects the report: song was not plagio
 		for (Report r : test.getReportList())
 			r.reject();
+		test.logout();
 		assertEquals(SongState.ACCEPTED, s1.getState());
 		assertTrue(uLiar.getBlocked());
-
+		
+		// Anon plays song to decrease anonSongCount by 1
+		s1.play();
+		
+		// User plays song to decrease individual SongCount by 1
+		test.login("thetruth", "1111");
+		s1.play();
+		
 		// 30 days later
 		FechaSimulada.avanzar(40);
 		System.out.println(FechaSimulada.getHoy());
@@ -133,8 +146,129 @@ public class SistemTest {
 		Sistem.getInstance().checkDate();
 
 		assertFalse(uLiar.getBlocked());
-
-		test.logout();
 		test.deleteUser(uLiar);
+		
+		// SongCounts should be updated
+		assertEquals(test.getMaxRegisteredSong(), uHonest.getSongCount());
+		assertEquals(test.getAnonSongCount(), test.getMaxAnonSong());
+	}
+	
+	@Test
+	public void testSearch() {
+		test.logout();
+		test.register("SmashMouth", "smashmouth", LocalDate.of(1970, Month.APRIL, 20), "1111");
+		test.login("smashmouth", "1111");
+		
+		Song s1 = new Song("All Star", "music/som.mp3");
+		test.addSong(s1);
+		assertNotNull(test.search("All Star", true, false, false));
+		assertEquals(1, test.search("All Star", true, false, false).size());
+		
+		Album a1 = new Album("Shrek The Movie", 2001);
+		test.addAlbum(a1);
+		assertNotNull(test.search("Shrek The Movie", false, false, true));
+		assertEquals(1, test.search("Shrek The Movie", false, false, true).size());
+		
+		assertNotNull(test.search("SmashMouth", false, true, false));
+		assertEquals(2, test.search("SmashMouth", false, true, false).size()); // Expected 2 (song + album)
+	}
+	
+	@Test
+	public void testSave() {
+		test.logout();
+		User u1 = new User("Fernando", LocalDate.of(1970, Month.APRIL, 20), "yaboi", "1111");
+		User artist = new User("The Artist", LocalDate.of(1970, Month.APRIL, 20), "theoneandonly", "1111");
+		test.addUser(u1);
+		test.addUser(artist);
+		test.login("theoneandonly", "1111");
+		Song s1 = new Song("Silaba Tonica", "music/bejito.mp3");
+		Song s2 = new Song("A continent", "music/africa.mp3");
+		Song s3 = new Song("Somebody", "music/som.mp3");
+		test.addSong(s1);
+		test.addSong(s2);
+		test.addSong(s3);
+		Album a = new Album("Latin Hits", 2009);
+		a.addSong(s1);
+		a.addSong(s2);
+		test.addAlbum(a);
+		test.logout();
+		
+		test.login("yaboi", "1111");
+		Playlist pl = new Playlist("Mi lista 1");
+		pl.addPlayableObject(s3);
+		pl.addPlayableObject(a);
+		test.addPlaylist(pl);
+		try {
+			test.saveData();
+		} catch (IOException e) {
+			fail("IOException in saveData");
+		}
+		
+		test.deleteAlbum(a);
+		test.deleteSong(s1);
+		test.deleteSong(s2);
+		test.deleteSong(s3);
+		
+		File file = new File("System.bal");
+		file.delete();
+	}
+	
+	@Test
+	public void testLoad() {
+		test.logout();
+		assertNotNull(test.loadData());
+		assertNotNull(test.getUserList());
+		assertNotNull(test.getSongList());
+		assertNotNull(test.getAlbumList());
+		assertNotNull(test.getPlaylistList());
+		assertNotNull(test.getReportList());
+		assertNotNull(test.getAdminUser());
+		
+		User u1 = new User("Fernando", LocalDate.of(1970, Month.APRIL, 20), "yaboi", "1111");
+		User artist = new User("The Artist", LocalDate.of(1970, Month.APRIL, 20), "theoneandonly", "1111");
+		test.addUser(u1);
+		test.addUser(artist);
+		test.login("theoneandonly", "1111");
+		Song s1 = new Song("Le Bejo", "music/bejito.mp3");
+		Song s2 = new Song("The mainland", "music/africa.mp3");
+		Song s3 = new Song("No Star", "music/som.mp3");
+		test.addSong(s1);
+		test.addSong(s2);
+		test.addSong(s3);
+		Album a = new Album("Latin Hits", 2009);
+		a.addSong(s1);
+		a.addSong(s2);
+		test.addAlbum(a);
+		test.logout();
+		
+		test.login("yaboi", "1111");
+		Playlist pl = new Playlist("Mi lista 1");
+		pl.addPlayableObject(s3);
+		pl.addPlayableObject(a);
+		test.addPlaylist(pl);
+		s3.report();
+		test.logout();
+		
+		assertNotNull(test.loadData());
+		// Check everything is how we left it at logout (logout saves data)
+		assertNotNull(test.getUserList());
+		assertNotNull(test.getSongList());
+		assertNotNull(test.getAlbumList());
+		assertNotNull(test.getPlaylistList());
+		assertNotNull(test.getReportList());
+		assertNotNull(test.getAdminUser());
+		assertSame(Status.ERROR, test.register("Fernando", "yaboi", LocalDate.of(1970, Month.APRIL, 20), "1111"));
+		assertSame(Status.ERROR, test.register("The Artist", "theoneandonly", LocalDate.of(1970, Month.APRIL, 20), "1111"));
+		assertEquals(1, test.getReportList().size());
+		assertEquals(3, test.getSongList().size());
+		assertEquals(1, test.getAlbumList().size());
+		assertEquals(1, test.getPlaylistList().size());
+		test.deleteAlbum(a);
+		test.deleteSong(s1);
+		test.deleteSong(s2);
+		test.deleteSong(s3);
+		
+		File file = new File("System.bal");
+		file.delete();
 	}
 }
