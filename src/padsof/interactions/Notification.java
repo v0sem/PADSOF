@@ -6,7 +6,7 @@ import padsof.user.User;
 /**
  * Notificaciones de los usuarios a los que sigues
  * 
- * @author Equipo 1
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
 public class Notification {

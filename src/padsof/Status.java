@@ -3,7 +3,7 @@ package padsof;
 /**
  * Marca si un metodo se ha ejecutado correctamente
  * 
- * @author Equipo 1
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
 public enum Status {

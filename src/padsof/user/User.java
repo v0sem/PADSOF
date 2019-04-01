@@ -11,6 +11,12 @@ import padsof.Status;
 import padsof.interactions.Notification;
 import padsof.sistem.Sistem;
 
+/**
+ * Usuario del sistema, tanto registrados como premium como administradores 
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class User implements java.io.Serializable {
 
 	/**
@@ -364,6 +370,11 @@ public class User implements java.io.Serializable {
 		return this.songsPlayCount;
 	}
 
+	/**
+	 * Getter de la lista de seguidores
+	 * 
+	 * @return ArrayList de seguidores
+	 */
 	public ArrayList<User> getIsFollowed() {
 		return isFollowed;
 	}

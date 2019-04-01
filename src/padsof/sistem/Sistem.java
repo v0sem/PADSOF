@@ -768,22 +768,42 @@ public class Sistem implements java.io.Serializable {
 
 	/******************* List getters *********************/
 
+	/**
+	 * Getter de la lista de usuarios
+	 * @return ArrayList de usuarios
+	 */
 	public ArrayList<User> getUserList() {
 		return userList;
 	}
 
+	/**
+	 * Getter de la lista de canciones
+	 * @return ArrayList de canciones
+	 */
 	public ArrayList<Song> getSongList() {
 		return songList;
 	}
 
+	/**
+	 * Getter de la lista de albumes
+	 * @return ArrayList de albumes
+	 */
 	public ArrayList<Album> getAlbumList() {
 		return albumList;
 	}
 
+	/**
+	 * Getter de la lista de Playlists
+	 * @return ArrayList de Playlists
+	 */
 	public ArrayList<Playlist> getPlaylistList() {
 		return playlistList;
 	}
 
+	/**
+	 * Getter de la lista de Reports
+	 * @return ArrayList de Reports
+	 */
 	public ArrayList<Report> getReportList() {
 		return reportList;
 	}
