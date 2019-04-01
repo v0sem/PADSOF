@@ -21,7 +21,7 @@ public class SongTest {
 		assertNotNull(this.test);
 		
 		assertEquals("Africa", test.getTitle());
-		assertEquals("music/africa.mp3", test.getFileName());
+		assertEquals("music" + File.separator + "africa.mp3", test.getFileName());
 	}
 	
 	@Test
@@ -71,6 +71,15 @@ public class SongTest {
 		assertEquals(Status.ERROR, test.reject());
 		sis.login("admin", "admin");
 		assertEquals(Status.OK, test.reject());
+	}
+	
+	@Test
+	public void testAccept() {
+		sis.addSong(test);
+		sis.logout();
+		assertEquals(Status.ERROR, test.accept());
+		sis.login("admin", "admin");
+		assertEquals(Status.OK, test.accept());
 	}
 
 }

@@ -122,7 +122,7 @@ public class Song extends CommentableObject {
 	public Status reject() {
 		Sistem sis = Sistem.getInstance();
 
-		if (sis.getAdminUser() != sis.getLoggedUser())
+		if (!sis.adminIsLogged())
 			return Status.ERROR;
 
 		this.rejectedDate = LocalDate.now();
@@ -135,7 +135,10 @@ public class Song extends CommentableObject {
 	 * Permite aceptar una cancion pendiente de validacion
 	 */
 	public Status accept() {
+		Sistem sis = Sistem.getInstance();
 
+		if (!sis.adminIsLogged())
+			return Status.ERROR;
 		this.setState(SongState.ACCEPTED);
 
 		return Status.OK;
