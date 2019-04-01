@@ -23,7 +23,6 @@ public abstract class CommentableObject extends PlayableObject{
 	/**
 	 * Constructor de los objetos comentables
 	 * @param title titulo del objeto
-	 * @return devuleve el objeto nuevo
 	 */
 	public CommentableObject(String title) {
 		super(title);
@@ -57,7 +56,7 @@ public abstract class CommentableObject extends PlayableObject{
 	
 	/**
 	 * Permite borrar comentarios
-	 * @param texto del comentario que queremos borrar
+	 * @param text del comentario que queremos borrar
 	 * @return status de la operacion
 	 */
 	public Status removeComment(String text) {

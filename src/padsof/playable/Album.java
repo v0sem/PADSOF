@@ -17,7 +17,6 @@ public class Album extends CommentableObject {
 	 * 
 	 * @param title titulo del album
 	 * @param year  time of creation
-	 * @return objeto creado
 	 */
 	public Album(String title, int year) {
 		super(title);

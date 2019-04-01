@@ -15,7 +15,6 @@ public abstract class PlayableObject implements java.io.Serializable {
 	 * Constructor de playable object
 	 * 
 	 * @param title titulo del playable object
-	 * @return objeto creado
 	 */
 	public PlayableObject(String title) {
 		User u = Sistem.getInstance().getLoggedUser();

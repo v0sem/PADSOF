@@ -52,7 +52,6 @@ public class Song extends CommentableObject {
 	 * 
 	 * @param title    titulo de la cancion a crear
 	 * @param fileName path de la cancion a crear
-	 * @return objeto creado
 	 */
 	public Song(String title, String fileName) {
 		// Super checks if user is logged
@@ -129,7 +128,6 @@ public class Song extends CommentableObject {
 	/**
 	 * Permite reportar canciones
 	 * 
-	 * @param u usuario que esta reportando la cancion
 	 * @return status de la operacion
 	 */
 	public Status report() {

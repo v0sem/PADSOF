@@ -15,7 +15,6 @@ public class Playlist extends PlayableObject {
 	 * Constructor de playlist
 	 * 
 	 * @param title titulo del playlist
-	 * @return objeto creado
 	 */
 	public Playlist(String title) {
 		super(title);

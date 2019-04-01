@@ -20,7 +20,6 @@ public class Report implements java.io.Serializable {
 	 * 
 	 * @param reportedSong cancion acusada de plagio
 	 * @param reporter     usuario que reporta plagio
-	 * @return objeto creado
 	 */
 	public Report(Song reportedSong, User reporter) {
 

@@ -15,7 +15,7 @@ public class FechaSimulada {
 	/**
 	 * Avanza numDias la fecha simulada actual, o la retrasa si numDias es negativo
 	 * 
-	 * @param numDias
+	 * @param numDias numero de dias que avanzar
 	 */
 	public static void avanzar(int numDias) {
 		fechaSimulada = fechaSimulada.plusDays(numDias);
@@ -42,9 +42,9 @@ public class FechaSimulada {
 	
 	/**
 	 * Se fija la fecha simulada con los valores de dia, mes y anyo dados como parametros
-	 * @param dia
-	 * @param mes
-	 * @param anyo
+	 * @param dia dia
+	 * @param mes mes
+	 * @param anyo anno
 	 * @return fecha simulada actual con los valores dados como parametros
 	 */
 	public static LocalDate fijarFecha(int dia, int mes, int anyo) {
