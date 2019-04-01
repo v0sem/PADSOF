@@ -69,9 +69,6 @@ public class User implements java.io.Serializable {
 	 */
 	private ArrayList<Notification> notifications;
 	
-	/**
-	 * Lista de notificaciones para el usuario
-	 */
 
 	/**
 	 * Fecha en que el usuario renovo el premium
@@ -380,5 +377,16 @@ public class User implements java.io.Serializable {
 	public ArrayList<User> getIsFollowed() {
 		return isFollowed;
 	}
+
+	/**
+	 * Getter de la lista de notificaciones
+	 * 
+	 * @return Arraylist de notificaciones
+	 */
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+	
+	
 
 }

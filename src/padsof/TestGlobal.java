@@ -60,10 +60,12 @@ public class TestGlobal {
 		
 		// Give the user 10 second to listen
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		s1.stop();
 
 		// Check search by title
 		for (PlayableObject p : sis.search("Africa", true, false, false)) {
@@ -131,6 +133,38 @@ public class TestGlobal {
 		else {
 			System.out.println("Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
 		}
+		
+		sis.logout();
+		
+		sis.login("admin", "admin");
+		
+		// Admin starts following Toto
+		sis.getLoggedUser().follow(sis.getUserList().get(1));
+		
+		sis.logout();
+		
+		sis.login(userNick1Test, passwordTest);
+		
+		if(sis.getLoggedUser().getIsFollowed().size() == 1) {
+			System.out.println(sis.getLoggedUser().getName() + " is being followed by " + sis.getLoggedUser().getIsFollowed().get(0).getName());
+		}
+		else {
+			System.out.println("There was something wrong when following");
+		}
+		
+		sis.addSong(new Song("All Star", "music" + File.separator + "som.mp3"));
+		
+		sis.logout();
+		sis.login("admin", "admin");
+		
+		if(sis.getLoggedUser().getNotifications().size() == 1) {
+			System.out.println(sis.getLoggedUser().getName() + " recieved --> " + sis.getLoggedUser().getNotifications().get(0).getNotificationText());
+		}
+		else {
+			System.out.println("There was something wrong with the notifications");
+		}
+		
+		sis.logout();
 	}
 
 }
