@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import padsof.playable.*;
 import padsof.sistem.Sistem;
 import padsof.user.User;
-import padsof.playable.SongState;
 
 public class TestGlobal {
 	private static String userName1Test = "Toto";
@@ -92,11 +91,12 @@ public class TestGlobal {
 					+ sis.getLoggedUser().getNick() + ")");
 		
 		// Add new album
-		sis.addAlbum(new Album("Africa - Single", 2001));
+		Album album = new Album("Africa - Single", 2001);
+		sis.addAlbum(album);
 		
 		// Search our album
 		ArrayList<PlayableObject> result = sis.search("Africa - Single", false, false, true);
-		if(result.size() != 1) {
+		if(result.size() < 1) {
 			System.out.println("Search is not working properly");
 		}
 		else {
@@ -104,9 +104,8 @@ public class TestGlobal {
 		}
 		
 		// Adding song to album
-		Album album = (Album) result.get(0);
 		album.addSong(s1);
-		if(Math.abs(album.getLength() - s1.getLength()) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
+		if(Math.abs(album.getLength() % s1.getLength()) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
 			System.out.println("Added song correctly");
 		}
 		else {
@@ -127,7 +126,7 @@ public class TestGlobal {
 		// Add items to the playlist and check that they are all in
 		pl.addPlayableObject(s1);
 		pl.addPlayableObject(album);
-		if(Math.abs(pl.getLength() - (album.getLength() + s1.getLength())) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
+		if(Math.abs(pl.getLength() % (album.getLength() + s1.getLength())) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
 			System.out.println("Added " + s1.getTitle() + " and " + album.getTitle() + " correctly to " + pl.getTitle());
 		}
 		else {
@@ -158,11 +157,30 @@ public class TestGlobal {
 		sis.logout();
 		sis.login("admin", "admin");
 		
-		if(sis.getLoggedUser().getNotifications().size() == 1) {
+		// Checking the notification
+		if(sis.getLoggedUser().getNotifications().size() > 0) {
 			System.out.println(sis.getLoggedUser().getName() + " recieved --> " + sis.getLoggedUser().getNotifications().get(0).getNotificationText());
 		}
 		else {
 			System.out.println("There was something wrong with the notifications");
+		}
+		
+		// Reporting new song because is Smash Mouth's song
+		result = sis.search("All Star", true, false, false);
+		Song s2 = (Song) result.get(0);
+		
+		if(s2.report() == Status.OK) {
+			System.out.println(s2.getTitle() + " reported");
+		}
+		else {
+			System.out.println("There was something wrong with the report");
+		}
+		
+		if(sis.getReportList().size() > 0) {
+			System.out.println("Report is in system");
+		}
+		else {
+			System.out.println("Report is not in system");
 		}
 		
 		sis.logout();
