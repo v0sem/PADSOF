@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import fechasimulada.FechaSimulada;
 import padsof.Status;
+import padsof.playable.Album;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.user.User;
@@ -149,5 +150,25 @@ public class SistemTest {
 		// SongCounts should be updated
 		assertEquals(test.getMaxRegisteredSong(), uHonest.getSongCount());
 		assertEquals(test.getAnonSongCount(), test.getMaxAnonSong());
+	}
+	
+	@Test
+	public void testSearch() {
+		test.logout();
+		test.register("SmashMouth", "smashmouth", LocalDate.of(1970, Month.APRIL, 20), "1111");
+		test.login("smashmouth", "1111");
+		
+		Song s1 = new Song("All Star", "music/som.mp3");
+		test.addSong(s1);
+		assertNotNull(test.search("All Star", true, false, false));
+		assertEquals(1, test.search("All Star", true, false, false).size());
+		
+		Album a1 = new Album("Shrek The Movie", 2001);
+		test.addAlbum(a1);
+		assertNotNull(test.search("Shrek The Movie", false, false, true));
+		assertEquals(1, test.search("Shrek The Movie", false, false, true).size());
+		
+		assertNotNull(test.search("SmashMouth", false, true, false));
+		assertEquals(2, test.search("SmashMouth", false, true, false).size()); // Expected 2 (song + album)
 	}
 }
