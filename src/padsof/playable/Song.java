@@ -9,6 +9,7 @@ import padsof.Status;
 import padsof.interactions.Report;
 import padsof.sistem.Sistem;
 import padsof.user.User;
+import padsof.user.UserType;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -26,12 +27,11 @@ public class Song extends CommentableObject {
 	 * @return objeto creado
 	 */
 	public Song(String title, String fileName) {
-		// TODO: debemos permitir crear cancion sin que usr haya iniciado sesion? pondra
-		// autor a null
+		// Super checks if user is logged
 		super(title);
 
 		if (Mp3Player.isValidMp3File(fileName) == false)
-			java.lang.System.out.println("eres un poco burro tu"); // TODO: dis
+			System.out.println("File path is incorrect");
 
 		this.explicit = false;
 		this.state = SongState.REVISION_PENDING;
@@ -70,21 +70,24 @@ public class Song extends CommentableObject {
 			return Status.ERROR;
 		}
 
+		// Try to play it
 		try {
-			// TODO: you tell me
-			Mp3Player poop = new Mp3Player(fileName);
-			poop.play();
+			Mp3Player player = new Mp3Player(fileName);
+			player.play();
 		} catch (FileNotFoundException | Mp3PlayerException e) {
-			// notin
+			System.out.println("Error playing the song");
 		}
 
-		User u;
-		if ((u = Sistem.getInstance().getLoggedUser()) != null) {
-			u.increaseSongCount();
+		// Remove one from song count of the logged user (unless admin or premium)
+		User u = Sistem.getInstance().getLoggedUser();
+		if (u != null) {
+			if (u.getUserType() == UserType.STANDARD)
+				u.increaseSongCount();
 		} else {
 			Sistem.getInstance().increaseAnonSongCount();
 		}
 
+		// Add one to the plays of the author
 		this.getAuthor().increaseSongPlaycount();
 
 		return Status.OK;

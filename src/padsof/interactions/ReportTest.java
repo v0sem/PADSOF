@@ -2,6 +2,7 @@ package padsof.interactions;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -14,7 +15,7 @@ import padsof.user.User;
 
 public class ReportTest {
 	Sistem sis = Sistem.getInstance();
-	Song s1 = new Song("Africa", "music/africa.mp3");
+	Song s1 = new Song("Africa", "music" + File.separator + "africa.mp3");
 	
 	@Test
 	public void testReport() {

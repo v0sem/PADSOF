@@ -13,6 +13,7 @@ import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Playlist;
 import padsof.playable.Song;
+import padsof.playable.SongState;
 import padsof.user.User;
 import padsof.user.UserType;
 
@@ -380,9 +381,12 @@ public class Sistem implements java.io.Serializable {
 
 		if (s != null && loggedUser != null) {
 			this.songList.add(s);
+			s.setState(SongState.REVISION_PENDING);
+			
 			for (User u : loggedUser.getIsFollowed()) {
 				u.notificate(new Notification(loggedUser.getNick() + " subi� una nueva canci�n", loggedUser, s));
 			}
+			
 			return Status.OK;
 		}
 
@@ -564,7 +568,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status login(String userName, String userPass) {
 
-		if (loggedUser != null)
+		if (loggedUser != null && userPass != null)
 			return Status.ERROR;
 
 		for (User u : userList) {
