@@ -12,7 +12,7 @@ import padsof.playable.SongState;
 import padsof.sistem.Sistem;
 import padsof.user.User;
 
-public class Report {
+public class Report implements java.io.Serializable {
 	
 	/*
 	 * Cancion que ha sido reportada por plagio

@@ -159,6 +159,13 @@ public class Sistem implements java.io.Serializable {
 			this.albumList = loadedSystem.albumList;
 			this.playlistList = loadedSystem.playlistList;
 			this.userList = loadedSystem.userList;
+			this.reportList = loadedSystem.reportList;
+			this.anonSongCount = loadedSystem.anonSongCount;
+			this.songCountDate = loadedSystem.songCountDate;
+			this.premiumPrice = loadedSystem.premiumPrice;
+			this.maxAnonSong = loadedSystem.maxAnonSong;
+			this.maxRegisteredSong = loadedSystem.maxRegisteredSong;
+			this.playsToPremium = loadedSystem.playsToPremium;
 			
 			loadedSystem.checkDate();
 			ois.close();
@@ -194,6 +201,9 @@ public class Sistem implements java.io.Serializable {
     		this.anonSongCount = maxAnonSong;
     	}
     	
+    	if(loggedUser == null)
+    		return;
+    				
     	// Check registered song counts
     	period = Period.between(today, this.loggedUser.getRegisteredDate());
     	diff = period.getDays();
@@ -372,7 +382,7 @@ public class Sistem implements java.io.Serializable {
 			this.songList.add(s);
 			for(User u : loggedUser.getIsFollowed()) {
 				u.notificate(new Notification(
-						loggedUser.getNick() + " subió una nueva canción", loggedUser, s));
+						loggedUser.getNick() + " subiï¿½ una nueva canciï¿½n", loggedUser, s));
 			}
 			return Status.OK;
 		}
@@ -392,7 +402,7 @@ public class Sistem implements java.io.Serializable {
 			this.albumList.add(a);
 			for(User u : loggedUser.getIsFollowed()) {
 				u.notificate(new Notification(
-						loggedUser.getNick() + " subió un nuevo album", loggedUser, a));
+						loggedUser.getNick() + " subiï¿½ un nuevo album", loggedUser, a));
 			}
 			return Status.OK;
 		}
@@ -401,7 +411,7 @@ public class Sistem implements java.io.Serializable {
 	}
 	
 	/**
-	 * Aniade un al sistema
+	 * Aniade una playlist al sistema
 	 * 
 	 * @param pl una playlist
 	 * @return ERROR en caso de que la playlist sea null
@@ -412,7 +422,7 @@ public class Sistem implements java.io.Serializable {
 			this.playlistList.add(pl);
 			for(User u : loggedUser.getIsFollowed()) {
 				u.notificate(new Notification(
-						loggedUser.getNick() + " subió una nueva playlist", loggedUser, pl));
+						loggedUser.getNick() + " subiï¿½ una nueva playlist", loggedUser, pl));
 			}
 			return Status.OK;
 		}
@@ -538,7 +548,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status register(String userName, String userNick, LocalDate date, String userPass) {
 		
-		if(userNameExists(userName) || userNickExists(userNick))
+		if (userName == null || userNick == null || date == null || userPass == null || userNameExists(userName) || userNickExists(userNick))
 			return Status.ERROR;
 		
 		this.userList.add(new User(userName, date, userNick, userPass));
@@ -561,9 +571,6 @@ public class Sistem implements java.io.Serializable {
 		
 		for(User u : userList) {
 			if(userName.equals(u.getNick()) && userPass.equals(u.getPassword())) {
-				if(u.getUserType() == UserType.ADMIN) {
-					adminUser = u;	
-				}
 				loggedUser = u;  //Si es admin tambien le loggea
 
 				return Status.OK;
@@ -750,5 +757,27 @@ public class Sistem implements java.io.Serializable {
 	    ObjectOutputStream oos = new ObjectOutputStream(fos);
 	    oos.writeObject(this);
 	    oos.close();
+	}
+
+	/******************* List getters *********************/
+	
+	public ArrayList<User> getUserList() {
+		return userList;
+	}
+
+	public ArrayList<Song> getSongList() {
+		return songList;
+	}
+	
+	public ArrayList<Album> getAlbumList() {
+		return albumList;
+	}
+
+	public ArrayList<Playlist> getPlaylistList() {
+		return playlistList;
+	}
+
+	public ArrayList<Report> getReportList() {
+		return reportList;
 	}
 }
