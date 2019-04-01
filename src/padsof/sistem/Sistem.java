@@ -381,7 +381,6 @@ public class Sistem implements java.io.Serializable {
 
 		if (s != null && loggedUser != null) {
 			this.songList.add(s);
-			s.setState(SongState.REVISION_PENDING);
 			
 			for (User u : loggedUser.getIsFollowed()) {
 				u.notificate(new Notification(loggedUser.getNick() + " subi� una nueva canci�n", loggedUser, s));
