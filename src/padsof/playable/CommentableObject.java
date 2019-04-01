@@ -27,6 +27,7 @@ public abstract class CommentableObject extends PlayableObject{
 	 */
 	public CommentableObject(String title) {
 		super(title);
+		this.commentList = new ArrayList<Comment>();
 	}
 
 	/**
