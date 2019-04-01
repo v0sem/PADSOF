@@ -2,6 +2,7 @@ package padsof.playable;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -12,7 +13,7 @@ import padsof.Status;
 
 public class CommentableObjectTest {
 
-	Song test = new Song("Africa", "music/africa.mp3");
+	Song test = new Song("Africa", "music" + File.separator + "africa.mp3");
 	Sistem sis = Sistem.getInstance();
 
 	@Test

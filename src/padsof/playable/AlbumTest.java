@@ -2,6 +2,7 @@ package padsof.playable;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -13,9 +14,9 @@ import padsof.sistem.Sistem;
 public class AlbumTest {
 
 	Album album = new Album("test", 3000);
-	Song s = new Song("Africa", "music/africa.mp3");
-	Song d = new Song("Bejito", "music/bejito.mp3");
-	Song f = new Song("SomBODY", "music/som.mp3");
+	Song s = new Song("Africa", "music" + File.separator + "africa.mp3");
+	Song d = new Song("Bejito", "music" + File.separator + "bejito.mp3");
+	Song f = new Song("SomBODY", "music" + File.separator + "som.mp3");
 	
 	@Test
 	public void testAlbum() {
