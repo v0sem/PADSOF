@@ -9,7 +9,7 @@ import padsof.user.User;
  * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
-public class Notification {
+public class Notification implements java.io.Serializable {
 
 	/**
 	 * Constructor de notificaciones
