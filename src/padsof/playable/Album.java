@@ -31,6 +31,7 @@ public class Album extends CommentableObject{
 	public Album(String title, int year) {
 		super(title);
 		this.year = year;
+		this.songList = new ArrayList<Song>();
 	}
 	
 	/**
@@ -95,8 +96,8 @@ public class Album extends CommentableObject{
 	 */
 	public Status deleteSong(Song s) {
 		if(s !=  null) {
-			if(songList.remove(s));
-				return Status.OK;
+			songList.remove(s);
+			return Status.OK;
 		}
 		
 		return Status.ERROR;

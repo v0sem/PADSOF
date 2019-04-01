@@ -23,6 +23,7 @@ public class Playlist extends PlayableObject {
 	 */
 	public Playlist(String title) {
 		super(title);
+		this.playableObjectList = new ArrayList<PlayableObject>();
 	}
 	
 	/**
