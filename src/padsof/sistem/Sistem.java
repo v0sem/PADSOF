@@ -172,10 +172,13 @@ public class Sistem implements java.io.Serializable {
 
 			loadedSystem.checkDate();
 			ois.close();
+			
 			return loadedSystem;
 		} catch (IOException | ClassNotFoundException r) {
 			return null;
 		}
+		
+
 	}
 
 	/**
@@ -530,6 +533,10 @@ public class Sistem implements java.io.Serializable {
 	 * @return true si ya existe
 	 */
 	private Boolean userNickExists(String userNick) {
+		if (this.userList == null || userNick == null) {
+			System.out.println("User list o userNick son null");
+			return false;
+		}
 
 		for (User user : this.userList) {
 			if (userNick.equals(user.getNick())) {
@@ -547,8 +554,10 @@ public class Sistem implements java.io.Serializable {
 	 * @return true si ya existe
 	 */
 	private Boolean userNameExists(String userName) {
-		if (this.userList == null)
-			System.out.println("user list esta a nul"); // #DEBUG
+		if (this.userList == null || userName == null) {
+			System.out.println("User list o userName son null");
+			return false;
+		}
 		for (User user : this.userList) {
 			if (userName.equals(user.getName())) {
 				return true;
@@ -571,12 +580,16 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR si algo ha ido mal
 	 */
 	public Status register(String userName, String userNick, LocalDate date, String userPass) {
-
-		if (userName == null || userNick == null || date == null || userPass == null || userNameExists(userName)
+		if (userList == null || userName == null || userNick == null || date == null || userPass == null || userNameExists(userName)
 				|| userNickExists(userNick))
 			return Status.ERROR;
 
-		this.userList.add(new User(userName, date, userNick, userPass));
+		User u = new User(userName, date, userNick, userPass);
+		if (u == null) {
+			return Status.ERROR;
+		}
+		
+		this.userList.add(u);
 
 		return Status.OK;
 	}
@@ -590,7 +603,6 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR si algo ha ido mal
 	 */
 	public Status login(String userName, String userPass) {
-
 		if (loggedUser != null && userPass != null)
 			return Status.ERROR;
 
@@ -784,22 +796,42 @@ public class Sistem implements java.io.Serializable {
 
 	/******************* List getters *********************/
 
+	/**
+	 * Getter de la lista de usuarios
+	 * @return ArrayList de usuarios
+	 */
 	public ArrayList<User> getUserList() {
 		return userList;
 	}
 
+	/**
+	 * Getter de la lista de canciones
+	 * @return ArrayList de canciones
+	 */
 	public ArrayList<Song> getSongList() {
 		return songList;
 	}
 
+	/**
+	 * Getter de la lista de albumes
+	 * @return ArrayList de albumes
+	 */
 	public ArrayList<Album> getAlbumList() {
 		return albumList;
 	}
 
+	/**
+	 * Getter de la lista de Playlists
+	 * @return ArrayList de Playlists
+	 */
 	public ArrayList<Playlist> getPlaylistList() {
 		return playlistList;
 	}
 
+	/**
+	 * Getter de la lista de Reports
+	 * @return ArrayList de Reports
+	 */
 	public ArrayList<Report> getReportList() {
 		return reportList;
 	}

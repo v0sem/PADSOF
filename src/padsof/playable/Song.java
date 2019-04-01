@@ -18,26 +18,11 @@ import pads.musicPlayer.*;
 import pads.musicPlayer.exceptions.*;
 
 public class Song extends CommentableObject {
-
 	/**
-	 * Constructor de cancion
-	 * 
-	 * @param title    titulo de la cancion a crear
-	 * @param fileName path de la cancion a crear
-	 * @return objeto creado
+	 * Guarda el player de esta cancion
 	 */
-	public Song(String title, String fileName) {
-		// Super checks if user is logged
-		super(title);
-
-		if (Mp3Player.isValidMp3File(fileName) == false)
-			System.out.println("File path is incorrect");
-
-		this.explicit = false;
-		this.state = SongState.REVISION_PENDING;
-		this.fileName = fileName;
-	}
-
+	private Mp3Player songPlayer;
+	
 	/**
 	 * Guarda si la cancion tiene contenido explicito o no
 	 */
@@ -60,6 +45,26 @@ public class Song extends CommentableObject {
 	private LocalDate rejectedDate;
 
 	/**
+	 * Constructor de cancion
+	 * 
+	 * @param title    titulo de la cancion a crear
+	 * @param fileName path de la cancion a crear
+	 * @return objeto creado
+	 */
+	public Song(String title, String fileName) {
+		// Super checks if user is logged
+		super(title);
+
+		if (Mp3Player.isValidMp3File(fileName) == false)
+			System.out.println("File path is incorrect");
+
+		this.explicit = false;
+		this.state = SongState.REVISION_PENDING;
+		this.fileName = fileName;
+		// songPlayer no se inicializa hasta que hagamos play()
+	}
+
+	/**
 	 * Permite reproducir una cancion
 	 * 
 	 * @return status de la operacion
@@ -73,6 +78,7 @@ public class Song extends CommentableObject {
 		// Try to play it
 		try {
 			Mp3Player player = new Mp3Player(fileName);
+			this.songPlayer = player;
 			player.play();
 		} catch (FileNotFoundException | Mp3PlayerException e) {
 			System.out.println("Error playing the song");
@@ -89,6 +95,20 @@ public class Song extends CommentableObject {
 
 		// Add one to the plays of the author
 		this.getAuthor().increaseSongPlaycount();
+
+		return Status.OK;
+	}
+	
+	/**
+	 * Permite parar una cancion
+	 * 
+	 * @return status de la operacion
+	 */
+	public Status stop() {
+		if (this.songPlayer == null)
+			return Status.ERROR;
+
+		this.songPlayer.stop();
 
 		return Status.OK;
 	}
@@ -116,8 +136,10 @@ public class Song extends CommentableObject {
 		return Status.OK;
 	}
 
-	/*
+	/**
 	 * Permite rechazar una cancion pendiente de validacion
+	 * 
+	 * @return ERROR si el usuario loggeado no es un admin
 	 */
 	public Status reject() {
 		Sistem sis = Sistem.getInstance();
@@ -131,8 +153,10 @@ public class Song extends CommentableObject {
 		return Status.OK;
 	}
 
-	/*
-	 * Permite aceptar una cancion pendiente de validacion
+	/**
+	 * Marca una cancion como aceptada
+	 * 
+	 * @return ERROR si el usuario loggeado no es un admin
 	 */
 	public Status accept() {
 		Sistem sis = Sistem.getInstance();
@@ -144,12 +168,17 @@ public class Song extends CommentableObject {
 		return Status.OK;
 	}
 
-	/*
-	 * Permite aceptar (pero solo para mayores de 18) una cancion pendiente de
-	 * validacion
+	/**
+	 *  Permite aceptar (pero solo para mayores de 18) una cancion pendiente de
+	 *  validacion
+	 *  
+	 * @return ERROR si el usuario loggeado no es admin
 	 */
 	public Status acceptExplicit() {
-
+		Sistem sis = Sistem.getInstance();
+		if (!sis.adminIsLogged())
+			return Status.ERROR;
+		
 		this.explicit = true;
 		this.setState(SongState.ACCEPTED);
 

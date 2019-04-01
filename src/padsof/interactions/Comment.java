@@ -5,7 +5,7 @@ import padsof.user.User;
 /**
  * Comentarios realizados por los ususarios
  * 
- * @author Equipo 1
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
 public class Comment {

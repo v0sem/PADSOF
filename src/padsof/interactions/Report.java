@@ -83,10 +83,20 @@ public class Report implements java.io.Serializable {
 		return decisionDate;
 	}
 
+	/**
+	 * Getter de closed. Comprueba si el report esta cerrado
+	 * 
+	 * @return true si el report se ha cerrado
+	 */
 	public Boolean getClosed() {
 		return closed;
 	}
 
+	/**
+	 * Getter del reporter
+	 * 
+	 * @return usuario que ha creado el report
+	 */
 	public User getReporter() {
 		return reporter;
 	}
