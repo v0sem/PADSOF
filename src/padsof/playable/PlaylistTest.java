@@ -1,20 +1,17 @@
 package padsof.playable;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import padsof.Status;
 import padsof.sistem.Sistem;
+import padsof.Status;
 
-class PlaylistTest {
-	
+public class PlaylistTest {
+
 	Playlist test = new Playlist("test");
 	Album album = new Album("test", 3000);
 	Song s = new Song("Africa", "music/africa.mp3");
@@ -23,7 +20,7 @@ class PlaylistTest {
 	Sistem sis = Sistem.getInstance();
 	
 	@Test
-	void testPlaylist() {
+	public void testPlaylist() {
 		assertNotNull(this.test);
 		
 		assertEquals("test", test.getTitle());
@@ -31,7 +28,7 @@ class PlaylistTest {
 
 
 	@Test
-	void testPlay() {
+	public void testPlay() {
 		album.addSong(s);
 		album.addSong(d);
 		test.addPlayableObject(album);
@@ -52,7 +49,7 @@ class PlaylistTest {
 	}
 
 	@Test
-	void testCanUserPlay() {
+	public void testCanUserPlay() {
 		test.addPlayableObject(f);
 		
 		assertFalse(album.canUserPlay());
@@ -65,7 +62,7 @@ class PlaylistTest {
 	}
 
 	@Test
-	void testAddPlayableObject() {
+	public void testAddPlayableObject() {
 		Song fake = null;
 		
 		assertEquals(Status.ERROR, test.addPlayableObject(fake));
@@ -74,7 +71,7 @@ class PlaylistTest {
 	}
 
 	@Test
-	void testDeletePlayableObject() {
+	public void testDeletePlayableObject() {
 		Song fake = null;
 		
 		assertEquals(Status.ERROR, test.deletePlayableObject(fake));

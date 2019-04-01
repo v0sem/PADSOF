@@ -102,7 +102,10 @@ public class User implements java.io.Serializable {
 		this.name = name;
 		this.nick = nick;
 		this.password = password;
-		this.songCount = 0;
+		if(!nick.contentEquals("admin"))
+			this.songCount = Sistem.getInstance().getMaxRegisteredSong();
+		else
+			this.songCount =  1000;
 		this.follows = new ArrayList<User>();
 		this.isFollowed = new ArrayList<User>();
 		this.notifications = new ArrayList<Notification>();
@@ -233,6 +236,8 @@ public class User implements java.io.Serializable {
 	 * Resta uno al numero de canciones restantes que puede reproducir el usuario
 	 */
 	public void increaseSongCount() {
+		if(this.userType.equals(UserType.PREMIUM) || this.userType.equals(UserType.ADMIN))
+			return;
 		this.songCount--;
 	}
 	

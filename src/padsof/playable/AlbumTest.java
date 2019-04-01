@@ -53,9 +53,9 @@ public class AlbumTest {
 		
 		assertFalse(album.canUserPlay());
 		
-		Sistem.getInstance().register("Toto", "toto", 
+		Sistem.getInstance().register("Toto1", "toto1", 
 				LocalDate.of(1980, Month.JANUARY, 1), "1234");
-		Sistem.getInstance().login("toto", "1234");
+		Sistem.getInstance().login("toto1", "1234");
 		
 		assertTrue(album.canUserPlay());
 		
