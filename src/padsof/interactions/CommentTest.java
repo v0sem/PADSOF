@@ -12,7 +12,7 @@ public class CommentTest {
 	String comment = "test comment";
 	User u = sis.getLoggedUser();
 	Comment test = new Comment(comment, u);
-	
+
 	@Test
 	public void test() {
 		assertEquals(test.getText(), comment);

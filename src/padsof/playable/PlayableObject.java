@@ -12,17 +12,8 @@ import padsof.user.User;
 public abstract class PlayableObject implements java.io.Serializable {
 
 	/**
-	 * Autor del playableObject
-	 */
-	private User author;
-
-	/**
-	 * Titulo del playable object
-	 */
-	private String title;
-	
-	/**
 	 * Constructor de playable object
+	 * 
 	 * @param title titulo del playable object
 	 * @return objeto creado
 	 */
@@ -32,47 +23,63 @@ public abstract class PlayableObject implements java.io.Serializable {
 			this.author = u;
 		}
 
-		this.title = title;	
+		this.title = title;
 	}
-	
+
+	/**
+	 * Autor del playableObject
+	 */
+	private User author;
+
+	/**
+	 * Titulo del playable object
+	 */
+	private String title;
+
 	/**
 	 * Getter del autor
+	 * 
 	 * @return objeto creado
 	 */
 	public User getAuthor() {
 		return author;
 	}
-	
+
 	/**
 	 * Getter del titulo
+	 * 
 	 * @return objeto creado
 	 */
 	public String getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * Setter del titulo
+	 * 
 	 * @param title titulo del objeto
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	/**
 	 * Permite reproducir un album
+	 * 
 	 * @return status de la operacion
 	 */
 	public abstract Status play();
-	
+
 	/**
 	 * Te permite comprobar si puedes reproducir el objeto
+	 * 
 	 * @return boolean con el resultado
 	 */
 	protected abstract Boolean canUserPlay();
-	
+
 	/**
 	 * Devuleve la longitud del objeto playable
+	 * 
 	 * @return float con la longitud
 	 */
 	public abstract Float getLength();

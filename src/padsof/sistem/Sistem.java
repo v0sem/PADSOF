@@ -23,122 +23,123 @@ import padsof.user.UserType;
  *
  */
 public class Sistem implements java.io.Serializable {
-	
+
 	/**
 	 * Instancia del sistema
 	 */
 	private static Sistem instance = null;
-	
+
 	/**
 	 * Usuario administrador
 	 */
 	private User adminUser = null;
-	
+
 	/**
 	 * Usuario loggeado actualmente
 	 */
-	private User loggedUser = null; //mientras este a null, estamos en anon
-	
+	private User loggedUser = null; // mientras este a null, estamos en anon
+
 	/**
 	 * Numero de canciones que a los usuarios anonimos les queda por reproducir
 	 */
 	private long anonSongCount;
-	
+
 	/**
 	 * Lista de usuarios
 	 */
 	private ArrayList<User> userList;
-	
+
 	/**
 	 * Lista de canciones
 	 */
 	private ArrayList<Song> songList;
-	
+
 	/**
-	 * Lista de albumes 
+	 * Lista de albumes
 	 */
 	private ArrayList<Album> albumList;
-	
+
 	/**
 	 * Lista de Playlists
 	 */
 	private ArrayList<Playlist> playlistList;
-	
+
 	/**
 	 * Lista de reportes
 	 */
 	private ArrayList<Report> reportList;
-	
+
 	/**
-	 * Fecha en la que se resetean el numero de canciones reproducibles por los usuarios
-	 * anonimos
+	 * Fecha en la que se resetean el numero de canciones reproducibles por los
+	 * usuarios anonimos
 	 */
 	private LocalDate songCountDate;
-	
+
 	/**
 	 * Precio configurable para ser premium
 	 */
 	private double premiumPrice;
-	
+
 	/**
-	 * Maximo configurable del numero de canciones que un usuario anonimo puede reproducir
+	 * Maximo configurable del numero de canciones que un usuario anonimo puede
+	 * reproducir
 	 */
 	private long maxAnonSong;
-	
+
 	/**
-	 * Maximo configurable del numero de canciones que un usuario registrado puede reproducir
+	 * Maximo configurable del numero de canciones que un usuario registrado puede
+	 * reproducir
 	 */
 	private long maxRegisteredSong;
-	
+
 	/**
-	 * Numero de veces que tienen que ser reproducidas las canciones de un usuario para 
-	 * que se le pase automaticamente a premium
+	 * Numero de veces que tienen que ser reproducidas las canciones de un usuario
+	 * para que se le pase automaticamente a premium
 	 */
 	private long playsToPremium;
-	
+
 	/**
-	 * Constructor de la clase Sistem. Inicializa con valores por defecto y con
-	 * un usuario Admin User. Carga los datos de un fichero si este existe
+	 * Constructor de la clase Sistem. Inicializa con valores por defecto y con un
+	 * usuario Admin User. Carga los datos de un fichero si este existe
 	 */
 	public Sistem() {
-	
-		//si existe un archivo para cargarlo, lo carga
+
+		// si existe un archivo para cargarlo, lo carga
 		if (new File("System.bal").exists()) {
 			this.loadData();
-		}
-		else {
+		} else {
 			this.userList = new ArrayList<User>();
 			this.songList = new ArrayList<Song>();
 			this.albumList = new ArrayList<Album>();
 			this.playlistList = new ArrayList<Playlist>();
 			this.reportList = new ArrayList<Report>();
-			
+
 			this.songCountDate = LocalDate.now();
-			
-			this.maxRegisteredSong = 1000; 
+
+			this.maxRegisteredSong = 1000;
 			this.maxAnonSong = 1000;
-			
+
 			this.anonSongCount = this.maxAnonSong;
-			
+
 			this.adminUser = new User("Admin User", LocalDate.of(1980, Month.JANUARY, 1), "admin", "admin");
 			this.adminUser.setUserType(UserType.ADMIN);
 			this.userList.add(this.adminUser);
-			
+
 			this.premiumPrice = 19.99;
 			this.playsToPremium = 10000;
 		}
 	}
-	
+
 	/**
 	 * Permite recoger la instancia de sistema y que solo haya un sistema
 	 * 
 	 * @return el Sistem
 	 */
 	public static Sistem getInstance() {
-		
-		if(instance == null)
+
+		if (instance == null)
 			instance = new Sistem();
-		
+
 		return instance;
 	}
 
@@ -147,7 +148,7 @@ public class Sistem implements java.io.Serializable {
 	 * 
 	 * @return Sistem cargado
 	 */
-	public Sistem loadData(){
+	public Sistem loadData() {
 		try {
 			FileInputStream fin = new FileInputStream("System.bal");
 			ObjectInputStream ois = new ObjectInputStream(fin);
@@ -166,97 +167,96 @@ public class Sistem implements java.io.Serializable {
 			this.maxAnonSong = loadedSystem.maxAnonSong;
 			this.maxRegisteredSong = loadedSystem.maxRegisteredSong;
 			this.playsToPremium = loadedSystem.playsToPremium;
-			
+
 			loadedSystem.checkDate();
 			ois.close();
 			return loadedSystem;
-		}
-		catch(IOException | ClassNotFoundException r) {
+		} catch (IOException | ClassNotFoundException r) {
 			return null;
 		}
 	}
-	
+
 	/**
-	 * Comprueba la fecha de hoy y realiza todas las acciones necesarias dependiendo del resultado
+	 * Comprueba la fecha de hoy y realiza todas las acciones necesarias dependiendo
+	 * del resultado
 	 */
 	public void checkDate() {
 		LocalDate today = LocalDate.now();
 		Period period;
 		int diff;
-		
+
 		// Check songs reported and delete dem
-		for(Report r : this.reportList) {
+		for (Report r : this.reportList) {
 			period = Period.between(today, r.getDecisionDate());
-	    	diff = period.getDays();
-	    	
-	    	if (diff >= 3)
-	    		this.reportList.remove(r);
+			diff = period.getDays();
+
+			if (diff >= 3)
+				this.reportList.remove(r);
 		}
-		
+
 		// Check anon song counts
 		period = Period.between(today, this.songCountDate);
-    	diff = period.getDays();
-    	
-    	if (diff >= 30) {
-    		this.anonSongCount = maxAnonSong;
-    	}
-    	
-    	if(loggedUser == null)
-    		return;
-    				
-    	// Check registered song counts
-    	period = Period.between(today, this.loggedUser.getRegisteredDate());
-    	diff = period.getDays();
-    	
-    	if (diff >= 30) {
-    		// reset date
-    		this.loggedUser.setRegisterdDate(today);
-    		// reset count
-    		this.loggedUser.setSongCount(this.maxRegisteredSong);
-    	}
-		
+		diff = period.getDays();
+
+		if (diff >= 30) {
+			this.anonSongCount = maxAnonSong;
+		}
+
+		if (loggedUser == null)
+			return;
+
+		// Check registered song counts
+		period = Period.between(today, this.loggedUser.getRegisteredDate());
+		diff = period.getDays();
+
+		if (diff >= 30) {
+			// reset date
+			this.loggedUser.setRegisterdDate(today);
+			// reset count
+			this.loggedUser.setSongCount(this.maxRegisteredSong);
+		}
+
 		// Check if premium users have to pay again
-		if (this.loggedUser.getUserType() == UserType.PREMIUM)
-		{
+		if (this.loggedUser.getUserType() == UserType.PREMIUM) {
 			// User is premium, check for payment
 			period = Period.between(today, this.loggedUser.getPremiumDate());
-	    	diff = period.getDays();
-			
-	    	if (diff >= 30) {
-	    		// Demote user first
-	    		this.loggedUser.setUserType(UserType.STANDARD);
-	    		
-	    		// Check if we have the credit card number from last payment
-	    		if (this.loggedUser.getCardNumber() == null) {
-	    			System.out.println("Credit card not provided...?");
-	    			return;
-	    		}
-	    		
-	    		// If we do, pay the saved price with last credit card
-	    		this.loggedUser.goPremium(this.loggedUser.getCardNumber());
-	    	}
+			diff = period.getDays();
+
+			if (diff >= 30) {
+				// Demote user first
+				this.loggedUser.setUserType(UserType.STANDARD);
+
+				// Check if we have the credit card number from last payment
+				if (this.loggedUser.getCardNumber() == null) {
+					System.out.println("Credit card not provided...?");
+					return;
+				}
+
+				// If we do, pay the saved price with last credit card
+				this.loggedUser.goPremium(this.loggedUser.getCardNumber());
+			}
 		}
 	}
-	
+
 	/************************** Getters ***************************/
-	
+
 	/**
 	 * Getter de AdminUser
 	 * 
 	 * @return admin user
 	 */
 	public User getAdminUser() {
-	
+
 		return adminUser;
 	}
-	
+
 	/**
 	 * Getter del usuario loggeado
 	 * 
 	 * @return usuario loggeado o null si no hay nadie loggeado
 	 */
 	public User getLoggedUser() {
-		
+
 		return loggedUser;
 	}
 
@@ -266,10 +266,10 @@ public class Sistem implements java.io.Serializable {
 	 * @return numero de reproducciones que le quedan a los usuarios anonimos
 	 */
 	public Long getAnonSongCount() {
-		
+
 		return anonSongCount;
 	}
-	
+
 	/**
 	 * Getter de PremiumPrice
 	 * 
@@ -278,7 +278,7 @@ public class Sistem implements java.io.Serializable {
 	public double getPremiumPrice() {
 		return premiumPrice;
 	}
-	
+
 	/**
 	 * Getter de MaxAnonSongCount
 	 * 
@@ -296,7 +296,7 @@ public class Sistem implements java.io.Serializable {
 	public long getMaxRegisteredSong() {
 		return maxRegisteredSong;
 	}
-	
+
 	/**
 	 * Getter de MaxRegisteredSong
 	 * 
@@ -305,24 +305,24 @@ public class Sistem implements java.io.Serializable {
 	public long getPlaysToPremium() {
 		return playsToPremium;
 	}
-	
+
 	/*************************** Setters ***************************/
-	
+
 	/**
 	 * Decreases by one anonSongCount
 	 */
 	public void increaseAnonSongCount() {
-		
+
 		anonSongCount--;
 	}
-	
+
 	/**
 	 * Setter de MaxAnonSong
 	 * 
 	 * @param count nuevo maximo
 	 */
 	public void setMaxAnonSong(long count) {
-		
+
 		maxAnonSong = count;
 	}
 
@@ -354,7 +354,7 @@ public class Sistem implements java.io.Serializable {
 	}
 
 	/********************** Adding to Lists ************************/
-	
+
 	/**
 	 * Aniade un user al sistema
 	 * 
@@ -362,14 +362,14 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en caso de que el user sea null
 	 */
 	public Status addUser(User user) {
-		if(user != null) {
+		if (user != null) {
 			this.userList.add(user);
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/**
 	 * Aniade una cancion al sistema
 	 * 
@@ -377,19 +377,18 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en caso de que la cancion sea null
 	 */
 	public Status addSong(Song s) {
-		
-		if(s != null && loggedUser != null) {
+
+		if (s != null && loggedUser != null) {
 			this.songList.add(s);
-			for(User u : loggedUser.getIsFollowed()) {
-				u.notificate(new Notification(
-						loggedUser.getNick() + " subi� una nueva canci�n", loggedUser, s));
+			for (User u : loggedUser.getIsFollowed()) {
+				u.notificate(new Notification(loggedUser.getNick() + " subi� una nueva canci�n", loggedUser, s));
 			}
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/**
 	 * Aniade un album al sistema
 	 * 
@@ -397,19 +396,18 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en caso de que el album sea null
 	 */
 	public Status addAlbum(Album a) {
-		
-		if(a != null && loggedUser != null) {
+
+		if (a != null && loggedUser != null) {
 			this.albumList.add(a);
-			for(User u : loggedUser.getIsFollowed()) {
-				u.notificate(new Notification(
-						loggedUser.getNick() + " subi� un nuevo album", loggedUser, a));
+			for (User u : loggedUser.getIsFollowed()) {
+				u.notificate(new Notification(loggedUser.getNick() + " subi� un nuevo album", loggedUser, a));
 			}
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/**
 	 * Aniade una playlist al sistema
 	 * 
@@ -417,21 +415,20 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en caso de que la playlist sea null
 	 */
 	public Status addPlaylist(Playlist pl) {
-		
-		if(pl != null && loggedUser != null) {
+
+		if (pl != null && loggedUser != null) {
 			this.playlistList.add(pl);
-			for(User u : loggedUser.getIsFollowed()) {
-				u.notificate(new Notification(
-						loggedUser.getNick() + " subi� una nueva playlist", loggedUser, pl));
+			for (User u : loggedUser.getIsFollowed()) {
+				u.notificate(new Notification(loggedUser.getNick() + " subi� una nueva playlist", loggedUser, pl));
 			}
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/******************* Removing from lists *****************/
-	
+
 	/**
 	 * Elimina un user del sistema
 	 * 
@@ -439,12 +436,12 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en el caso de que user sea null
 	 */
 	public Status deleteUser(User user) {
-		
-		if(user != null) {
+
+		if (user != null) {
 			this.userList.remove(user);
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
 
@@ -455,15 +452,15 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en el caso de que s sea null
 	 */
 	public Status deleteSong(Song s) {
-		
-		if(s != null) {
+
+		if (s != null) {
 			this.songList.remove(s);
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/**
 	 * Elimina un album del sistema
 	 * 
@@ -471,12 +468,12 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en el caso de que a sea null
 	 */
 	public Status deleteAlbum(Album a) {
-		
-		if(a != null) {
+
+		if (a != null) {
 			this.albumList.remove(a);
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
 
@@ -487,17 +484,17 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR en el caso de que pl sea null
 	 */
 	public Status deletePlaylist(Playlist pl) {
-		
-		if(pl != null) {
+
+		if (pl != null) {
 			this.playlistList.remove(pl);
 			return Status.OK;
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/******************** Getting from lists *******************/
-	
+
 	/**
 	 * Comprueba si ya hay alguien que tiene este nick
 	 * 
@@ -506,16 +503,16 @@ public class Sistem implements java.io.Serializable {
 	 * @return true si ya existe
 	 */
 	private Boolean userNickExists(String userNick) {
-		
-		for(User user : this.userList) {
-			if(userNick.equals(user.getNick())) {
+
+		for (User user : this.userList) {
+			if (userNick.equals(user.getNick())) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Comprueba si ya hay alguien que tiene este nombre
 	 * 
@@ -525,37 +522,38 @@ public class Sistem implements java.io.Serializable {
 	private Boolean userNameExists(String userName) {
 		if (this.userList == null)
 			System.out.println("user list esta a nul"); // #DEBUG
-		for(User user : this.userList) {
-			if(userName.equals(user.getName())) {
+		for (User user : this.userList) {
+			if (userName.equals(user.getName())) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/************************ User related *********************/
-	
+
 	/**
 	 * Crea un nuevo usuario y lo anade al sistema
 	 * 
 	 * @param userName nombre del usuario (unico)
 	 * @param userNick nick del usuario (unico)
-	 * @param date fecha de nacimiento
+	 * @param date     fecha de nacimiento
 	 * @param userPass contrasena
 	 * 
 	 * @return ERROR si algo ha ido mal
 	 */
 	public Status register(String userName, String userNick, LocalDate date, String userPass) {
-		
-		if (userName == null || userNick == null || date == null || userPass == null || userNameExists(userName) || userNickExists(userNick))
+
+		if (userName == null || userNick == null || date == null || userPass == null || userNameExists(userName)
+				|| userNickExists(userNick))
 			return Status.ERROR;
-		
+
 		this.userList.add(new User(userName, date, userNick, userPass));
-		
+
 		return Status.OK;
 	}
-	
+
 	/**
 	 * Loggea a un usuario al sistema
 	 * 
@@ -565,81 +563,80 @@ public class Sistem implements java.io.Serializable {
 	 * @return ERROR si algo ha ido mal
 	 */
 	public Status login(String userName, String userPass) {
-		
-		if(loggedUser != null)
+
+		if (loggedUser != null)
 			return Status.ERROR;
-		
-		for(User u : userList) {
-			if(userName.equals(u.getNick()) && userPass.equals(u.getPassword())) {
-				loggedUser = u;  //Si es admin tambien le loggea
+
+		for (User u : userList) {
+			if (userName.equals(u.getNick()) && userPass.equals(u.getPassword())) {
+				loggedUser = u; // Si es admin tambien le loggea
 
 				return Status.OK;
 			}
 		}
-		
+
 		return Status.ERROR;
 	}
-	
+
 	/**
 	 * Desloggea al que estuviese loggeado en el sistema y guarda el sistema
 	 * 
 	 * @return ERROR en caso de IOException
 	 */
 	public Status logout() {
-		
+
 		loggedUser = null;
-		
+
 		try {
 			saveData();
-		} 
-		catch(IOException e) {
+		} catch (IOException e) {
 			return Status.ERROR;
 		}
-		
+
 		return Status.OK;
 	}
-	
+
 	/**
 	 * Checks if admin is logged
 	 * 
 	 * @return boolean
 	 */
 	public boolean adminIsLogged() {
-		
+
 		if (loggedUser == adminUser)
 			return true;
 		return false;
 	}
-	
+
 	/************************* Song Related ********************/
-	
+
 	/**
 	 * Busca a partir de la query con las restricciones oportunas
 	 * 
-	 * @param query string de busqueda
-	 * @param title busqueda por titulo
+	 * @param query  string de busqueda
+	 * @param title  busqueda por titulo
 	 * @param author busqueda por autor
-	 * @param album busqueda por album
+	 * @param album  busqueda por album
 	 * 
 	 * @return lista con todos los resultados de busqueda
 	 */
 	public ArrayList<PlayableObject> search(String query, Boolean title, Boolean author, Boolean album) {
-		
+
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
-		
-		if(title) {
+
+		if (title) {
 			search.addAll(searchTitle(query));
 		}
-		if(author) {
+		if (author) {
 			search.addAll(searchAuthor(query));
 		}
-		if(album) {
+		if (album) {
 			search.addAll(searchAlbum(query));
 		}
-		
+
 		return search;
 	}
-	
+
 	/**
 	 * Busqueda por titulo
 	 * 
@@ -648,22 +645,22 @@ public class Sistem implements java.io.Serializable {
 	 * @return lista con resultados
 	 */
 	private ArrayList<PlayableObject> searchTitle(String title) {
-		
+
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
-		
-		for(Song s : this.songList) {
-			if(title.equals(s.getTitle()))
+
+		for (Song s : this.songList) {
+			if (title.equals(s.getTitle()))
 				search.add(s);
 		}
-		
-		for(Album a : this.albumList) {
-			if(title.equals(a.getTitle()))
+
+		for (Album a : this.albumList) {
+			if (title.equals(a.getTitle()))
 				search.add(a);
 		}
-		
+
 		return search;
 	}
-	
+
 	/**
 	 * Busqueda por autor
 	 * 
@@ -672,22 +669,22 @@ public class Sistem implements java.io.Serializable {
 	 * @return lista con resultados
 	 */
 	private ArrayList<PlayableObject> searchAuthor(String author) {
-		
+
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
-		
-		for(Song s : this.songList) {
-			if(author.equals(s.getAuthor().getName()))
+
+		for (Song s : this.songList) {
+			if (author.equals(s.getAuthor().getName()))
 				search.add(s);
 		}
-		
-		for(Album a : this.albumList) {
-			if(author.equals(a.getAuthor().getName()))
+
+		for (Album a : this.albumList) {
+			if (author.equals(a.getAuthor().getName()))
 				search.add(a);
 		}
-		
+
 		return search;
 	}
-	
+
 	/**
 	 * Busqueda por album
 	 * 
@@ -696,20 +693,19 @@ public class Sistem implements java.io.Serializable {
 	 * @return lista con resultados
 	 */
 	private ArrayList<PlayableObject> searchAlbum(String albumTitle) {
-		
+
 		ArrayList<PlayableObject> search = new ArrayList<PlayableObject>();
-				
-		for(Album a : this.albumList) {
-			if(albumTitle.equals(a.getTitle()))
+
+		for (Album a : this.albumList) {
+			if (albumTitle.equals(a.getTitle()))
 				search.add(a);
 		}
-		
+
 		return search;
 	}
-	
 
 	/******************** Report related ******************/
-	
+
 	/**
 	 * Anade un report a la lista
 	 * 
@@ -719,7 +715,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status addReport(Report r) {
 
-		if(r != null) {
+		if (r != null) {
 			this.reportList.add(r);
 			return Status.OK;
 		}
@@ -736,7 +732,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	public Status deleteReport(Report r) {
 
-		if(r != null) {
+		if (r != null) {
 			this.reportList.remove(r);
 			return Status.OK;
 		}
@@ -745,22 +741,22 @@ public class Sistem implements java.io.Serializable {
 	}
 
 	/******************* SAVE STATE ***********************/
-	
+
 	/**
 	 * Guarda los datos en un fichero System.bal
 	 * 
 	 * @throws IOException si hay problemas con el fichero
 	 */
-	public void saveData()throws IOException{
-	    String fileName= "System.bal";
-	    FileOutputStream fos = new FileOutputStream(fileName);
-	    ObjectOutputStream oos = new ObjectOutputStream(fos);
-	    oos.writeObject(this);
-	    oos.close();
+	public void saveData() throws IOException {
+		String fileName = "System.bal";
+		FileOutputStream fos = new FileOutputStream(fileName);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(this);
+		oos.close();
 	}
 
 	/******************* List getters *********************/
-	
+
 	public ArrayList<User> getUserList() {
 		return userList;
 	}
@@ -768,7 +764,7 @@ public class Sistem implements java.io.Serializable {
 	public ArrayList<Song> getSongList() {
 		return songList;
 	}
-	
+
 	public ArrayList<Album> getAlbumList() {
 		return albumList;
 	}

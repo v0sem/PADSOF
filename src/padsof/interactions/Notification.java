@@ -12,35 +12,35 @@ import padsof.user.User;
 public class Notification {
 
 	/**
-	 * Contenido de la notificacion
-	 */
-	private String notificationText;
-	
-	/**
-	 * El receptor de la notificacion
-	 */
-	private User receiver;
-	
-	/**
-	 * El objeto que ha lanzado la notificacion
-	 */
-	private PlayableObject trigger;
-	
-	/**
 	 * Constructor de notificaciones
 	 * 
-	 * @param text Texto de la notificacion
+	 * @param text     Texto de la notificacion
 	 * @param receiver Usuario que recibe la notificacion
-	 * @param trigger PlayableObject que crea la notificacion
+	 * @param trigger  PlayableObject que crea la notificacion
 	 */
 	public Notification(String text, User receiver, PlayableObject trigger) {
 		notificationText = text;
 		this.receiver = receiver;
 		this.trigger = trigger;
 	}
-	
+
+	/**
+	 * Contenido de la notificacion
+	 */
+	private String notificationText;
+
+	/**
+	 * El receptor de la notificacion
+	 */
+	private User receiver;
+
+	/**
+	 * El objeto que ha lanzado la notificacion
+	 */
+	private PlayableObject trigger;
+
 	/************************** Getters ***************************/
-	
+
 	/**
 	 * Getter del texto de la notificacion
 	 * 
@@ -67,5 +67,5 @@ public class Notification {
 	public PlayableObject getTrigger() {
 		return trigger;
 	}
-	
+
 }
