@@ -21,6 +21,8 @@ public class MainPanel extends JFrame {
 	 */
 	public MainPanel() {
 		super("MP3BALL");
+		ImageIcon img = new ImageIcon("icons/MP3BALL-icon.png");
+		super.setIconImage(img.getImage());
 		super.setFont(new Font("Roboto", Font.BOLD, 13));
 		
 		Container container = this.getContentPane();
