@@ -5,12 +5,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import padsof.swing.items.StandardButton;
+
 public class LoginPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel nickLabel;
 	private JTextField nickField;
-	private JButton loginButton;
+	private StandardButton loginButton;
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
 
@@ -44,10 +46,7 @@ public class LoginPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, passwordField, 6, SpringLayout.EAST, passwordLabel);
 	
 		
-		loginButton = new JButton("LOGIN");
-		loginButton.setPreferredSize(new Dimension(150, 50));
-		loginButton.setFocusPainted(false);
-		loginButton.setContentAreaFilled(false);
+		loginButton = new StandardButton("LOGIN", 150, 50);
 		this.add(loginButton);
 		
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, loginButton, 30, SpringLayout.HORIZONTAL_CENTER, this);
