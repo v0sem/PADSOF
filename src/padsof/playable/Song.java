@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import pads.musicPlayer.*;
 import pads.musicPlayer.exceptions.*;
 
+@SuppressWarnings("serial")
 public class Song extends CommentableObject {
 	/**
 	 * Guarda el player de esta cancion

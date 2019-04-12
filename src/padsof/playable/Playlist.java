@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import padsof.Status;
 
+@SuppressWarnings("serial")
 public class Playlist extends PlayableObject {
 
 	/**

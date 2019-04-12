@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import padsof.Status;
 import padsof.sistem.Sistem;
 
+@SuppressWarnings("serial")
 public class Album extends CommentableObject {
 
 	/**

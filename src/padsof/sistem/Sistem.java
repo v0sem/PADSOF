@@ -14,7 +14,6 @@ import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Playlist;
 import padsof.playable.Song;
-import padsof.playable.SongState;
 import padsof.user.User;
 import padsof.user.UserType;
 
@@ -24,6 +23,7 @@ import padsof.user.UserType;
  * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
+@SuppressWarnings("serial")
 public class Sistem implements java.io.Serializable {
 
 	/**
@@ -582,9 +582,6 @@ public class Sistem implements java.io.Serializable {
 			return Status.ERROR;
 
 		User u = new User(userName, date, userNick, userPass);
-		if (u == null) {
-			return Status.ERROR;
-		}
 		
 		this.userList.add(u);
 

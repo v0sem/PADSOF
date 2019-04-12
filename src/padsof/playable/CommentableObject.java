@@ -11,8 +11,8 @@ import padsof.Status;
 import padsof.interactions.Comment;
 import padsof.sistem.Sistem;
 import padsof.user.User;
-import padsof.user.UserType;
 
+@SuppressWarnings("serial")
 public abstract class CommentableObject extends PlayableObject{
 
 	/**
