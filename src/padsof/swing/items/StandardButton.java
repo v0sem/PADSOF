@@ -5,13 +5,8 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class StandardButton extends JButton{
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	public StandardButton(String text, int x, int y) {
 		super(text);
