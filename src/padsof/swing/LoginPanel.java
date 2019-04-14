@@ -15,6 +15,7 @@ public class LoginPanel extends JPanel {
 	private StandardButton loginButton;
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
+	private JLabel title;
 
 
 	public LoginPanel() {
@@ -32,6 +33,13 @@ public class LoginPanel extends JPanel {
 		this.add(passwordLabel);
 		passwordField = new JPasswordField(20);
 		this.add(passwordField);
+		title = new JLabel("Iniciar sesion");
+		title.setFont(new Font("Rockwell Extra Bold", Font.BOLD, 22));
+		this.add(title);
+		
+		// PANEL DESCRIPTION / TITLE
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 30, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, title, 100, SpringLayout.NORTH, this);
 		
 		// NICK
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, nickLabel, -100, SpringLayout.HORIZONTAL_CENTER, this);
@@ -56,5 +64,13 @@ public class LoginPanel extends JPanel {
 	
 	public void setControlador(ActionListener controlador){
 		this.loginButton.addActionListener(controlador);
+	}
+	
+	public JTextField getNick() {
+		return nickField;
+	}
+
+	public JPasswordField getPassword() {
+		return passwordField;
 	}
 }
