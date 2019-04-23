@@ -7,11 +7,11 @@ import java.io.File;
 import org.junit.Test;
 
 import padsof.playable.Song;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 
 public class NotificationTest {
-	Sistem sis = Sistem.getInstance();
+	System sis = System.getInstance();
 	String text = "test comment";
 	User u = sis.getLoggedUser();
 	Song s = new Song("Africa", "music" + File.separator + "africa.mp3");

@@ -10,11 +10,11 @@ import org.junit.Test;
 
 import padsof.Status;
 import padsof.playable.Song;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 
 public class ReportTest {
-	Sistem sis = Sistem.getInstance();
+	System sis = System.getInstance();
 	Song s1 = new Song("Africa", "music" + File.separator + "africa.mp3");
 	
 	@Test
@@ -45,7 +45,7 @@ public class ReportTest {
 		
 		User u = sis.getLoggedUser();
 		if (u == null)
-			System.out.println("[ERROR] User not logged in, error in testAccept.");
+			java.lang.System.out.println("[ERROR] User not logged in, error in testAccept.");
 		
 		Report r = new Report(s1, u);
 		r.accept();

@@ -1,4 +1,4 @@
-package padsof.sistem;
+package padsof.system;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -24,12 +24,13 @@ import padsof.user.UserType;
  * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
-public class Sistem implements java.io.Serializable {
+@SuppressWarnings("serial")
+public class System implements java.io.Serializable {
 
 	/**
 	 * Instancia del sistema
 	 */
-	private static Sistem instance = null;
+	private static System instance = null;
 
 	/**
 	 * Usuario administrador
@@ -104,7 +105,7 @@ public class Sistem implements java.io.Serializable {
 	 * Constructor de la clase Sistem. Inicializa con valores por defecto y con un
 	 * usuario Admin User. Carga los datos de un fichero si este existe
 	 */
-	public Sistem() {
+	public System() {
 
 		// si existe un archivo para cargarlo, lo carga
 		if (new File("System.bal").exists()) {
@@ -137,10 +138,10 @@ public class Sistem implements java.io.Serializable {
 	 * 
 	 * @return el Sistem
 	 */
-	public static Sistem getInstance() {
+	public static System getInstance() {
 
 		if (instance == null)
-			instance = new Sistem();
+			instance = new System();
 
 		return instance;
 	}
@@ -150,11 +151,11 @@ public class Sistem implements java.io.Serializable {
 	 * 
 	 * @return Sistem cargado
 	 */
-	public Sistem loadData() {
+	public System loadData() {
 		try {
 			FileInputStream fin = new FileInputStream("System.bal");
 			ObjectInputStream ois = new ObjectInputStream(fin);
-			Sistem loadedSystem = (Sistem) ois.readObject();
+			System loadedSystem = (System) ois.readObject();
 
 			this.adminUser = loadedSystem.adminUser;
 			this.loggedUser = loadedSystem.loggedUser;
@@ -243,7 +244,7 @@ public class Sistem implements java.io.Serializable {
 
 				// Check if we have the credit card number from last payment
 				if (this.loggedUser.getCardNumber() == null) {
-					System.out.println("[ERROR] Credit card not provided...?");
+					java.lang.System.out.println("[ERROR] Credit card not provided...?");
 					return;
 				}
 
@@ -531,7 +532,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	private Boolean userNickExists(String userNick) {
 		if (this.userList == null || userNick == null) {
-			System.out.println("[ERROR] User list o userNick son null");
+			java.lang.System.out.println("[ERROR] User list o userNick son null");
 			return false;
 		}
 
@@ -552,7 +553,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	private Boolean userNameExists(String userName) {
 		if (this.userList == null || userName == null) {
-			System.out.println("[ERROR] User list o userName son null");
+			java.lang.System.out.println("[ERROR] User list o userName son null");
 			return false;
 		}
 		for (User user : this.userList) {
@@ -626,7 +627,7 @@ public class Sistem implements java.io.Serializable {
 		try {
 			saveData();
 		} catch (IOException e) {
-			System.out.println("[ERROR] " + e);
+			java.lang.System.out.println("[ERROR] " + e);
 			return Status.ERROR;
 		}
 

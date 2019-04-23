@@ -6,7 +6,7 @@
 package padsof.playable;
 
 import padsof.Status;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 
 public abstract class PlayableObject implements java.io.Serializable {
@@ -17,10 +17,10 @@ public abstract class PlayableObject implements java.io.Serializable {
 	 * @param title titulo del playable object
 	 */
 	public PlayableObject(String title) {
-		User u = Sistem.getInstance().getLoggedUser();
+		User u = System.getInstance().getLoggedUser();
 		if (u == null) {
-			System.out.println("[INFO] No user logged in, defaulting to admin user");
-			this.author = Sistem.getInstance().getAdminUser();
+			java.lang.System.out.println("[INFO] No user logged in, defaulting to admin user");
+			this.author = System.getInstance().getAdminUser();
 		} else {
 			this.author = u;
 		}

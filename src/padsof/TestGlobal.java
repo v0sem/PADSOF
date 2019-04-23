@@ -6,7 +6,7 @@ import java.time.Month;
 import java.util.ArrayList;
 
 import padsof.playable.*;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 import padsof.user.UserType;
 
@@ -24,7 +24,7 @@ public class TestGlobal {
 	private static String invalidString = "invalid";
 
 	public static void main(String[] args) {
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 
 		// Register Toto
 		sis.register(userName1Test, userNick1Test, birthTest, passwordTest);
@@ -36,7 +36,7 @@ public class TestGlobal {
 		// Try real login
 		sis.login(userNick1Test, passwordTest);
 
-		System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
+		java.lang.System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
 				+ sis.getLoggedUser().getNick() + ")");
 
 		// Create new song and add it (revision pending)
@@ -55,7 +55,7 @@ public class TestGlobal {
 		s1.play();
 
 		// Check how the song was uploaded
-		System.out.println(
+		java.lang.System.out.println(
 				"\n[INFO] Now Playing:\n  " + s1.getAuthor().getName() + " - " + s1.getTitle() + " [" + s1.getLength() + "]");
 		
 		// Give the user 10 second to listen
@@ -68,20 +68,20 @@ public class TestGlobal {
 		// Stop it
 		s1.stop();
 		
-		System.out.println("\n[INFO] Stopping song");
+		java.lang.System.out.println("\n[INFO] Stopping song");
 
 		// Check search by title
-		System.out.println("\\n[INFO] Results of searching by title \"Africa\":");
+		java.lang.System.out.println("\\n[INFO] Results of searching by title \"Africa\":");
 		for (PlayableObject p : sis.search("Africa", true, false, false)) {
-			System.out.println("\t> " + p.getTitle());
+			java.lang.System.out.println("\t> " + p.getTitle());
 		}
 		
-		System.out.println("\\n[INFO] Number of results: " + sis.search("Africa", true, false, false).size());
+		java.lang.System.out.println("\\n[INFO] Number of results: " + sis.search("Africa", true, false, false).size());
 		
 		// Check search by author
-		System.out.println("[INFO] Results of searching by author \"" + userName1Test + "\":");
+		java.lang.System.out.println("[INFO] Results of searching by author \"" + userName1Test + "\":");
 		for (PlayableObject p : sis.search(userName1Test, false, true, false)) {
-			System.out.println("\t> " + p.getTitle());
+			java.lang.System.out.println("\t> " + p.getTitle());
 		}
 
 		// Logout from admin account
@@ -89,9 +89,9 @@ public class TestGlobal {
 		
 		// Login again as normal user
 		if (sis.login(userNick1Test, passwordTest) == Status.ERROR)
-			System.out.println("[ERROR] Login is not working properly");
+			java.lang.System.out.println("[ERROR] Login is not working properly");
 		else
-			System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
+			java.lang.System.out.println("[INFO] Logged in successfully as " + sis.getLoggedUser().getName() + " (@"
 					+ sis.getLoggedUser().getNick() + ")");
 		
 		// Add new album
@@ -101,19 +101,19 @@ public class TestGlobal {
 		// Search our album
 		ArrayList<PlayableObject> result = sis.search("Africa - Single", false, false, true);
 		if(result.size() < 1) {
-			System.out.println("[ERROR] Search is not working properly");
+			java.lang.System.out.println("[ERROR] Search is not working properly");
 		}
 		else {
-			System.out.println("[INFO] Found Album" + result.get(0).getTitle());
+			java.lang.System.out.println("[INFO] Found Album" + result.get(0).getTitle());
 		}
 		
 		// Adding song to album
 		album.addSong(s1);
 		if(Math.abs(album.getLength() % s1.getLength()) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
-			System.out.println("[INFO] Added song correctly");
+			java.lang.System.out.println("[INFO] Added song correctly");
 		}
 		else {
-			System.out.println("[ERROR] Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
+			java.lang.System.out.println("[ERROR] Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
 		}
 		
 		// Add new Playlist
@@ -121,20 +121,20 @@ public class TestGlobal {
 		sis.addPlaylist(pl);
 		
 		if(sis.getPlaylistList().contains(pl)) {
-			System.out.println("[INFO] Playlist " + pl.getTitle() + " was correctly added to the system");
+			java.lang.System.out.println("[INFO] Playlist " + pl.getTitle() + " was correctly added to the system");
 		}
 		else {
-			System.out.println("[ERROR] Playlist " + pl.getTitle() + " was not added to the sistem");
+			java.lang.System.out.println("[ERROR] Playlist " + pl.getTitle() + " was not added to the sistem");
 		}
 		
 		// Add items to the playlist and check that they are all in
 		pl.addPlayableObject(s1);
 		pl.addPlayableObject(album);
 		if(Math.abs(pl.getLength() % (album.getLength() + s1.getLength())) < 0.001) { //Usamos un threshold porque comparar doubles en java no esta bien
-			System.out.println("[INFO] Added " + s1.getTitle() + " and " + album.getTitle() + " correctly to " + pl.getTitle());
+			java.lang.System.out.println("[INFO] Added " + s1.getTitle() + " and " + album.getTitle() + " correctly to " + pl.getTitle());
 		}
 		else {
-			System.out.println("[ERROR] Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
+			java.lang.System.out.println("[ERROR] Something went wrong when adding a song to an album" + album.getLength() + " vs " + s1.getLength());
 		}
 		
 		sis.logout();
@@ -145,15 +145,15 @@ public class TestGlobal {
 		sis.getLoggedUser().follow(sis.getUserList().get(1));
 		
 		if (sis.logout() == Status.ERROR)
-			System.out.println("[ERROR] Problem logging out...");
+			java.lang.System.out.println("[ERROR] Problem logging out...");
 		
 		sis.login(userNick1Test, passwordTest);
 		
 		if(sis.getLoggedUser().getIsFollowed().size() == 1) {
-			System.out.println("[INFO] " + sis.getLoggedUser().getName() + " is being followed by " + sis.getLoggedUser().getIsFollowed().get(0).getName());
+			java.lang.System.out.println("[INFO] " + sis.getLoggedUser().getName() + " is being followed by " + sis.getLoggedUser().getIsFollowed().get(0).getName());
 		}
 		else {
-			System.out.println("[ERROR] There was something wrong when following");
+			java.lang.System.out.println("[ERROR] There was something wrong when following");
 		}
 		
 		sis.addSong(new Song("All Star", "music" + File.separator + "som.mp3"));
@@ -163,10 +163,10 @@ public class TestGlobal {
 		
 		// Checking the notification
 		if(sis.getLoggedUser().getNotifications().size() > 0) {
-			System.out.println("[INFO] " + sis.getLoggedUser().getName() + " recieved --> " + sis.getLoggedUser().getNotifications().get(0).getNotificationText());
+			java.lang.System.out.println("[INFO] " + sis.getLoggedUser().getName() + " recieved --> " + sis.getLoggedUser().getNotifications().get(0).getNotificationText());
 		}
 		else {
-			System.out.println("[ERROR] There was something wrong with the notifications");
+			java.lang.System.out.println("[ERROR] There was something wrong with the notifications");
 		}
 		
 		// Reporting new song because is Smash Mouth's song
@@ -174,17 +174,17 @@ public class TestGlobal {
 		Song s2 = (Song) result.get(0);
 		
 		if(s2.report() == Status.OK) {
-			System.out.println("[INFO] " + s2.getTitle() + " reported");
+			java.lang.System.out.println("[INFO] " + s2.getTitle() + " reported");
 		}
 		else {
-			System.out.println("[ERROR] There was something wrong with the report");
+			java.lang.System.out.println("[ERROR] There was something wrong with the report");
 		}
 		
 		if(sis.getReportList().size() > 0) {
-			System.out.println("[INFO] Report is in system");
+			java.lang.System.out.println("[INFO] Report is in system");
 		}
 		else {
-			System.out.println("[ERROR] Report is not in system");
+			java.lang.System.out.println("[ERROR] Report is not in system");
 		}
 		
 		sis.logout();
@@ -197,7 +197,7 @@ public class TestGlobal {
 		// Buy premium
 		sis.getLoggedUser().goPremium("4115528259915985");
 		
-		System.out.println("[INFO] User status > " + sis.getLoggedUser().getUserType());
+		java.lang.System.out.println("[INFO] User status > " + sis.getLoggedUser().getUserType());
 		
 		sis.logout();
 		
@@ -205,9 +205,9 @@ public class TestGlobal {
 		sis.loadData();
 		
 		// Check search by author as before
-		System.out.println("[INFO] Results of searching by author \"" + userName1Test + "\":");
+		java.lang.System.out.println("[INFO] Results of searching by author \"" + userName1Test + "\":");
 		for (PlayableObject p : sis.search(userName1Test, false, true, false)) {
-			System.out.println("\t> " + p.getTitle());
+			java.lang.System.out.println("\t> " + p.getTitle());
 		}
 	}
 

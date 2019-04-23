@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 
 import padsof.Status;
 import padsof.interactions.Notification;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 
 /**
  * Usuario del sistema, tanto registrados como premium como administradores 
@@ -106,7 +106,7 @@ public class User implements java.io.Serializable {
 		this.nick = nick;
 		this.password = password;
 		if(!nick.contentEquals("admin"))
-			this.songCount = Sistem.getInstance().getMaxRegisteredSong();
+			this.songCount = System.getInstance().getMaxRegisteredSong();
 		else
 			this.songCount =  1000;
 		this.follows = new ArrayList<User>();
@@ -250,7 +250,7 @@ public class User implements java.io.Serializable {
 	public void increaseSongPlaycount() {
 		this.songsPlayCount++;
 		
-		if(this.songsPlayCount >= Sistem.getInstance().getPlaysToPremium())
+		if(this.songsPlayCount >= System.getInstance().getPlaysToPremium())
 			this.userType = UserType.PREMIUM;
 			
 	}
@@ -331,7 +331,7 @@ public class User implements java.io.Serializable {
 	 */
 	public Status goPremium(String cardNumber) {
 
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 		
 		if(!TeleChargeAndPaySystem.isValidCardNumber(cardNumber))
 			return Status.ERROR;

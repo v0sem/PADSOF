@@ -1,4 +1,4 @@
-package padsof.sistem;
+package padsof.system;
 
 import static org.junit.Assert.*;
 
@@ -18,11 +18,11 @@ import padsof.playable.SongState;
 import padsof.user.User;
 import padsof.interactions.Report;
 
-public class SistemTest {
+public class SystemTest {
 
 	File file = new File("System.bal");
 	boolean flag = file.delete();
-	Sistem test = Sistem.getInstance();
+	System test = System.getInstance();
 
 	@Test
 	public void testSistem() {
@@ -105,7 +105,7 @@ public class SistemTest {
 		// are not privileged)
 
 		//FechaSimulada.restablecerHoyReal();
-		System.out.println(FechaSimulada.getHoy());
+		java.lang.System.out.println(FechaSimulada.getHoy());
 		test.logout();
 		User uHonest = new User("Honest Man", LocalDate.of(1970, Month.APRIL, 20), "thetruth", "1111");
 		test.addUser(uHonest);
@@ -141,9 +141,9 @@ public class SistemTest {
 		
 		// 30 days later
 		FechaSimulada.avanzar(40);
-		System.out.println(FechaSimulada.getHoy());
+		java.lang.System.out.println(FechaSimulada.getHoy());
 		
-		Sistem.getInstance().checkDate();
+		System.getInstance().checkDate();
 
 		assertFalse(uLiar.getBlocked());
 		test.deleteUser(uLiar);

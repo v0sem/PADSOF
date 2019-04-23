@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 
 public class CommentTest {
-	Sistem sis = Sistem.getInstance();
+	System sis = System.getInstance();
 	String comment = "test comment";
 	User u = sis.getLoggedUser();
 	Comment test = new Comment(comment, u);

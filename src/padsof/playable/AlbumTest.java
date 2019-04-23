@@ -9,7 +9,7 @@ import java.time.Month;
 import org.junit.Test;
 
 import padsof.Status;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 
 public class AlbumTest {
 
@@ -33,9 +33,9 @@ public class AlbumTest {
 		album.addSong(d);
 		album.addSong(f);
 		
-		Sistem.getInstance().register("Toto", "toto", 
+		System.getInstance().register("Toto", "toto", 
 				LocalDate.of(1980, Month.JANUARY, 1), "1234");
-		Sistem.getInstance().login("toto", "1234");
+		System.getInstance().login("toto", "1234");
 		
 		assertEquals(Status.OK, album.play());
 		
@@ -43,7 +43,7 @@ public class AlbumTest {
 		album.deleteSong(d);
 		album.deleteSong(f);
 		
-		Sistem.getInstance().logout();
+		System.getInstance().logout();
 	}
 
 	@Test
@@ -54,9 +54,9 @@ public class AlbumTest {
 		
 		assertFalse(album.canUserPlay());
 		
-		Sistem.getInstance().register("Toto1", "toto1", 
+		System.getInstance().register("Toto1", "toto1", 
 				LocalDate.of(1980, Month.JANUARY, 1), "1234");
-		Sistem.getInstance().login("toto1", "1234");
+		System.getInstance().login("toto1", "1234");
 		
 		assertTrue(album.canUserPlay());
 		
@@ -64,7 +64,7 @@ public class AlbumTest {
 		album.deleteSong(d);
 		album.deleteSong(f);
 		
-		Sistem.getInstance().logout();
+		System.getInstance().logout();
 	}
 
 	@Test

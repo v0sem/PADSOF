@@ -8,13 +8,13 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import padsof.sistem.Sistem;
 import padsof.Status;
+import padsof.system.System;
 
 public class CommentableObjectTest {
 
 	Song test = new Song("Africa", "music" + File.separator + "africa.mp3");
-	Sistem sis = Sistem.getInstance();
+	System sis = System.getInstance();
 
 	@Test
 	public void testAddComment() {

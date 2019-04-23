@@ -8,7 +8,7 @@ package padsof.playable;
 import java.util.ArrayList;
 
 import padsof.Status;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 
 public class Album extends CommentableObject {
 
@@ -56,7 +56,7 @@ public class Album extends CommentableObject {
 	 */
 	@Override
 	protected Boolean canUserPlay() {
-		if (Sistem.getInstance().getLoggedUser() == null)
+		if (System.getInstance().getLoggedUser() == null)
 			return false;
 
 		return true;

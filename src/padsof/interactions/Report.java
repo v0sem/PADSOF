@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import fechasimulada.FechaSimulada;
 import padsof.playable.Song;
 import padsof.playable.SongState;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 
 /**
@@ -68,9 +68,9 @@ public class Report implements java.io.Serializable {
 		// banear al plagiador
 		reportedSong.getAuthor().block();
 		// cancion se borra por plagio (article 13)
-		Sistem.getInstance().deleteSong(reportedSong);
+		System.getInstance().deleteSong(reportedSong);
 		// Borra el reporte
-		Sistem.getInstance().deleteReport(this);
+		System.getInstance().deleteReport(this);
 	}
 
 	/**
