@@ -81,11 +81,6 @@ public class User implements java.io.Serializable {
 	private LocalDate registeredDate;
 
 	/**
-	 * Ultima tarjeta de credito usada por el usuario
-	 */
-	private String cardNumber;
-
-	/**
 	 * Numero de reproducciones de las canciones creadas por el usuario
 	 */
 	private long songsPlayCount;
@@ -201,14 +196,6 @@ public class User implements java.io.Serializable {
 	 */
 	public LocalDate getPremiumDate() {
 		return premiumDate;
-	}
-
-	/**
-	 * Getter de la ultima tarjeta de credito usada
-	 * @return tarjeta de credito para pagos
-	 */
-	public String getCardNumber() {
-		return cardNumber;
 	}
 
 	/**
@@ -338,8 +325,6 @@ public class User implements java.io.Serializable {
 		
 		try {
 			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", sis.getPremiumPrice());
-			// Save card number to recharge in 30 days
-			this.cardNumber = cardNumber;
 			// Update premium date
 			this.premiumDate = LocalDate.now();
 		}

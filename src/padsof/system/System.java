@@ -241,15 +241,6 @@ public class System implements java.io.Serializable {
 			if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
 				// Demote user first
 				this.loggedUser.setUserType(UserType.STANDARD);
-
-				// Check if we have the credit card number from last payment
-				if (this.loggedUser.getCardNumber() == null) {
-					java.lang.System.out.println("[ERROR] Credit card not provided...?");
-					return;
-				}
-
-				// If we do, pay the saved price with last credit card
-				this.loggedUser.goPremium(this.loggedUser.getCardNumber());
 			}
 		}
 	}
