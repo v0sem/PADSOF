@@ -1,10 +1,11 @@
-package padsof;
+package tests;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 
+import padsof.Status;
 import padsof.playable.*;
 import padsof.system.System;
 import padsof.user.User;

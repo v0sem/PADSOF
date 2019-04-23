@@ -1,9 +1,10 @@
-package padsof.interactions;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import padsof.interactions.Comment;
 import padsof.system.System;
 import padsof.user.User;
 

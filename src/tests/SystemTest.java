@@ -1,4 +1,4 @@
-package padsof.system;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -15,6 +15,7 @@ import padsof.playable.Album;
 import padsof.playable.Playlist;
 import padsof.playable.Song;
 import padsof.playable.SongState;
+import padsof.system.System;
 import padsof.user.User;
 import padsof.interactions.Report;
 

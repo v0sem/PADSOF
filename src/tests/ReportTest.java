@@ -1,4 +1,4 @@
-package padsof.interactions;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,7 @@ import java.time.Month;
 import org.junit.Test;
 
 import padsof.Status;
+import padsof.interactions.Report;
 import padsof.playable.Song;
 import padsof.system.System;
 import padsof.user.User;

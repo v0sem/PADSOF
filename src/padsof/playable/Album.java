@@ -55,7 +55,7 @@ public class Album extends CommentableObject {
 	 * @return boolean de la operacion
 	 */
 	@Override
-	protected Boolean canUserPlay() {
+	public Boolean canUserPlay() {
 		if (System.getInstance().getLoggedUser() == null)
 			return false;
 

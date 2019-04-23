@@ -77,7 +77,7 @@ public abstract class PlayableObject implements java.io.Serializable {
 	 * 
 	 * @return boolean con el resultado
 	 */
-	protected abstract Boolean canUserPlay();
+	public abstract Boolean canUserPlay();
 
 	/**
 	 * Devuleve la longitud del objeto playable

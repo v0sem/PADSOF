@@ -256,7 +256,7 @@ public class Song extends CommentableObject {
 	 * @return devuelve true si se puede reproducir o false si no
 	 */
 	@Override
-	protected Boolean canUserPlay() {
+	public Boolean canUserPlay() {
 		// Check if song is in a playable state
 		if (state != SongState.ACCEPTED) {
 			return false;

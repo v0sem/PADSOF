@@ -1,4 +1,4 @@
-package padsof.interactions;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,7 @@ import java.io.File;
 
 import org.junit.Test;
 
+import padsof.interactions.Notification;
 import padsof.playable.Song;
 import padsof.system.System;
 import padsof.user.User;

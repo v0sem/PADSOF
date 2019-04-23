@@ -48,7 +48,7 @@ public class Playlist extends PlayableObject {
 	 * @return boolean de la operacion
 	 */
 	@Override
-	protected Boolean canUserPlay() {
+	public Boolean canUserPlay() {
 		return true;
 	}
 

@@ -1,4 +1,4 @@
-package padsof.playable;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,9 @@ import java.time.Month;
 import org.junit.Test;
 
 import padsof.Status;
+import padsof.playable.Album;
+import padsof.playable.Playlist;
+import padsof.playable.Song;
 import padsof.system.System;
 
 public class PlaylistTest {
