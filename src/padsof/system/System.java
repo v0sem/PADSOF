@@ -597,6 +597,9 @@ public class System implements java.io.Serializable {
 
 		for (User u : userList) {
 			if (userName.equals(u.getNick()) && userPass.equals(u.getPassword())) {
+				if (u.getBlocked() == true)
+					return Status.ERROR;
+				
 				loggedUser = u; // Si es admin tambien le loggea
 
 				return Status.OK;
