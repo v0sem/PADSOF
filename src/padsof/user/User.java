@@ -83,7 +83,7 @@ public class User implements java.io.Serializable {
 	/**
 	 * Numero de reproducciones de las canciones creadas por el usuario
 	 */
-	private long songsPlayCount;
+	private long songPlayCount;
 
 	/**
 	 * Constructor del usuario
@@ -111,7 +111,7 @@ public class User implements java.io.Serializable {
 		// Save date of registed
 		this.registeredDate = LocalDate.now();
 		
-		this.songsPlayCount = 0;
+		this.songPlayCount = 0;
 		
 	}
 
@@ -235,9 +235,9 @@ public class User implements java.io.Serializable {
 	 * Sumar uno al numero de reproducciones que tiene un usuario dado en las canciones que ha subido
 	 */
 	public void increaseSongPlaycount() {
-		this.songsPlayCount++;
+		this.songPlayCount++;
 		
-		if(this.songsPlayCount >= System.getInstance().getPlaysToPremium())
+		if(this.songPlayCount >= System.getInstance().getPlaysToPremium())
 			this.userType = UserType.PREMIUM;
 			
 	}
@@ -349,9 +349,17 @@ public class User implements java.io.Serializable {
 	 * @return el numero de reproducciones de las canciones del usuario
 	 */
 	public long getSongPlaycount() {
-		return this.songsPlayCount;
+		return this.songPlayCount;
 	}
 
+
+	/**
+	 * Resetea el valor de SongPlayCount
+	 */
+	public void resetSongPlayCount() {
+		this.songPlayCount = 0;
+	}
+	
 	/**
 	 * Getter de la lista de seguidores
 	 * 

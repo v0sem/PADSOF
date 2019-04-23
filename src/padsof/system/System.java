@@ -219,7 +219,7 @@ public class System implements java.io.Serializable {
 		if (loggedUser == null)
 			return;
 
-		// Check registered song counts
+		// Monthly checks
 		period = Period.between(today, this.loggedUser.getRegisteredDate());
 
 		if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
@@ -227,6 +227,8 @@ public class System implements java.io.Serializable {
 			this.loggedUser.setRegisterdDate(today);
 			// reset count
 			this.loggedUser.setSongCount(this.maxRegisteredSong);
+			// reset songs played
+			this.loggedUser.resetSongPlayCount();
 		}
 
 		// Check if premium users have to pay again
@@ -239,7 +241,7 @@ public class System implements java.io.Serializable {
 			period = Period.between(today, this.loggedUser.getPremiumDate());
 
 			if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
-				// Demote user first
+				// Demote user
 				this.loggedUser.setUserType(UserType.STANDARD);
 			}
 		}
@@ -574,10 +576,6 @@ public class System implements java.io.Serializable {
 			return Status.ERROR;
 
 		User u = new User(userName, date, userNick, userPass);
-		if (u == null) {
-			return Status.ERROR;
-		}
-		
 		this.userList.add(u);
 
 		return Status.OK;
