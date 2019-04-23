@@ -1,10 +1,10 @@
 package padsof;
 
-import padsof.swing.MainPanel;
+import padsof.swing.MainFrame;
 
 public class TestGUI {
 
 	public static void main(String[] args) {
-		new MainPanel();
+		new MainFrame();
 	}
 }

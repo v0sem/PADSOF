@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import padsof.swing.LoginPanel;
-import padsof.swing.MainPanel;
+import padsof.swing.MainFrame;
 import padsof.Status;
 import padsof.sistem.Sistem;
 
@@ -13,7 +13,7 @@ public class LoginControl implements ActionListener {
 
 	private LoginPanel panel;
 
-	public LoginControl(LoginPanel panel, MainPanel mainPanel) {
+	public LoginControl(LoginPanel panel, MainFrame mainPanel) {
 		this.panel = panel;
 	}
 
@@ -27,7 +27,7 @@ public class LoginControl implements ActionListener {
 			JOptionPane.showMessageDialog(this.panel, "Entrando a la aplicacion como " + nick, "LOG-IN", JOptionPane.INFORMATION_MESSAGE);
 			this.panel.getNick().setText("");
 			this.panel.getPassword().setText("");
-			// TODO: this.mainPanel.metodoParaMostrarElHome();  mostrarlo segun el tipo del usuario logueado
+			// TODO: mainFrame.getInstans.metodoParaMostrarElHome();  mostrarlo segun el tipo del usuario logueado
 		} else {
 			JOptionPane.showMessageDialog(this.panel, "Usuario o contrasena incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
 			this.panel.getNick().setText("");

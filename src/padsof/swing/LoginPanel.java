@@ -7,9 +7,9 @@ import javax.swing.*;
 
 import padsof.swing.items.StandardButton;
 
+@SuppressWarnings("serial")
 public class LoginPanel extends JPanel {
-	
-	private static final long serialVersionUID = 1L;
+
 	private JLabel nickLabel;
 	private JTextField nickField;
 	private StandardButton loginButton;
