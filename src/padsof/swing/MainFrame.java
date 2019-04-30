@@ -11,15 +11,17 @@ import padsof.control.*;
 
 import java.awt.*;
 
-public class MainPanel extends JFrame {
+public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	final static String LOGINPANEL = "Carta con el LOGIN";
+	final static String SIDEBAR = "Sidebar";
+	private static MainFrame instance = null;
 	
 	/**
 	 * Constructor de mainPanel
 	 */
-	public MainPanel() {
+	public MainFrame() {
 		super("MP3BALL");
 		ImageIcon img = new ImageIcon("icons/MP3BALL-icon.png");
 		super.setIconImage(img.getImage());
@@ -30,15 +32,33 @@ public class MainPanel extends JFrame {
 		
 		LoginPanel login = new LoginPanel();
 		login.setControlador(new LoginControl(login, this));
-
+		
+		SideBarPanel side = new SideBarPanel();
+		//TODO:Ay k meter 1 Kontrolador
+		
 		//Aniadimos los componentes al container
+		container.add(SIDEBAR, side);
 		container.add(LOGINPANEL, login);
+		
 	
-		//Colocar los componentes de acuerdo a sus tamaños
+		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
 		this.pack();
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public static MainFrame getInstance() {
+
+		if (instance == null)
+			instance = new MainFrame();
+
+		return instance;
+	}
+	
+	public void test() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), SIDEBAR);
 	}
 	
 	public void mostrarLogin(){
