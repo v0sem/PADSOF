@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	final static String LOGINPANEL = "Carta con el LOGIN";
-	final static String SIDEBAR = "Sidebar";
+	final static String MAINPANEL = "Main";
 	private static MainFrame instance = null;
 	
 	/**
@@ -33,11 +33,11 @@ public class MainFrame extends JFrame {
 		LoginPanel login = new LoginPanel();
 		login.setControlador(new LoginControl(login, this));
 		
-		SideBarPanel side = new SideBarPanel();
-		//TODO:Ay k meter 1 Kontrolador
+		MainPanel main = new MainPanel();
+		//TODO: Ay k meter 0tro kontrol
 		
 		//Aniadimos los componentes al container
-		container.add(SIDEBAR, side);
+		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
 		
 	
@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 	
 	public void test() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), SIDEBAR);
+		cl.show(this.getContentPane(), MAINPANEL);
 	}
 	
 	public void mostrarLogin(){
