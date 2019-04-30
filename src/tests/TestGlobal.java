@@ -8,15 +8,11 @@ import java.util.ArrayList;
 import padsof.Status;
 import padsof.playable.*;
 import padsof.system.System;
-import padsof.user.User;
 import padsof.user.UserType;
 
 public class TestGlobal {
 	private static String userName1Test = "Toto";
 	private static String userNick1Test = "toto";
-
-	private static String userName2Test = "Made";
-	private static String userNick2Test = "made";
 
 	private static LocalDate birthTest = LocalDate.of(1980, Month.JANUARY, 1);
 
