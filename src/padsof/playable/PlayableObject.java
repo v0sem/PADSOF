@@ -9,6 +9,7 @@ import padsof.Status;
 import padsof.system.System;
 import padsof.user.User;
 
+@SuppressWarnings("serial")
 public abstract class PlayableObject implements java.io.Serializable {
 
 	/**

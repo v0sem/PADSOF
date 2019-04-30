@@ -9,6 +9,7 @@ import padsof.user.User;
  * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
+@SuppressWarnings("serial")
 public class Notification implements java.io.Serializable {
 
 	/**

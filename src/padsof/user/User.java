@@ -17,6 +17,7 @@ import padsof.system.System;
  * @author David Palomo, Pablo Sanchez, Antonio Solana
  *
  */
+@SuppressWarnings("serial")
 public class User implements java.io.Serializable {
 
 	/**
