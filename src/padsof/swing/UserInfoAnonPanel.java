@@ -1,6 +1,7 @@
 package padsof.swing;
 
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,17 +20,22 @@ public class UserInfoAnonPanel extends JPanel {
 		
 		anon  = new JLabel();
 		anon.setText("Usuario anónimo");
-		//TODO:Poner negro gordo
+		Font f = anon.getFont();
+		// bold
+		anon.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
+		
+		info = new JLabel("Sesion no iniciada");
+		info.setFont(f.deriveFont(f.getStyle() & ~Font.BOLD));
 		
 		this.add(anon);
 		this.add(info);
 		
-		layout.putConstraint(SpringLayout.WEST, anon, -100, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.VERTICAL_CENTER, anon, 5, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, anon, -90, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, anon, 10, SpringLayout.NORTH, this);
 
 		
-		layout.putConstraint(SpringLayout.WEST, info, -100, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.SOUTH, info, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.WEST, info, -90, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.SOUTH, info, -15, SpringLayout.SOUTH, this);
 		
 		this.setPreferredSize(new Dimension(200, 55));
 	}

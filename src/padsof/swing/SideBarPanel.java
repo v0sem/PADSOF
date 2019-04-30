@@ -18,10 +18,17 @@ public class SideBarPanel extends JPanel {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
 		//TODO: la wea esa de conprobar que ay login y mierdas
-		System.getInstance().login("admin", "admin");
-		userInfo = new UserInfoLoggedPanel();
+		if(System.getInstance().getLoggedUser()==null)
+			userInfo = new UserInfoAnonPanel();
+		else
+			userInfo = new UserInfoLoggedPanel();
 		menu = new MenuPanel();
-		userActions = new UserActionsLoggedPanel();
+		if(System.getInstance().getLoggedUser()==null)
+			userActions = new UserActionsAnonPanel();
+		else if(System.getInstance().adminIsLogged())
+			userActions = new UserActionsAdminPanel();
+		else
+			userActions = new UserActionsLoggedPanel();
 		
 		this.add(userInfo);
 		this.add(menu);
