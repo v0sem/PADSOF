@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 
 import padsof.Status;
 import padsof.interactions.Notification;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 
 /**
  * Usuario del sistema, tanto registrados como premium como administradores 
@@ -82,14 +82,9 @@ public class User implements java.io.Serializable {
 	private LocalDate registeredDate;
 
 	/**
-	 * Ultima tarjeta de credito usada por el usuario
-	 */
-	private String cardNumber;
-
-	/**
 	 * Numero de reproducciones de las canciones creadas por el usuario
 	 */
-	private long songsPlayCount;
+	private long songPlayCount;
 
 	/**
 	 * Constructor del usuario
@@ -107,7 +102,7 @@ public class User implements java.io.Serializable {
 		this.nick = nick;
 		this.password = password;
 		if(!nick.contentEquals("admin"))
-			this.songCount = Sistem.getInstance().getMaxRegisteredSong();
+			this.songCount = System.getInstance().getMaxRegisteredSong();
 		else
 			this.songCount =  1000;
 		this.follows = new ArrayList<User>();
@@ -117,7 +112,7 @@ public class User implements java.io.Serializable {
 		// Save date of registed
 		this.registeredDate = LocalDate.now();
 		
-		this.songsPlayCount = 0;
+		this.songPlayCount = 0;
 		
 	}
 
@@ -205,14 +200,6 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * Getter de la ultima tarjeta de credito usada
-	 * @return tarjeta de credito para pagos
-	 */
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	/**
 	 * Getter de la fecha en la que se creo el usuario
 	 * @return fecha de creacion del usuario
 	 */
@@ -249,9 +236,9 @@ public class User implements java.io.Serializable {
 	 * Sumar uno al numero de reproducciones que tiene un usuario dado en las canciones que ha subido
 	 */
 	public void increaseSongPlaycount() {
-		this.songsPlayCount++;
+		this.songPlayCount++;
 		
-		if(this.songsPlayCount >= Sistem.getInstance().getPlaysToPremium())
+		if(this.songPlayCount >= System.getInstance().getPlaysToPremium())
 			this.userType = UserType.PREMIUM;
 			
 	}
@@ -332,15 +319,13 @@ public class User implements java.io.Serializable {
 	 */
 	public Status goPremium(String cardNumber) {
 
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 		
 		if(!TeleChargeAndPaySystem.isValidCardNumber(cardNumber))
 			return Status.ERROR;
 		
 		try {
 			TeleChargeAndPaySystem.charge(cardNumber, "Mp3ball Subscription", sis.getPremiumPrice());
-			// Save card number to recharge in 30 days
-			this.cardNumber = cardNumber;
 			// Update premium date
 			this.premiumDate = LocalDate.now();
 		}
@@ -365,9 +350,17 @@ public class User implements java.io.Serializable {
 	 * @return el numero de reproducciones de las canciones del usuario
 	 */
 	public long getSongPlaycount() {
-		return this.songsPlayCount;
+		return this.songPlayCount;
 	}
 
+
+	/**
+	 * Resetea el valor de SongPlayCount
+	 */
+	public void resetSongPlayCount() {
+		this.songPlayCount = 0;
+	}
+	
 	/**
 	 * Getter de la lista de seguidores
 	 * 

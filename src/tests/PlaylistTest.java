@@ -1,4 +1,4 @@
-package padsof.playable;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,11 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import padsof.sistem.Sistem;
 import padsof.Status;
+import padsof.playable.Album;
+import padsof.playable.Playlist;
+import padsof.playable.Song;
+import padsof.system.System;
 
 public class PlaylistTest {
 
@@ -18,7 +21,7 @@ public class PlaylistTest {
 	Song s = new Song("Africa", "music" + File.separator + "africa.mp3");
 	Song d = new Song("Bejito", "music" + File.separator + "bejito.mp3");
 	Song f = new Song("SomBODY", "music" + File.separator + "som.mp3");
-	Sistem sis = Sistem.getInstance();
+	System sis = System.getInstance();
 	
 	@Test
 	public void testPlaylist() {
@@ -55,7 +58,7 @@ public class PlaylistTest {
 		
 		assertFalse(album.canUserPlay());
 		
-		Sistem.getInstance().login("toto", "1234");
+		System.getInstance().login("toto", "1234");
 		
 		assertTrue(album.canUserPlay());
 		

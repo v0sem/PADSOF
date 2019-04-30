@@ -8,7 +8,7 @@ package padsof.playable;
 import java.util.ArrayList;
 
 import padsof.Status;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 
 @SuppressWarnings("serial")
 public class Album extends CommentableObject {
@@ -56,8 +56,8 @@ public class Album extends CommentableObject {
 	 * @return boolean de la operacion
 	 */
 	@Override
-	protected Boolean canUserPlay() {
-		if (Sistem.getInstance().getLoggedUser() == null)
+	public Boolean canUserPlay() {
+		if (System.getInstance().getLoggedUser() == null)
 			return false;
 
 		return true;

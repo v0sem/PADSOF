@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.swing.items.StandardButton;
 
 @SuppressWarnings("serial")
@@ -21,7 +21,7 @@ public class UserInfoLoggedPanel extends JPanel {
 		this.setLayout(layout);
 		
 		nick  = new JLabel();
-		nick.setText("Usuario: @" + Sistem.getInstance().getLoggedUser().getNick());
+		nick.setText("Usuario: @" + System.getInstance().getLoggedUser().getNick());
 		
 		button = new StandardButton("Cerrar sesion", 200, 40);
 		

@@ -7,7 +7,7 @@ package padsof.playable;
 
 import padsof.Status;
 import padsof.interactions.Report;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 import padsof.user.UserType;
 
@@ -59,7 +59,7 @@ public class Song extends CommentableObject {
 		super(title);
 
 		if (Mp3Player.isValidMp3File(fileName) == false)
-			System.out.println("[ERROR] File path is incorrect");
+			java.lang.System.out.println("[ERROR] File path is incorrect");
 		
 		File oldPath = new File(fileName);
 		String oldName = oldPath.getName();
@@ -68,7 +68,7 @@ public class Song extends CommentableObject {
 		try {
 			Files.copy(oldPath.toPath(), newPath.toPath());
 		} catch (IOException e) {
-			System.out.println("[ERROR] Failed to copy MP3 to local library, file probably already in the library");
+			java.lang.System.out.println("[ERROR] Failed to copy MP3 to local library, file probably already in the library");
 		}
 
 		this.explicit = false;
@@ -94,16 +94,16 @@ public class Song extends CommentableObject {
 			this.songPlayer = player;
 			player.play();
 		} catch (FileNotFoundException | Mp3PlayerException e) {
-			System.out.println("[ERROR] Error playing the song");
+			java.lang.System.out.println("[ERROR] Error playing the song");
 		}
 
 		// Remove one from song count of the logged user (unless admin or premium)
-		User u = Sistem.getInstance().getLoggedUser();
+		User u = System.getInstance().getLoggedUser();
 		if (u != null) {
 			if (u.getUserType() == UserType.STANDARD)
 				u.increaseSongCount();
 		} else {
-			Sistem.getInstance().increaseAnonSongCount();
+			System.getInstance().increaseAnonSongCount();
 		}
 
 		// Add one to the plays of the author
@@ -133,7 +133,7 @@ public class Song extends CommentableObject {
 	 */
 	public Status report() {
 
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 		// Cancion pasa a estado reportado
 		this.setState(SongState.REPORTED);
 
@@ -141,7 +141,7 @@ public class Song extends CommentableObject {
 
 		// Nuevo reporte con la cancion y el usuario que denuncia
 		if (u != null)
-			Sistem.getInstance().addReport(new Report(this, u));
+			System.getInstance().addReport(new Report(this, u));
 		else
 			return Status.ERROR;
 
@@ -154,7 +154,7 @@ public class Song extends CommentableObject {
 	 * @return ERROR si el usuario loggeado no es un admin
 	 */
 	public Status reject() {
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 
 		if (!sis.adminIsLogged())
 			return Status.ERROR;
@@ -171,7 +171,7 @@ public class Song extends CommentableObject {
 	 * @return ERROR si el usuario loggeado no es un admin
 	 */
 	public Status accept() {
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 
 		if (!sis.adminIsLogged())
 			return Status.ERROR;
@@ -187,7 +187,7 @@ public class Song extends CommentableObject {
 	 * @return ERROR si el usuario loggeado no es admin
 	 */
 	public Status acceptExplicit() {
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 		if (!sis.adminIsLogged())
 			return Status.ERROR;
 		
@@ -257,22 +257,22 @@ public class Song extends CommentableObject {
 	 * @return devuelve true si se puede reproducir o false si no
 	 */
 	@Override
-	protected Boolean canUserPlay() {
+	public Boolean canUserPlay() {
 		// Check if song is in a playable state
 		if (state != SongState.ACCEPTED) {
 			return false;
 		}
 
-		if (Sistem.getInstance().getLoggedUser() != null) {
+		if (System.getInstance().getLoggedUser() != null) {
 			// Check if user can play the song
-			if (Sistem.getInstance().getLoggedUser().getSongCount() <= 0) {
+			if (System.getInstance().getLoggedUser().getSongCount() <= 0) {
 				return false;
 			}
 			// Check if kids are listening
-			if (explicit == true && !Sistem.getInstance().getLoggedUser().isOverEighteen()) {
+			if (explicit == true && !System.getInstance().getLoggedUser().isOverEighteen()) {
 				return false;
 			}
-		} else if (Sistem.getInstance().getAnonSongCount() <= 0 || explicit == true) {
+		} else if (System.getInstance().getAnonSongCount() <= 0 || explicit == true) {
 			return false;
 		}
 

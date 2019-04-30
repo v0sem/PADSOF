@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import padsof.Status;
 import padsof.interactions.Comment;
-import padsof.sistem.Sistem;
+import padsof.system.System;
 import padsof.user.User;
 
 @SuppressWarnings("serial")
@@ -43,7 +43,7 @@ public abstract class CommentableObject extends PlayableObject{
 	 * @return status de la operacion
 	 */
 	public Status addComment(String text) {
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 		User u = sis.getLoggedUser();
 		
 		if(text.length() > 0 && u != null) {
@@ -60,7 +60,7 @@ public abstract class CommentableObject extends PlayableObject{
 	 * @return status de la operacion
 	 */
 	public Status removeComment(String text) {
-		Sistem sis = Sistem.getInstance();
+		System sis = System.getInstance();
 		
 		for(Comment com : this.commentList) {
 			if(text.contentEquals(com.getText()) && 

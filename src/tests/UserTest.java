@@ -1,4 +1,4 @@
-package padsof.user;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import java.time.Month;
 import org.junit.Test;
 
 import padsof.Status;
+import padsof.user.User;
+import padsof.user.UserType;
 
 public class UserTest {
 	String name = "test";

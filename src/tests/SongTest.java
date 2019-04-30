@@ -1,4 +1,4 @@
-package padsof.playable;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -8,11 +8,12 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import padsof.sistem.Sistem;
 import padsof.Status;
+import padsof.playable.Song;
+import padsof.system.System;
 
 public class SongTest {
-	Sistem sis = Sistem.getInstance();
+	System sis = System.getInstance();
 	Status flag = sis.login("admin", "admin");
 	Song test = new Song("Africa", "music" + File.separator + "africa.mp3");
 

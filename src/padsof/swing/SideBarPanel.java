@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.sistem.Sistem;
+import padsof.system.System;
 
 @SuppressWarnings("serial")
 public class SideBarPanel extends JPanel {
@@ -18,7 +18,7 @@ public class SideBarPanel extends JPanel {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
 		//TODO: la wea esa de conprobar que ay login y mierdas
-		Sistem.getInstance().login("admin", "admin");
+		System.getInstance().login("admin", "admin");
 		userInfo = new UserInfoLoggedPanel();
 		menu = new MenuPanel();
 		userActions = new UserActionsLoggedPanel();

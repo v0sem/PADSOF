@@ -1,4 +1,4 @@
-package padsof.sistem;
+package padsof.system;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -14,6 +14,7 @@ import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Playlist;
 import padsof.playable.Song;
+import padsof.playable.SongState;
 import padsof.user.User;
 import padsof.user.UserType;
 
@@ -24,12 +25,12 @@ import padsof.user.UserType;
  *
  */
 @SuppressWarnings("serial")
-public class Sistem implements java.io.Serializable {
+public class System implements java.io.Serializable {
 
 	/**
 	 * Instancia del sistema
 	 */
-	private static Sistem instance = null;
+	private static System instance = null;
 
 	/**
 	 * Usuario administrador
@@ -104,7 +105,7 @@ public class Sistem implements java.io.Serializable {
 	 * Constructor de la clase Sistem. Inicializa con valores por defecto y con un
 	 * usuario Admin User. Carga los datos de un fichero si este existe
 	 */
-	public Sistem() {
+	public System() {
 
 		// si existe un archivo para cargarlo, lo carga
 		if (new File("System.bal").exists()) {
@@ -137,10 +138,10 @@ public class Sistem implements java.io.Serializable {
 	 * 
 	 * @return el Sistem
 	 */
-	public static Sistem getInstance() {
+	public static System getInstance() {
 
 		if (instance == null)
-			instance = new Sistem();
+			instance = new System();
 
 		return instance;
 	}
@@ -150,11 +151,11 @@ public class Sistem implements java.io.Serializable {
 	 * 
 	 * @return Sistem cargado
 	 */
-	public Sistem loadData() {
+	public System loadData() {
 		try {
 			FileInputStream fin = new FileInputStream("System.bal");
 			ObjectInputStream ois = new ObjectInputStream(fin);
-			Sistem loadedSystem = (Sistem) ois.readObject();
+			System loadedSystem = (System) ois.readObject();
 
 			this.adminUser = loadedSystem.adminUser;
 			this.loggedUser = loadedSystem.loggedUser;
@@ -218,7 +219,7 @@ public class Sistem implements java.io.Serializable {
 		if (loggedUser == null)
 			return;
 
-		// Check registered song counts
+		// Monthly checks
 		period = Period.between(today, this.loggedUser.getRegisteredDate());
 
 		if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
@@ -226,6 +227,8 @@ public class Sistem implements java.io.Serializable {
 			this.loggedUser.setRegisterdDate(today);
 			// reset count
 			this.loggedUser.setSongCount(this.maxRegisteredSong);
+			// reset songs played
+			this.loggedUser.resetSongPlayCount();
 		}
 
 		// Check if premium users have to pay again
@@ -238,17 +241,8 @@ public class Sistem implements java.io.Serializable {
 			period = Period.between(today, this.loggedUser.getPremiumDate());
 
 			if (period.getDays() >= 30 || period.getMonths() > 0 || period.getYears() > 0) {
-				// Demote user first
+				// Demote user
 				this.loggedUser.setUserType(UserType.STANDARD);
-
-				// Check if we have the credit card number from last payment
-				if (this.loggedUser.getCardNumber() == null) {
-					System.out.println("[ERROR] Credit card not provided...?");
-					return;
-				}
-
-				// If we do, pay the saved price with last credit card
-				this.loggedUser.goPremium(this.loggedUser.getCardNumber());
 			}
 		}
 	}
@@ -531,7 +525,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	private Boolean userNickExists(String userNick) {
 		if (this.userList == null || userNick == null) {
-			System.out.println("[ERROR] User list o userNick son null");
+			java.lang.System.out.println("[ERROR] User list o userNick son null");
 			return false;
 		}
 
@@ -552,7 +546,7 @@ public class Sistem implements java.io.Serializable {
 	 */
 	private Boolean userNameExists(String userName) {
 		if (this.userList == null || userName == null) {
-			System.out.println("[ERROR] User list o userName son null");
+			java.lang.System.out.println("[ERROR] User list o userName son null");
 			return false;
 		}
 		for (User user : this.userList) {
@@ -582,7 +576,6 @@ public class Sistem implements java.io.Serializable {
 			return Status.ERROR;
 
 		User u = new User(userName, date, userNick, userPass);
-		
 		this.userList.add(u);
 
 		return Status.OK;
@@ -602,6 +595,9 @@ public class Sistem implements java.io.Serializable {
 
 		for (User u : userList) {
 			if (userName.equals(u.getNick()) && userPass.equals(u.getPassword())) {
+				if (u.getBlocked() == true)
+					return Status.ERROR;
+				
 				loggedUser = u; // Si es admin tambien le loggea
 
 				return Status.OK;
@@ -623,7 +619,7 @@ public class Sistem implements java.io.Serializable {
 		try {
 			saveData();
 		} catch (IOException e) {
-			System.out.println("[ERROR] " + e);
+			java.lang.System.out.println("[ERROR] " + e);
 			return Status.ERROR;
 		}
 

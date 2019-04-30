@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.sistem.Sistem;
-import padsof.swing.items.StandardButton;
 
 @SuppressWarnings("serial")
 public class UserInfoAnonPanel extends JPanel {
