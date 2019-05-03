@@ -26,7 +26,7 @@ public class SearchBarPanel extends JPanel {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
 		
-		this.searchField = new JTextField(38);
+		this.searchField = new JTextField(35);
 		searchField.setMinimumSize(new Dimension(100, 35));
 		this.searchButton = new StandardButton("Buscar", 100, 20);
 		this.author = new JCheckBox();
@@ -69,6 +69,6 @@ public class SearchBarPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, albumLabel, 175, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, albumLabel, 40, SpringLayout.NORTH, this);
 		
-		this.setPreferredSize(new Dimension(600, 150));
+		this.setPreferredSize(new Dimension(600, 65));
 	}
 }

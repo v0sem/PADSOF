@@ -1,7 +1,5 @@
 package padsof.swing;
 
-import java.awt.Dimension;
-
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
@@ -9,24 +7,27 @@ import javax.swing.SpringLayout;
 public class MainPanel extends JPanel {
 
 	private JPanel searchBar;
-	private JPanel sideBar;
+	private SideBarPanel sideBar;
 	
 	public MainPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
 		
-		this.searchBar = new SearchBarPanel();
 		this.sideBar = new SideBarPanel();
-		
-		this.add(searchBar);
 		this.add(sideBar);
 		
-		layout.putConstraint(SpringLayout.WEST, sideBar, 0, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, sideBar, 0, SpringLayout.NORTH, this);
-		
-		layout.putConstraint(SpringLayout.EAST, searchBar, 0, SpringLayout.EAST, this);
-		layout.putConstraint(SpringLayout.NORTH, searchBar, 0, SpringLayout.NORTH, this);
-		
-		this.setPreferredSize(new Dimension(800, 450));
+		this.searchBar = new SearchBarPanel();
+		this.add(searchBar);
+		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
+	}
+	
+	public SideBarPanel getSideBar() {
+		return this.sideBar;
+	}
+
+	public void updateSideBar() {
+		this.remove(sideBar);
+		this.sideBar = new SideBarPanel();
+		this.add(sideBar);
 	}
 }
