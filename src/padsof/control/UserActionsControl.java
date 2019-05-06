@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import padsof.swing.MainFrame;
 import padsof.swing.UserActionsPanel;
 import padsof.system.System;
+import padsof.user.UserType;
 
 public class UserActionsControl implements ActionListener {
 
@@ -20,18 +21,15 @@ public class UserActionsControl implements ActionListener {
 		if (event.getSource().equals(panel.getButton1())) {
 			if (System.getInstance().getLoggedUser() == null)
 				MainFrame.getInstance().mostrarLogin(); //ANON
-			else if (System.getInstance().adminIsLogged())
-				MainFrame.getInstance().mostrarLogin(); //ADMIN
-			else
-				MainFrame.getInstance().mostrarLogin(); //STANDARD OR PREMIUM
+			else MainFrame.getInstance().mostrarAddAudio(); //LOGGED
 		}
 		if (event.getSource().equals(panel.getButton2())) {
 			if (System.getInstance().getLoggedUser() == null)
 				MainFrame.getInstance().mostrarRegister(); //ANON
 			else if (System.getInstance().adminIsLogged())
-				MainFrame.getInstance().mostrarRegister(); //ADMIN
-			else
-				MainFrame.getInstance().mostrarRegister(); //STANDARD OR PREMIUM
+				MainFrame.getInstance().mostrarRegister(); //ADMIN: mostrarAdminPanel
+			else if(System.getInstance().getLoggedUser().getUserType().equals(UserType.STANDARD))
+				MainFrame.getInstance().mostrarGoPremium(); //STANDARD
 		}
 	}
 

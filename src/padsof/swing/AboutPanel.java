@@ -25,7 +25,7 @@ public class AboutPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 				
 		// TEXT
-		paragraph = new JLabel("Texto que explica como va la aplicasion ");
+		paragraph = new JLabel("Texto que explica como va la aplicasion. Es un panel lamentable yo lo quitaba ");
 		paragraph.setFont(new Font("Roboto", Font.BOLD, 14));
 		this.add(paragraph);
 		layout.putConstraint(SpringLayout.WEST, paragraph, 240, SpringLayout.WEST, this);

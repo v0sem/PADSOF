@@ -23,21 +23,13 @@ public class SideBarPanel extends JPanel {
 			
 		userActions = new UserActionsPanel();
 		userInfo = new UserInfoPanel();
-		if(System.getInstance().getLoggedUser() == null) { 
-			//ANON
+		if(System.getInstance().getLoggedUser() == null) { //ANON
 			userActions.addButton1("Iniciar sesion");
 			userActions.addButton2("Registrarse");
-		} else { 
-			//LOGGED
+		} else { //LOGGED
 			userActions.addButton1("Anadir un audio");
-			if(System.getInstance().adminIsLogged()) {
-				 //ADMIN
-				userActions.addButton2("Panel de admin.");
-			}
-			else {
-				//NOT ADMIN
-				userActions.addButton2("Obtener premium");
-			}
+			if(System.getInstance().adminIsLogged()) userActions.addButton2("Panel de admin.");
+			else userActions.addButton2("Obtener premium");
 		}
 		menu = new MenuPanel();
 		
