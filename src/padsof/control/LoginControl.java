@@ -13,12 +13,12 @@ public class LoginControl implements ActionListener {
 
 	private LoginPanel panel;
 
-	public LoginControl(LoginPanel panel, MainFrame mainPanel) {
+	public LoginControl(LoginPanel panel) {
 		this.panel = panel;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		String nick = this.panel.getNick().getText();
 		String pass = new String(this.panel.getPassword().getPassword());
 		if (nick.isEmpty() || pass.isEmpty()) {
@@ -27,7 +27,8 @@ public class LoginControl implements ActionListener {
 			JOptionPane.showMessageDialog(this.panel, "Entrando a la aplicacion como " + nick, "LOG-IN", JOptionPane.INFORMATION_MESSAGE);
 			this.panel.getNick().setText("");
 			this.panel.getPassword().setText("");
-			// TODO: mainFrame.getInstans.metodoParaMostrarElHome();  mostrarlo segun el tipo del usuario logueado
+			MainFrame.getInstance().updateSideBar();
+			MainFrame.getInstance().mostrarMainPanel(); //Actualiza sidebar por inicio de sesion
 		} else {
 			JOptionPane.showMessageDialog(this.panel, "Usuario o contrasena incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
 			this.panel.getNick().setText("");

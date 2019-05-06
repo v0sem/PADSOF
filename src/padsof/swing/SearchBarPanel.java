@@ -1,12 +1,12 @@
 package padsof.swing;
 
-import java.awt.Checkbox;
 import java.awt.Dimension;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
 
@@ -23,8 +23,12 @@ public class SearchBarPanel extends JPanel {
 	private JLabel albumLabel;
 	
 	public SearchBarPanel() {
-		this.searchField = new JTextField();
-		this.searchButton = new StandardButton("Buscar", 70, 25);
+		SpringLayout layout = new SpringLayout();
+		this.setLayout(layout);
+		
+		this.searchField = new JTextField(35);
+		searchField.setMinimumSize(new Dimension(100, 35));
+		this.searchButton = new StandardButton("Buscar", 100, 20);
 		this.author = new JCheckBox();
 		this.audio = new JCheckBox();
 		this.album = new JCheckBox();
@@ -41,7 +45,30 @@ public class SearchBarPanel extends JPanel {
 		this.add(audioLabel);
 		this.add(albumLabel);
 		
+		layout.putConstraint(SpringLayout.WEST, searchField, 35, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, searchField, 10, SpringLayout.NORTH, this);
 		
-		this.setPreferredSize(new Dimension(600, 150));
+		layout.putConstraint(SpringLayout.EAST, searchButton, -25, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, searchButton, 10, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, author, 0, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, author, 40, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, audio, 75, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, audio, 40, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, album, 150, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, album, 40, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, authorLabel, 25, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, authorLabel, 40, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, audioLabel, 100, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, audioLabel, 40, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, albumLabel, 175, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, albumLabel, 40, SpringLayout.NORTH, this);
+		
+		this.setPreferredSize(new Dimension(600, 65));
 	}
 }
