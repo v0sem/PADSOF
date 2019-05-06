@@ -1,6 +1,8 @@
 package padsof.swing;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import padsof.control.*;
 
