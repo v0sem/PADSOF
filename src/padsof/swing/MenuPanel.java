@@ -1,6 +1,7 @@
 package padsof.swing;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -21,12 +22,12 @@ public class MenuPanel extends JPanel {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
 		
-		home = new StandardButton("Inicio", 200, 40);
-		lists = new StandardButton("Mis Listas", 200, 40);
-		albums = new StandardButton("Mis Albumes", 200, 40);
-		audios = new StandardButton("Mis Audios", 200, 40);
-		following = new StandardButton("Usuarios Seguidos", 200, 40);
-		about = new StandardButton("Sobre la aplicacion", 200, 40);
+		home = new StandardButton("Inicio", 200, 42);
+		lists = new StandardButton("Mis Listas", 200, 42);
+		albums = new StandardButton("Mis Albumes", 200, 42);
+		audios = new StandardButton("Mis Audios", 200, 42);
+		following = new StandardButton("Usuarios Seguidos", 200, 42);
+		about = new StandardButton("Sobre la app", 200, 42);
 		
 		this.add(home);
 		this.add(lists);
@@ -53,6 +54,40 @@ public class MenuPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, about, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, about, 200, SpringLayout.NORTH, this);
 		
-		this.setPreferredSize(new Dimension(200, 240));
+		this.setPreferredSize(new Dimension(200, 245));
 	}
+	
+	public StandardButton getHome() {
+		return home;
+	}
+
+	public StandardButton getLists() {
+		return lists;
+	}
+
+	public StandardButton getAlbums() {
+		return albums;
+	}
+
+	public StandardButton getAudios() {
+		return audios;
+	}
+
+	public StandardButton getFollowing() {
+		return following;
+	}
+
+	public StandardButton getAbout() {
+		return about;
+	}
+
+	public void setControlador(ActionListener controlador){
+		this.home.addActionListener(controlador);
+		this.lists.addActionListener(controlador);
+		this.albums.addActionListener(controlador);
+		this.audios.addActionListener(controlador);
+		this.following.addActionListener(controlador);
+		this.about.addActionListener(controlador);
+	}
+
 }

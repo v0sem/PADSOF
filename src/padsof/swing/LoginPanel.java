@@ -16,49 +16,49 @@ public class LoginPanel extends JPanel {
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
 	private JLabel title;
-
+	private SideBarPanel sideBar;
 
 	public LoginPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
 		
-		//Creamos nuestros componentes
+		this.sideBar = new SideBarPanel();
+		this.add(sideBar);
+		
+		// PANEL DESCRIPTION / TITLE
+		title = new JLabel("Iniciar sesion");
+		title.setFont(new Font("Rockwell Extra Bold", Font.BOLD, 22));
+		this.add(title);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, title, -80, SpringLayout.VERTICAL_CENTER, this);
+		
+		// NICK
 		nickLabel = new JLabel("Nick: ");
 		nickLabel.setFont(new Font("Roboto", Font.BOLD, 14));
 		this.add(nickLabel);
 		nickField = new JTextField(20);
 		this.add(nickField);
-		passwordLabel = new JLabel("Password: ");
-		passwordLabel.setFont(new Font("Roboto", Font.BOLD, 14));
-		this.add(passwordLabel);
-		passwordField = new JPasswordField(20);
-		this.add(passwordField);
-		title = new JLabel("Iniciar sesion");
-		title.setFont(new Font("Rockwell Extra Bold", Font.BOLD, 22));
-		this.add(title);
-		
-		// PANEL DESCRIPTION / TITLE
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 30, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.NORTH, title, 100, SpringLayout.NORTH, this);
-		
-		// NICK
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, nickLabel, -100, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, nickLabel, -5, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, nickLabel, -22, SpringLayout.VERTICAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, nickField, 0, SpringLayout.NORTH, nickLabel);
 		layout.putConstraint(SpringLayout.WEST, nickField, 6, SpringLayout.EAST, nickLabel);
 		
 		// PASS
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, passwordLabel, -117, SpringLayout.HORIZONTAL_CENTER, this);
+		passwordLabel = new JLabel("Contrasena: ");
+		passwordLabel.setFont(new Font("Roboto", Font.BOLD, 14));
+		this.add(passwordLabel);
+		passwordField = new JPasswordField(20);
+		this.add(passwordField);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, passwordLabel, -28, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, passwordLabel, 5, SpringLayout.VERTICAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, passwordField, 0, SpringLayout.NORTH, passwordLabel);
 		layout.putConstraint(SpringLayout.WEST, passwordField, 6, SpringLayout.EAST, passwordLabel);
 	
-		
-		loginButton = new StandardButton("LOGIN", 150, 50);
+		// BUTTON
+		loginButton = new StandardButton("Entrar", 150, 50);
 		this.add(loginButton);
-		
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, loginButton, 30, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.SOUTH, loginButton, -30, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, loginButton, 100, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, loginButton, 70, SpringLayout.VERTICAL_CENTER, this);
 		this.setPreferredSize(new Dimension(400, 150));
 	}
 	

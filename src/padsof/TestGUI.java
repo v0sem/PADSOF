@@ -5,6 +5,6 @@ import padsof.swing.MainFrame;
 public class TestGUI {
 
 	public static void main(String[] args) {
-		new MainFrame();
+		MainFrame.getInstance();
 	}
 }

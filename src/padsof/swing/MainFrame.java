@@ -1,10 +1,5 @@
 package padsof.swing;
 
-//// CARLAYAUT
-//// CREAR LA VENTANA TAL
-//// SI TAL, IR A LA VENTANA TAL
-//// HEREDA DE JFRAME
-//// TENER METODOS PARA PASAR DE UNA VENT A OTRA
 import javax.swing.*;
 
 import padsof.control.*;
@@ -15,8 +10,14 @@ public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	final static String LOGINPANEL = "Carta con el LOGIN";
-	final static String SIDEBAR = "Sidebar";
+	final static String MAINPANEL = "Main";
+	final static String REGISTERPANEL = "Register";
+	final static String ABOUTPANEL = "About";
 	private static MainFrame instance = null;
+	private	LoginPanel login = new LoginPanel();
+	private MainPanel main = new MainPanel();
+	private RegisterPanel register = new RegisterPanel();
+	private AboutPanel about = new AboutPanel();
 	
 	/**
 	 * Constructor de mainPanel
@@ -30,20 +31,17 @@ public class MainFrame extends JFrame {
 		Container container = this.getContentPane();
 		container.setLayout(new CardLayout());
 		
-		LoginPanel login = new LoginPanel();
-		login.setControlador(new LoginControl(login, this));
-		
-		SideBarPanel side = new SideBarPanel();
-		//TODO:Ay k meter 1 Kontrolador
-		
-		//Aniadimos los componentes al container
-		container.add(SIDEBAR, side);
+		login.setControlador(new LoginControl(login));
+		register.setControlador(new RegisterControl(register));
+		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
-		
+		container.add(REGISTERPANEL, register);
+		container.add(ABOUTPANEL, about);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -56,13 +54,28 @@ public class MainFrame extends JFrame {
 		return instance;
 	}
 	
-	public void test() {
+	public void mostrarMainPanel() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), SIDEBAR);
+		cl.show(this.getContentPane(), MAINPANEL);
 	}
 	
-	public void mostrarLogin(){
+	public void mostrarLogin() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), LOGINPANEL);
+	}
+	
+	public void mostrarRegister() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), REGISTERPANEL);
+	}
+	
+	public void mostrarAbout() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), ABOUTPANEL);
+	}
+	
+	public void updateSideBar() {
+		this.main.updateSideBar();
+		this.about.updateSideBar();
 	}
 }
