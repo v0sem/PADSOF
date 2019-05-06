@@ -6,6 +6,8 @@ package padsof.swing;
 //// HEREDA DE JFRAME
 //// TENER METODOS PARA PASAR DE UNA VENT A OTRA
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import padsof.control.*;
 
@@ -29,6 +31,25 @@ public class MainFrame extends JFrame {
 		
 		Container container = this.getContentPane();
 		container.setLayout(new CardLayout());
+		
+		 String[] titulos = {"Titulo", "Autor", "Duracion", ""};
+		Object[][] filas = {
+				{"Alba",   "Sanz",  5,   true},
+				{"Belén",  "López", 3.2, true},
+				{"Luisa",  "López", 4.5, true},
+				{"Marcos", "Pérez", 8.5, true},
+				{"Miguel", "Vela",  7,   true},
+				{"Sara",   "Valle", 10,  true},
+		};
+		/* Tabla de creacion de playlists dinamica
+		AbstractTableModel tablaDeMierda = new PlaylistCreationTable(titulos, filas);
+		JTable tabla = new JTable(tablaDeMierda);
+		container.add(tabla);*/
+		
+		DefaultTableModel tablaDeMierda = new DefaultTableModel(filas, titulos
+				);
+		JTable tabla = new JTable(tablaDeMierda);
+		container.add(tabla);
 		
 		LoginPanel login = new LoginPanel();
 		login.setControlador(new LoginControl(login, this));
