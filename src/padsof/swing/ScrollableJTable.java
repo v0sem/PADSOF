@@ -12,13 +12,13 @@ import padsof.playable.PlayableObject;
 import java.awt.*;
 
 @SuppressWarnings("serial")
-public class ScrollableJTable extends JPanel {
+public abstract class ScrollableJTable<T> extends JPanel {
 	JTable table;
 	DefaultTableModel tableModel;
-	List<PlayableObject> songList;
+	List<T> objectList;
 	
 	public ScrollableJTable(String[] titulos) {
-		songList = new ArrayList<PlayableObject>();
+		objectList = new ArrayList<T>();
 		
 		tableModel = new DefaultTableModel(0, titulos.length);
 		tableModel.setColumnIdentifiers(titulos);
@@ -30,7 +30,7 @@ public class ScrollableJTable extends JPanel {
 	}
 	
 	public ScrollableJTable(String[] titulos, int ancho, int altura) {
-		songList = new ArrayList<PlayableObject>();
+		objectList = new ArrayList<T>();
 		
 		tableModel = new DefaultTableModel(0, titulos.length);
 		tableModel.setColumnIdentifiers(titulos);
@@ -54,23 +54,12 @@ public class ScrollableJTable extends JPanel {
 		add(pane, BorderLayout.CENTER);
 	}
 	
-	public void insertSingle(PlayableObject po) {
-		songList.add(po);
-		tableModel.addRow(new Object[]{
-				po.getTitle(),
-				po.getAuthor().getName(),
-				po.getLength()
-		});
-	}
+	abstract public void insertSingle(T a);
 	
-	public void insertMultiple(List<? extends PlayableObject> pos) {
-		for (PlayableObject po : pos) {
-			insertSingle(po);
-		}
-	}
+	abstract public void insertMultiple(List<? extends T> a);
 	
-	public PlayableObject getSongByIndex(int fila) {
-		return songList.get(fila);
+	public T getSongByIndex(int fila) {
+		return objectList.get(fila);
 	}
 	
 	public void resetTable() {
@@ -78,13 +67,13 @@ public class ScrollableJTable extends JPanel {
 	}
 	
 	public void delSongByIndex(PlayableObject poo) {
-		if (!songList.contains(poo)) {
+		if (!objectList.contains(poo)) {
 			return;
 		}
 		
-		int fila = songList.indexOf(poo);
+		int fila = objectList.indexOf(poo);
 		
-		songList.remove(fila);
+		objectList.remove(fila);
 		tableModel.removeRow(fila);
 	}
 }

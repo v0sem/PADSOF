@@ -100,4 +100,13 @@ public class Report implements java.io.Serializable {
 	public User getReporter() {
 		return reporter;
 	}
+	
+	/**
+	 * Getter del reportedSong
+	 * 
+	 * @return cancion que ha sido reportada
+	 */
+	public Song getReportedSong() {
+		return reportedSong;
+	}
 }
