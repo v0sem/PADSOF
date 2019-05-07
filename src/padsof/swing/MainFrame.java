@@ -1,8 +1,6 @@
 package padsof.swing;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 import padsof.control.*;
 
@@ -15,11 +13,15 @@ public class MainFrame extends JFrame {
 	final static String MAINPANEL = "Main";
 	final static String REGISTERPANEL = "Register";
 	final static String ABOUTPANEL = "About";
+	final static String GOPREMIUMPANEL = "Go premium";
+	final static String ADDAUDIOPANEL = "Add audio";
 	private static MainFrame instance = null;
-	private	LoginPanel login = new LoginPanel();
-	private MainPanel main = new MainPanel();
-	private RegisterPanel register = new RegisterPanel();
-	private AboutPanel about = new AboutPanel();
+	private	LoginPanel login;
+	private MainPanel main;
+	private RegisterPanel register;
+	private AboutPanel about;
+	private GoPremiumPanel gopremium;
+	private AddAudioPanel addaudio;
 	
 	/**
 	 * Constructor de mainPanel
@@ -33,12 +35,24 @@ public class MainFrame extends JFrame {
 		Container container = this.getContentPane();
 		container.setLayout(new CardLayout());
 		
+		login = new LoginPanel();
+		main = new MainPanel();
+		register = new RegisterPanel();
+		about = new AboutPanel();
+		gopremium = new GoPremiumPanel();
+		addaudio = new AddAudioPanel();
+		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
+		gopremium.setControlador(new GoPremiumControl(gopremium));
+		addaudio.setControlador(new AddAudioControl(addaudio));
+		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
 		container.add(REGISTERPANEL, register);
 		container.add(ABOUTPANEL, about);
+		container.add(GOPREMIUMPANEL, gopremium);
+		container.add(ADDAUDIOPANEL, addaudio);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -75,9 +89,21 @@ public class MainFrame extends JFrame {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), ABOUTPANEL);
 	}
+
+	public void mostrarGoPremium() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), GOPREMIUMPANEL);
+	}
+	
+	public void mostrarAddAudio() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), ADDAUDIOPANEL);
+	}
 	
 	public void updateSideBar() {
 		this.main.updateSideBar();
 		this.about.updateSideBar();
+		this.gopremium.updateSideBar();
+		this.addaudio.updateSideBar();
 	}
 }
