@@ -14,7 +14,7 @@ public class AboutPanel extends JPanel {
 
 	private JLabel title;
 	private SideBarPanel sideBar;
-	private JTable table;
+	private ScrollableJTable table;
 	private SpringLayout layout;
 
 	public AboutPanel() {
@@ -25,31 +25,18 @@ public class AboutPanel extends JPanel {
 		this.add(sideBar);
 		
 		// PANEL DESCRIPTION / TITLE
-		title = new JLabel("Sobre la aplicacion");
+		title = new JLabel("Notificaciones");
 		title.setFont(new Font("Rockwell Extra Bold", Font.BOLD, 22));
 		this.add(title);
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
-		// TODO: REMOVE MY FRANKENSTEIN TESTS
-		ArrayList<Song> songList = System.getInstance().getSongList();
-		java.lang.System.out.println("listaAbout" + songList);
-		Object[][] filas = new Object[songList.size()][3];
-		int i = 0;
-		for (Song s : songList) {
-			filas[i][0] = s.getTitle();
-			filas[i][1] = s.getAuthor().getName();
-			filas[i][2] = s.getLength().intValue();
-			i++;
-		}
-		String[] titulos = {"Titulo", "Autor", "Duracion"};
-		/* Tabla de creacion de playlists dinamica */
-		AbstractTableModel tablaModel = new PlaylistCreationTable(titulos, filas);
-		table = new JTable(tablaModel);
+		table = new ScrollableJTable(new String[]{"a", "b", "c"}, 550, 340);
+		//table.insertMultiple(System.getInstance().getLoggedUser().getNotifications());
+		
 		this.add(table);
-			
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, table, 100, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.NORTH, table, 65, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.EAST, table, 0, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, table, 0, SpringLayout.SOUTH, this);
 	}
 	
 	public void updateSideBar() {
@@ -59,24 +46,6 @@ public class AboutPanel extends JPanel {
 	}
 	
 	public void updateTable() {
-		this.remove(table);
-		ArrayList<Song> songList = System.getInstance().getSongList();
-		java.lang.System.out.println("listaAbout" + songList);
-		Object[][] filas = new Object[songList.size()][3];
-		int i = 0;
-		for (Song s : songList) {
-			filas[i][0] = s.getTitle();
-			filas[i][1] = s.getAuthor().getName();
-			filas[i][2] = s.getLength().intValue();
-			i++;
-		}
-		String[] titulos = {"Titulo", "Autor", "Duracion"};
-		/* Tabla de creacion de playlists dinamica */
-		AbstractTableModel tablaModel = new PlaylistCreationTable(titulos, filas);
-		table = new JTable(tablaModel);
-		this.add(table);
-		
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, table, 100, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.NORTH, table, 65, SpringLayout.NORTH, this);
+
 	}
 }
