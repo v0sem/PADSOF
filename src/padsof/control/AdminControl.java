@@ -27,7 +27,7 @@ public class AdminControl implements ActionListener {
 		Long preRepro, reproReg, reproAnon;
 		
 		if (event.getSource().equals(panel.getPendientes())) {
-			MainFrame.getInstance().mostrarMainPanel(); //Panel Pendientes
+			MainFrame.getInstance().mostrarPending(); //Panel Pendientes
 		} else if (event.getSource().equals(panel.getGuardar())) {
 			System sys = System.getInstance();
 			
