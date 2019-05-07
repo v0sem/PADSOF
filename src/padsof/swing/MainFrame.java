@@ -12,16 +12,22 @@ public class MainFrame extends JFrame {
 	final static String LOGINPANEL = "Carta con el LOGIN";
 	final static String MAINPANEL = "Main";
 	final static String REGISTERPANEL = "Register";
-	final static String ABOUTPANEL = "About";
+	final static String NOTIFICATIONSPANEL = "Notifications";
 	final static String GOPREMIUMPANEL = "Go premium";
 	final static String ADDAUDIOPANEL = "Add audio";
+	final static String MYSONGSPANEL = "My Songs";
+	final static String MYPLAYLISTSPANEL = "My Playlists";
+	final static String MYALBUMSPANEL = "My Albums";
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
 	private RegisterPanel register;
-	private AboutPanel about;
+	private NotificationsPanel notifications;
 	private GoPremiumPanel gopremium;
 	private AddAudioPanel addaudio;
+	private MySongsPanel mysongs;
+	private MyPlaylistsPanel myplaylists;
+	private MyAlbumsPanel myalbums;
 	
 	/**
 	 * Constructor de mainPanel
@@ -38,21 +44,30 @@ public class MainFrame extends JFrame {
 		login = new LoginPanel();
 		main = new MainPanel();
 		register = new RegisterPanel();
-		about = new AboutPanel();
+		notifications = new NotificationsPanel();
 		gopremium = new GoPremiumPanel();
 		addaudio = new AddAudioPanel();
+		mysongs = new MySongsPanel();
+		myplaylists = new MyPlaylistsPanel();
+		myalbums = new MyAlbumsPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
+		//TODO: mysongs.setControlador(new MySongsControl(mysongs)); //Boton de deleteSong?
+		//myplaylists.setControlador(new MyPlaylistsControl(myplaylists));
+		//myalbums.setControlador(new MyAlbumsControl(myalbums));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
 		container.add(REGISTERPANEL, register);
-		container.add(ABOUTPANEL, about);
+		container.add(NOTIFICATIONSPANEL, notifications);
 		container.add(GOPREMIUMPANEL, gopremium);
 		container.add(ADDAUDIOPANEL, addaudio);
+		container.add(MYSONGSPANEL, mysongs);
+		container.add(MYPLAYLISTSPANEL, myplaylists);
+		container.add(MYALBUMSPANEL, myalbums);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -86,9 +101,9 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), REGISTERPANEL);
 	}
 	
-	public void mostrarAbout() {
+	public void mostrarNotifications() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), ABOUTPANEL);
+		cl.show(this.getContentPane(), NOTIFICATIONSPANEL);
 	}
 
 	public void mostrarGoPremium() {
@@ -101,10 +116,31 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), ADDAUDIOPANEL);
 	}
 	
+	public void mostrarMySongs() {
+		this.mysongs.updateTables();
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), MYSONGSPANEL);
+	}
+	
+	public void mostrarMyPlaylists() {
+		this.myplaylists.updateTables();
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), MYPLAYLISTSPANEL);
+	}
+	
+	public void mostrarMyAlbums() {
+		this.myalbums.updateTables();
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), MYALBUMSPANEL);
+	}
+	
 	public void updateSideBar() {
 		this.main.updateSideBar();
-		this.about.updateSideBar();
+		this.notifications.updateSideBar();
 		this.gopremium.updateSideBar();
 		this.addaudio.updateSideBar();
+		this.mysongs.updateSideBar();
+		this.myplaylists.updateSideBar();
+		this.myalbums.updateSideBar();
 	}
 }

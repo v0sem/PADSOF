@@ -1,23 +1,20 @@
 package padsof.swing;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-
-import padsof.playable.Song;
 import padsof.system.System;
+import padsof.user.User;
 
 @SuppressWarnings("serial")
-public class AboutPanel extends JPanel {
+public class NotificationsPanel extends JPanel {
 
 	private JLabel title;
 	private SideBarPanel sideBar;
-	private ScrollableJTable table;
+	private ScrollableJTableNotification table;
 	private SpringLayout layout;
 
-	public AboutPanel() {
+	public NotificationsPanel() {
 		layout = new SpringLayout();
 		this.setLayout(layout);
 		
@@ -31,8 +28,9 @@ public class AboutPanel extends JPanel {
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
-		table = new ScrollableJTable(new String[]{"a", "b", "c"}, 550, 340);
-		//table.insertMultiple(System.getInstance().getLoggedUser().getNotifications());
+		table = new ScrollableJTableNotification(550, 340);
+		User u = System.getInstance().getLoggedUser();
+		if (u != null) table.insertMultiple(u.getNotifications());
 		
 		this.add(table);
 		layout.putConstraint(SpringLayout.EAST, table, 0, SpringLayout.EAST, this);

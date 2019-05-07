@@ -19,18 +19,18 @@ public class MenuControl implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getHome())) {
 			MainFrame.getInstance().mostrarMainPanel();
-		} else if (event.getSource().equals(panel.getAbout())) {
-			MainFrame.getInstance().mostrarAbout();
-		}/* else if (System.getInstance().getLoggedUser() != null) {
+		} else if (System.getInstance().getLoggedUser() != null) {
 			if (event.getSource().equals(panel.getLists()))
-				MainFrame.getInstance().mostrarMainPanel();
+				MainFrame.getInstance().mostrarMyPlaylists();
 			if (event.getSource().equals(panel.getAlbums()))
-				MainFrame.getInstance().mostrarMainPanel();
+				MainFrame.getInstance().mostrarMyAlbums();
 			if (event.getSource().equals(panel.getAudios()))
-				MainFrame.getInstance().mostrarMainPanel();
+				MainFrame.getInstance().mostrarMySongs();
 			if (event.getSource().equals(panel.getFollowing()))
 				MainFrame.getInstance().mostrarMainPanel();
-		}*/
+			if (event.getSource().equals(panel.getNotif()))
+				MainFrame.getInstance().mostrarNotifications();
+		}
 	}
 
 }
