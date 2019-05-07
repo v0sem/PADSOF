@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import padsof.playable.Album;
+import padsof.swing.MainFrame;
 import padsof.swing.MyAlbumsPanel;
 import padsof.system.System;
 
@@ -21,8 +22,10 @@ public class MyAlbumsControl implements ActionListener {
 			panel.getTable().getSelected().play();
 		}
 		if (event.getSource().equals(panel.getDeleteButton())) {
-			if(panel.getTable().getSelected().getClass() == Album.class)
+			if(panel.getTable().getSelected().getClass() == Album.class) {
 				System.getInstance().deleteAlbum((Album) panel.getTable().getSelected());
+				MainFrame.getInstance().mostrarMyAlbums();
+			}
 		}
 		if (event.getSource().equals(panel.getCreateButton())) {
 			// MOSTRAR PANEL DE CREAR

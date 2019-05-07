@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import padsof.playable.Playlist;
+import padsof.swing.MainFrame;
 import padsof.swing.MyPlaylistsPanel;
 import padsof.system.System;
 
@@ -21,8 +22,10 @@ public class MyPlaylistsControl implements ActionListener {
 			panel.getTable().getSelected().play();
 		}
 		if (event.getSource().equals(panel.getDeleteButton())) {
-			if(panel.getTable().getSelected().getClass() == Playlist.class)
+			if(panel.getTable().getSelected().getClass() == Playlist.class) {
 				System.getInstance().deletePlaylist((Playlist) panel.getTable().getSelected());
+				MainFrame.getInstance().mostrarMyPlaylists();
+			}
 		}
 		if (event.getSource().equals(panel.getCreateButton())) {
 			// MOSTRAR PANEL DE CREAR
