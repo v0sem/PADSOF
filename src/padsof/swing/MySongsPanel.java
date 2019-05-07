@@ -24,11 +24,11 @@ public class MySongsPanel extends JPanel {
 	
 	private ScrollableJTablePlayable pendingTable;
 	
-	private StandardButton delete;
+	private StandardButton deleteButton;
 	
-	private StandardButton play;
+	private StandardButton playButton;
 	
-	private StandardButton delete2;
+	private StandardButton deletePendButton;
 
 	private JLabel title;
 	
@@ -48,12 +48,12 @@ public class MySongsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
-		delete = new StandardButton("Eliminar", 90, 25);
-		play = new StandardButton("Play", 70, 25);
-		delete2 = new StandardButton("Eliminar", 90, 25);
-		this.add(delete);
-		this.add(play);
-		this.add(delete2);
+		deleteButton = new StandardButton("Eliminar", 90, 25);
+		playButton = new StandardButton("Play", 70, 25);
+		deletePendButton = new StandardButton("Eliminar", 90, 25);
+		this.add(deleteButton);
+		this.add(playButton);
+		this.add(deletePendButton);
 		
 		acceptedTable = new ScrollableJTablePlayable(500, 120);
 		pendingTable = new ScrollableJTablePlayable(500, 120);
@@ -62,15 +62,15 @@ public class MySongsPanel extends JPanel {
 		
 		layout.putConstraint(SpringLayout.WEST, acceptedTable, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, acceptedTable, 80, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, delete, 0, SpringLayout.WEST, acceptedTable);
-		layout.putConstraint(SpringLayout.NORTH, delete, 5, SpringLayout.SOUTH, acceptedTable);
-		layout.putConstraint(SpringLayout.WEST, play, 20, SpringLayout.EAST, delete);
-		layout.putConstraint(SpringLayout.NORTH, play, 5, SpringLayout.SOUTH, acceptedTable);
+		layout.putConstraint(SpringLayout.WEST, deleteButton, 0, SpringLayout.WEST, acceptedTable);
+		layout.putConstraint(SpringLayout.NORTH, deleteButton, 5, SpringLayout.SOUTH, acceptedTable);
+		layout.putConstraint(SpringLayout.WEST, playButton, 20, SpringLayout.EAST, deleteButton);
+		layout.putConstraint(SpringLayout.NORTH, playButton, 5, SpringLayout.SOUTH, acceptedTable);
 		
 		layout.putConstraint(SpringLayout.WEST, pendingTable, 250, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, pendingTable, 20, SpringLayout.SOUTH, play);
-		layout.putConstraint(SpringLayout.WEST, delete2, 0, SpringLayout.WEST, pendingTable);
-		layout.putConstraint(SpringLayout.NORTH, delete2, 5, SpringLayout.SOUTH, pendingTable);
+		layout.putConstraint(SpringLayout.NORTH, pendingTable, 20, SpringLayout.SOUTH, playButton);
+		layout.putConstraint(SpringLayout.WEST, deletePendButton, 0, SpringLayout.WEST, pendingTable);
+		layout.putConstraint(SpringLayout.NORTH, deletePendButton, 5, SpringLayout.SOUTH, pendingTable);
 		
 		this.setPreferredSize(new Dimension(800, 450));
 	}
@@ -86,9 +86,9 @@ public class MySongsPanel extends JPanel {
 	}
 	
 	public void setControlador(ActionListener controlador){
-		this.delete.addActionListener(controlador);
-		this.play.addActionListener(controlador);
-		this.delete2.addActionListener(controlador);
+		this.deleteButton.addActionListener(controlador);
+		this.playButton.addActionListener(controlador);
+		this.deletePendButton.addActionListener(controlador);
 	}
 	
 	public void updateTables(){
@@ -112,6 +112,26 @@ public class MySongsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, acceptedTable, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, acceptedTable, 80, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, pendingTable, 250, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, pendingTable, 20, SpringLayout.SOUTH, play);
+		layout.putConstraint(SpringLayout.NORTH, pendingTable, 20, SpringLayout.SOUTH, playButton);
+	}
+
+	public ScrollableJTablePlayable getAcceptedTable() {
+		return acceptedTable;
+	}
+
+	public ScrollableJTablePlayable getPendingTable() {
+		return pendingTable;
+	}
+
+	public StandardButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	public StandardButton getPlayButton() {
+		return playButton;
+	}
+
+	public StandardButton getDeletePendButton() {
+		return deletePendButton;
 	}
 }

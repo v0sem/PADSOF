@@ -98,4 +98,22 @@ public class MyAlbumsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);
 	}
+
+	public StandardButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	public StandardButton getPlayButton() {
+		return playButton;
+	}
+
+	public StandardButton getCreateButton() {
+		return createButton;
+	}
+	
+
+	public ScrollableJTablePlayable getTable() {
+		return table;
+	}
+
 }

@@ -51,10 +51,6 @@ public class MainPanel extends JPanel {
 		comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
 		this.add(comment);
 				
-		// Update
-		tablita.insertSingle(new Song("nepe", "music/bejito.mp3"));
-		tablita.insertMultiple(System.getInstance().getSongList());
-		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
 		
 		layout.putConstraint(SpringLayout.EAST, tablita, 0, SpringLayout.EAST, this);

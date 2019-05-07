@@ -61,9 +61,9 @@ public class MainFrame extends JFrame {
 		register.setControlador(new RegisterControl(register));
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
-		//TODO: mysongs.setControlador(new MySongsControl(mysongs)); //Boton de deleteSong?
-		//myplaylists.setControlador(new MyPlaylistsControl(myplaylists));
-		//myalbums.setControlador(new MyAlbumsControl(myalbums));
+		mysongs.setControlador(new MySongsControl(mysongs));
+		myplaylists.setControlador(new MyPlaylistsControl(myplaylists));
+		myalbums.setControlador(new MyAlbumsControl(myalbums));
 		admin.setControlador(new AdminControl(admin));
 		
 		container.add(MAINPANEL, main);

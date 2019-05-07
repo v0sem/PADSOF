@@ -98,4 +98,21 @@ public class MyPlaylistsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);
 	}
+
+	public ScrollableJTablePlayable getTable() {
+		return table;
+	}
+
+	public StandardButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	public StandardButton getPlayButton() {
+		return playButton;
+	}
+
+	public StandardButton getCreateButton() {
+		return createButton;
+	}
+	
 }
