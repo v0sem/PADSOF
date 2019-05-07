@@ -62,7 +62,8 @@ public abstract class ScrollableJTable<T> extends JPanel {
 	
 	public T getSelected() {
 		int index = table.getSelectedRow();
-		return getByIndex(index);
+		
+		return objectList.get(index);
 	}
 	
 	public void resetTable() {
