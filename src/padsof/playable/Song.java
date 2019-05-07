@@ -74,6 +74,8 @@ public class Song extends CommentableObject {
 			return Status.ERROR;
 		}
 		
+		if(songPlayer != null)
+			songPlayer.stop();
 		// Remove one from song count of the logged user (unless admin or premium)
 		User u = System.getInstance().getLoggedUser();
 		if (u != null) {
@@ -85,9 +87,7 @@ public class Song extends CommentableObject {
 
 		// Add one to the plays of the author
 		this.getAuthor().increaseSongPlaycount();
-		
-		
-		System.getInstance().setSongPlayer(songPlayer);
+	
 		// Try to play it
 		try {
 			Mp3Player player = new Mp3Player(fileName);
