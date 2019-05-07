@@ -87,4 +87,9 @@ public abstract class PlayableObject implements java.io.Serializable {
 	 */
 	public abstract Float getLength();
 
+	@Override
+	public String toString() {
+		return "[" + author.getName() + ", " + title + "]";
+	}
+
 }

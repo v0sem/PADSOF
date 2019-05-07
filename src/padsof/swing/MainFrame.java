@@ -1,8 +1,6 @@
 package padsof.swing;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 import padsof.control.*;
 
@@ -18,12 +16,12 @@ public class MainFrame extends JFrame {
 	final static String GOPREMIUMPANEL = "Go premium";
 	final static String ADDAUDIOPANEL = "Add audio";
 	private static MainFrame instance = null;
-	private	LoginPanel login = new LoginPanel();
-	private MainPanel main = new MainPanel();
-	private RegisterPanel register = new RegisterPanel();
-	private AboutPanel about = new AboutPanel();
-	private GoPremiumPanel gopremium = new GoPremiumPanel();
-	private AddAudioPanel addaudio = new AddAudioPanel();
+	private	LoginPanel login;
+	private MainPanel main;
+	private RegisterPanel register;
+	private AboutPanel about;
+	private GoPremiumPanel gopremium;
+	private AddAudioPanel addaudio;
 	
 	/**
 	 * Constructor de mainPanel
@@ -37,10 +35,18 @@ public class MainFrame extends JFrame {
 		Container container = this.getContentPane();
 		container.setLayout(new CardLayout());
 		
+		login = new LoginPanel();
+		main = new MainPanel();
+		register = new RegisterPanel();
+		about = new AboutPanel();
+		gopremium = new GoPremiumPanel();
+		addaudio = new AddAudioPanel();
+		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
+		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
 		container.add(REGISTERPANEL, register);
@@ -100,5 +106,4 @@ public class MainFrame extends JFrame {
 		this.gopremium.updateSideBar();
 		this.addaudio.updateSideBar();
 	}
-
 }
