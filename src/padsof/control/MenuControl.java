@@ -21,16 +21,16 @@ public class MenuControl implements ActionListener {
 			MainFrame.getInstance().mostrarMainPanel();
 		} else if (event.getSource().equals(panel.getAbout())) {
 			MainFrame.getInstance().mostrarAbout();
-		} else if (System.getInstance().getLoggedUser() != null) {
-			/*if (event.getSource().equals(panel.getLists()))
+		}/* else if (System.getInstance().getLoggedUser() != null) {
+			if (event.getSource().equals(panel.getLists()))
 				MainFrame.getInstance().mostrarMainPanel();
 			if (event.getSource().equals(panel.getAlbums()))
 				MainFrame.getInstance().mostrarMainPanel();
 			if (event.getSource().equals(panel.getAudios()))
 				MainFrame.getInstance().mostrarMainPanel();
 			if (event.getSource().equals(panel.getFollowing()))
-				MainFrame.getInstance().mostrarMainPanel();*/
-		}
+				MainFrame.getInstance().mostrarMainPanel();
+		}*/
 	}
 
 }
