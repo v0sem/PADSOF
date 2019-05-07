@@ -57,20 +57,6 @@ public class Song extends CommentableObject {
 	public Song(String title, String fileName) {
 		// Super checks if user is logged
 		super(title);
-
-		if (Mp3Player.isValidMp3File(fileName) == false)
-			java.lang.System.out.println("[ERROR] File path is incorrect");
-		
-		File oldPath = new File(fileName);
-		String oldName = oldPath.getName();
-		File newPath = new File("music" + File.separator + oldName);
-				
-		try {
-			Files.copy(oldPath.toPath(), newPath.toPath());
-		} catch (IOException e) {
-			java.lang.System.out.println("[ERROR] Failed to copy MP3 to local library, file probably already in the library");
-		}
-
 		this.explicit = false;
 		this.state = SongState.REVISION_PENDING;
 		this.fileName = fileName;

@@ -15,9 +15,10 @@ public class AboutPanel extends JPanel {
 	private JLabel title;
 	private SideBarPanel sideBar;
 	private JTable table;
+	private SpringLayout layout;
 
 	public AboutPanel() {
-		SpringLayout layout = new SpringLayout();
+		layout = new SpringLayout();
 		this.setLayout(layout);
 		
 		this.sideBar = new SideBarPanel();
@@ -31,10 +32,8 @@ public class AboutPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
 		// TODO: REMOVE MY FRANKENSTEIN TESTS
-		System.getInstance().login("admin", "admin");
-		System.getInstance().addSong(new Song("Africa", "music/africa.mp3"));
 		ArrayList<Song> songList = System.getInstance().getSongList();
-		//java.lang.System.out.println("listaAbout" + songList);
+		java.lang.System.out.println("listaAbout" + songList);
 		Object[][] filas = new Object[songList.size()][3];
 		int i = 0;
 		for (Song s : songList) {
@@ -45,10 +44,10 @@ public class AboutPanel extends JPanel {
 		}
 		String[] titulos = {"Titulo", "Autor", "Duracion"};
 		/* Tabla de creacion de playlists dinamica */
-		AbstractTableModel tablaDeMierda = new PlaylistCreationTable(titulos, filas);
-		table = new JTable(tablaDeMierda);
+		AbstractTableModel tablaModel = new PlaylistCreationTable(titulos, filas);
+		table = new JTable(tablaModel);
 		this.add(table);
-		
+			
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, table, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, table, 65, SpringLayout.NORTH, this);
 	}
@@ -60,6 +59,24 @@ public class AboutPanel extends JPanel {
 	}
 	
 	public void updateTable() {
-		// YA TAL
+		this.remove(table);
+		ArrayList<Song> songList = System.getInstance().getSongList();
+		java.lang.System.out.println("listaAbout" + songList);
+		Object[][] filas = new Object[songList.size()][3];
+		int i = 0;
+		for (Song s : songList) {
+			filas[i][0] = s.getTitle();
+			filas[i][1] = s.getAuthor().getName();
+			filas[i][2] = s.getLength().intValue();
+			i++;
+		}
+		String[] titulos = {"Titulo", "Autor", "Duracion"};
+		/* Tabla de creacion de playlists dinamica */
+		AbstractTableModel tablaModel = new PlaylistCreationTable(titulos, filas);
+		table = new JTable(tablaModel);
+		this.add(table);
+		
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, table, 100, SpringLayout.HORIZONTAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, table, 65, SpringLayout.NORTH, this);
 	}
 }

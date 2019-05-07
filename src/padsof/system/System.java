@@ -1,12 +1,14 @@
 package padsof.system;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.util.ArrayList;
 
 import fechasimulada.FechaSimulada;
+import pads.musicPlayer.Mp3Player;
 import padsof.Status;
 import padsof.interactions.Notification;
 import padsof.interactions.Report;
@@ -397,6 +399,22 @@ public class System implements java.io.Serializable {
 	public Status addSong(Song s) {
 
 		if (s != null && loggedUser != null) {
+			if (Mp3Player.isValidMp3File(s.getFileName()) == false) {
+				java.lang.System.out.println("[ERROR] File path " + s.getFileName() + " is incorrect");
+				return Status.ERROR;
+			}
+			
+			File oldPath = new File(s.getFileName());
+			String oldName = oldPath.getName();
+			File newPath = new File("music" + File.separator + oldName);
+					
+			try {
+				Files.copy(oldPath.toPath(), newPath.toPath());
+			} catch (IOException e) {
+				java.lang.System.out.println("[ERROR] Failed to copy MP3 to local library, file probably already in the library");
+				return Status.ERROR;
+			}
+			
 			this.songList.add(s);
 
 			for (User u : loggedUser.getIsFollowed()) {
