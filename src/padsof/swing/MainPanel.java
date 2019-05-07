@@ -1,6 +1,9 @@
 package padsof.swing;
 
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -8,6 +11,7 @@ import javax.swing.SpringLayout;
 
 import padsof.control.MainControl;
 import padsof.playable.Song;
+import padsof.playable.SongState;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
@@ -50,7 +54,11 @@ public class MainPanel extends JPanel {
 		
 		comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
 		this.add(comment);
-				
+		
+		this.setControlador(new MainControl(this));
+		
+		updateSongTable();
+		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
 		
 		layout.putConstraint(SpringLayout.EAST, tablita, 0, SpringLayout.EAST, this);
@@ -67,6 +75,13 @@ public class MainPanel extends JPanel {
 		
 		layout.putConstraint(SpringLayout.EAST, comment, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, comment, 0, SpringLayout.SOUTH, this);
+	}
+	
+	public void updateSongTable() {
+		List<Song> listaReproducible = System.getInstance().getSongList().stream()
+				.filter(s -> s.getState() == SongState.ACCEPTED)
+				.collect(Collectors.toList());
+		tablita.insertMultiple(listaReproducible);
 	}
 	
 	public SideBarPanel getSideBar() {
