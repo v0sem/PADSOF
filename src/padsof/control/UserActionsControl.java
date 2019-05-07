@@ -27,7 +27,7 @@ public class UserActionsControl implements ActionListener {
 			if (System.getInstance().getLoggedUser() == null)
 				MainFrame.getInstance().mostrarRegister(); //ANON
 			else if (System.getInstance().adminIsLogged())
-				MainFrame.getInstance().mostrarRegister(); //ADMIN: mostrarAdminPanel
+				MainFrame.getInstance().mostrarAdmin(); //ADMIN
 			else if(System.getInstance().getLoggedUser().getUserType().equals(UserType.STANDARD))
 				MainFrame.getInstance().mostrarGoPremium(); //STANDARD
 		}

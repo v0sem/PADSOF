@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
 	final static String ABOUTPANEL = "About";
 	final static String GOPREMIUMPANEL = "Go premium";
 	final static String ADDAUDIOPANEL = "Add audio";
+	final static String ADMINPANEL = "Admin basic config";
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
@@ -22,6 +23,7 @@ public class MainFrame extends JFrame {
 	private AboutPanel about;
 	private GoPremiumPanel gopremium;
 	private AddAudioPanel addaudio;
+	private AdminPanel admin;
 	
 	/**
 	 * Constructor de mainPanel
@@ -41,6 +43,7 @@ public class MainFrame extends JFrame {
 		about = new AboutPanel();
 		gopremium = new GoPremiumPanel();
 		addaudio = new AddAudioPanel();
+		admin = new AdminPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
@@ -53,6 +56,7 @@ public class MainFrame extends JFrame {
 		container.add(ABOUTPANEL, about);
 		container.add(GOPREMIUMPANEL, gopremium);
 		container.add(ADDAUDIOPANEL, addaudio);
+		container.add(ADMINPANEL, admin);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -98,6 +102,11 @@ public class MainFrame extends JFrame {
 	public void mostrarAddAudio() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), ADDAUDIOPANEL);
+	}
+	
+	public void mostrarAdmin() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), ADMINPANEL);
 	}
 	
 	public void updateSideBar() {
