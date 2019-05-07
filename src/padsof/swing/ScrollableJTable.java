@@ -73,6 +73,10 @@ public class ScrollableJTable extends JPanel {
 		return mapita.get(fila);
 	}
 	
+	public void rascaPicaLand() {
+		tableModel.setRowCount(0);
+	}
+	
 	public void borrateLa(PlayableObject poo) {
 		if (!mapita.contains(poo)) {
 			return;
