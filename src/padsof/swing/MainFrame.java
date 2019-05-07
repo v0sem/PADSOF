@@ -15,6 +15,8 @@ public class MainFrame extends JFrame {
 	final static String ABOUTPANEL = "About";
 	final static String GOPREMIUMPANEL = "Go premium";
 	final static String ADDAUDIOPANEL = "Add audio";
+	final static String ADMINPANEL = "Admin basic config";
+	final static String PENDINGPANEL = "Pending song review";
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
@@ -22,6 +24,8 @@ public class MainFrame extends JFrame {
 	private AboutPanel about;
 	private GoPremiumPanel gopremium;
 	private AddAudioPanel addaudio;
+	private AdminPanel admin;
+	private PendingAdminPanel pending;
 	
 	/**
 	 * Constructor de mainPanel
@@ -41,12 +45,14 @@ public class MainFrame extends JFrame {
 		about = new AboutPanel();
 		gopremium = new GoPremiumPanel();
 		addaudio = new AddAudioPanel();
+		admin = new AdminPanel();
+		pending = new PendingAdminPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
-		main.setControlador(new MainControl(main));
+		admin.setControlador(new AdminControl(admin));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
@@ -54,6 +60,8 @@ public class MainFrame extends JFrame {
 		container.add(ABOUTPANEL, about);
 		container.add(GOPREMIUMPANEL, gopremium);
 		container.add(ADDAUDIOPANEL, addaudio);
+		container.add(ADMINPANEL, admin);
+		container.add(PENDINGPANEL, pending);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -102,10 +110,22 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), ADDAUDIOPANEL);
 	}
 	
+	public void mostrarAdmin() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), ADMINPANEL);
+	}
+	
+	public void mostrarPending() {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), PENDINGPANEL);
+	}
+	
 	public void updateSideBar() {
 		this.main.updateSideBar();
 		this.about.updateSideBar();
 		this.gopremium.updateSideBar();
 		this.addaudio.updateSideBar();
+		this.admin.updateSideBar();
+		this.pending.updateSideBar();
 	}
 }
