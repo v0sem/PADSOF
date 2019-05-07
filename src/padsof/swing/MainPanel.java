@@ -24,7 +24,7 @@ public class MainPanel extends JPanel {
 		ScrollableJTable tablita = new ScrollableJTable(new String[]{"a", "b", "c"}, 340, 550);
 		this.add(tablita);
 		
-		tablita.meteleCiervos(System.getInstance().getSongList());
+		tablita.insertMultiple(System.getInstance().getSongList());
 		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
 		
