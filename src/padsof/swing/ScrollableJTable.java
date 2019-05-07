@@ -28,6 +28,18 @@ public class ScrollableJTable extends JPanel {
 		
 		initializeUI(table);
 	}
+	
+	public ScrollableJTable(String[] titulos, int altura, int ancho) {
+		mapita = new ArrayList<PlayableObject>();
+		
+		tableModel = new DefaultTableModel(0, titulos.length);
+		tableModel.setColumnIdentifiers(titulos);
+		
+		table = new JTable(tableModel);
+		table.setPreferredSize(new Dimension(ancho, altura));
+		
+		initializeUI(table);
+	}
 
 	private void initializeUI(JTable table) {
 		BorderLayout layout = new BorderLayout();
