@@ -1,6 +1,7 @@
 package padsof.swing;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import padsof.interactions.Report;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 
+@SuppressWarnings("serial")
 public class PendingAdminPanel extends JPanel{
 	
 	private StandardButton approveSong;
@@ -94,5 +96,46 @@ public class PendingAdminPanel extends JPanel{
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
+	}
+	
+	public void setControlador(ActionListener controlador){
+		this.approveSong.addActionListener(controlador);
+		this.setExplicit.addActionListener(controlador);
+		this.rejectSong.addActionListener(controlador);
+		this.play.addActionListener(controlador);
+		this.approveReport.addActionListener(controlador);
+		this.punish.addActionListener(controlador);
+	}
+
+	public StandardButton getApproveSong() {
+		return approveSong;
+	}
+
+	public StandardButton getSetExplicit() {
+		return setExplicit;
+	}
+
+	public StandardButton getRejectSong() {
+		return rejectSong;
+	}
+
+	public StandardButton getPlay() {
+		return play;
+	}
+
+	public StandardButton getApproveReport() {
+		return approveReport;
+	}
+
+	public StandardButton getPunish() {
+		return punish;
+	}
+
+	public ScrollableJTablePlayable getCanciones() {
+		return canciones;
+	}
+
+	public ScrollableJTableReport getReportes() {
+		return reportes;
 	}
 }

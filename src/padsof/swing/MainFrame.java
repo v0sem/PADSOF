@@ -53,6 +53,7 @@ public class MainFrame extends JFrame {
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
 		admin.setControlador(new AdminControl(admin));
+		pending.setControlador(new PendingControl(pending));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);

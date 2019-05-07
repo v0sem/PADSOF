@@ -5,8 +5,6 @@ import javax.swing.table.DefaultTableModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import padsof.playable.PlayableObject;
 
 import java.awt.*;
@@ -58,15 +56,20 @@ public abstract class ScrollableJTable<T> extends JPanel {
 	
 	abstract public void insertMultiple(List<? extends T> a);
 	
-	public T getSongByIndex(int fila) {
+	public T getByIndex(int fila) {
 		return objectList.get(fila);
+	}
+	
+	public T getSelected() {
+		int index = table.getSelectedRow();
+		return getByIndex(index);
 	}
 	
 	public void resetTable() {
 		tableModel.setRowCount(0);
 	}
 	
-	public void delSongByIndex(PlayableObject poo) {
+	public void delByIndex(PlayableObject poo) {
 		if (!objectList.contains(poo)) {
 			return;
 		}
