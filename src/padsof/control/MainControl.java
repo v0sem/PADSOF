@@ -24,7 +24,8 @@ public class MainControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if (event.getSource().equals(panel.getPlay())) {
+		if (event.getSource().equals(panel.getPlay()))
+		{ // PLAY
 			PlayableObject p = panel.getTablita().getSelected();
 			p.play();
 		} else if(event.getSource().equals(panel.getReport())) {

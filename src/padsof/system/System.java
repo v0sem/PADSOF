@@ -432,7 +432,7 @@ public class System implements java.io.Serializable {
 			this.songList.add(s);
 
 			for (User u : loggedUser.getIsFollowed()) {
-				u.notificate(new Notification(loggedUser.getNick() + " subio una nueva cancion", loggedUser, s));
+				u.notificate(new Notification(loggedUser.getNick() + " subio " + s.getTitle(), loggedUser, s));
 			}
 
 			return Status.OK;
@@ -452,7 +452,7 @@ public class System implements java.io.Serializable {
 		if (a != null && loggedUser != null) {
 			this.albumList.add(a);
 			for (User u : loggedUser.getIsFollowed()) {
-				u.notificate(new Notification(loggedUser.getNick() + " subio un nuevo album", loggedUser, a));
+				u.notificate(new Notification(loggedUser.getNick() + " subio " + a.getTitle(), loggedUser, a));
 			}
 			return Status.OK;
 		}
@@ -470,9 +470,6 @@ public class System implements java.io.Serializable {
 
 		if (pl != null && loggedUser != null) {
 			this.playlistList.add(pl);
-			for (User u : loggedUser.getIsFollowed()) {
-				u.notificate(new Notification(loggedUser.getNick() + " subio una nueva playlist", loggedUser, pl));
-			}
 			return Status.OK;
 		}
 

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
+import padsof.system.System;
 
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
@@ -16,7 +17,7 @@ public class MenuPanel extends JPanel {
 	private StandardButton albums;
 	private StandardButton audios;
 	private StandardButton following;
-	private StandardButton about;
+	private StandardButton notif;
 	
 	public MenuPanel() {
 		SpringLayout layout = new SpringLayout();
@@ -27,14 +28,14 @@ public class MenuPanel extends JPanel {
 		albums = new StandardButton("Mis Albumes", 200, 42);
 		audios = new StandardButton("Mis Audios", 200, 42);
 		following = new StandardButton("Usuarios Seguidos", 200, 42);
-		about = new StandardButton("Sobre la app", 200, 42);
+		notif = new StandardButton("Notificaciones", 200, 42);
 		
 		this.add(home);
 		this.add(lists);
 		this.add(albums);
 		this.add(audios);
 		this.add(following);
-		this.add(about);
+		this.add(notif);
 		
 		layout.putConstraint(SpringLayout.WEST, home, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, home, 0, SpringLayout.NORTH, this);
@@ -51,8 +52,16 @@ public class MenuPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, following, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, following, 160, SpringLayout.NORTH, this);
 		
-		layout.putConstraint(SpringLayout.WEST, about, 0, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, about, 200, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, notif, 0, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, notif, 200, SpringLayout.NORTH, this);
+		
+		if(System.getInstance().getLoggedUser() == null) { //ANON
+			this.lists.setVisible(false);
+			this.albums.setVisible(false);
+			this.audios.setVisible(false);
+			this.following.setVisible(false);
+			this.notif.setVisible(false);
+		}
 		
 		this.setPreferredSize(new Dimension(200, 245));
 	}
@@ -77,8 +86,8 @@ public class MenuPanel extends JPanel {
 		return following;
 	}
 
-	public StandardButton getAbout() {
-		return about;
+	public StandardButton getNotif() {
+		return notif;
 	}
 
 	public void setControlador(ActionListener controlador){
@@ -87,7 +96,7 @@ public class MenuPanel extends JPanel {
 		this.albums.addActionListener(controlador);
 		this.audios.addActionListener(controlador);
 		this.following.addActionListener(controlador);
-		this.about.addActionListener(controlador);
+		this.notif.addActionListener(controlador);
 	}
 
 }
