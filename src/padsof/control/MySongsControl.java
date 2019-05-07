@@ -21,10 +21,12 @@ public class MySongsControl implements ActionListener {
 			panel.getAcceptedTable().getSelected().play();
 		}
 		if (event.getSource().equals(panel.getDeleteButton())) {
-			System.getInstance().deleteSong((Song) panel.getAcceptedTable().getSelected());
+			if(panel.getAcceptedTable().getSelected().getClass() == Song.class)
+				System.getInstance().deleteSong((Song) panel.getAcceptedTable().getSelected());
 		}
 		if (event.getSource().equals(panel.getDeletePendButton())) {
-			System.getInstance().deleteSong((Song) panel.getPendingTable().getSelected());
+			if(panel.getPendingTable().getSelected().getClass() == Song.class)
+				System.getInstance().deleteSong((Song) panel.getPendingTable().getSelected());
 		}
 	}
 

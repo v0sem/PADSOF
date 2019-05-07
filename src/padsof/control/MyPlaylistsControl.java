@@ -21,7 +21,8 @@ public class MyPlaylistsControl implements ActionListener {
 			panel.getTable().getSelected().play();
 		}
 		if (event.getSource().equals(panel.getDeleteButton())) {
-			System.getInstance().deletePlaylist((Playlist) panel.getTable().getSelected());
+			if(panel.getTable().getSelected().getClass() == Playlist.class)
+				System.getInstance().deletePlaylist((Playlist) panel.getTable().getSelected());
 		}
 		if (event.getSource().equals(panel.getCreateButton())) {
 			// MOSTRAR PANEL DE CREAR
