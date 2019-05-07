@@ -49,6 +49,7 @@ public class MainFrame extends JFrame {
 		register.setControlador(new RegisterControl(register));
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
+		admin.setControlador(new AdminControl(admin));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
@@ -114,5 +115,6 @@ public class MainFrame extends JFrame {
 		this.about.updateSideBar();
 		this.gopremium.updateSideBar();
 		this.addaudio.updateSideBar();
+		this.admin.updateSideBar();
 	}
 }

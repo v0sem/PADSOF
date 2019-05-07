@@ -2,6 +2,7 @@ package padsof.swing;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ public class AdminPanel extends JPanel {
 	private SideBarPanel sideBar;
 	
 	private StandardButton pendientes;
+	private StandardButton guardar;
 	
 	private JLabel premiumEuros;
 	private JLabel premiumRepro;
@@ -35,6 +37,9 @@ public class AdminPanel extends JPanel {
 		
 		pendientes = new StandardButton("Canciones pendientes", 250, 70);
 		this.add(pendientes);
+		
+		guardar = new StandardButton("Guardar", 100, 30);
+		this.add(guardar);
 		
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
@@ -57,9 +62,9 @@ public class AdminPanel extends JPanel {
 		
 		
 		String premiumEurosBoxText = Double.toString(System.getInstance().getPremiumPrice());
-		String premiumReproBoxText = Double.toString(System.getInstance().getPlaysToPremium());
-		String reproRegisBoxText = Double.toString(System.getInstance().getMaxRegisteredSong());
-		String reproAnonBoxText = Double.toString(System.getInstance().getMaxAnonSong());
+		String premiumReproBoxText = Long.toString(System.getInstance().getPlaysToPremium());
+		String reproRegisBoxText = Long.toString(System.getInstance().getMaxRegisteredSong());
+		String reproAnonBoxText = Long.toString(System.getInstance().getMaxAnonSong());
 		
 		
 		premiumEurosBox = new JTextField(premiumEurosBoxText, 7);
@@ -99,6 +104,9 @@ public class AdminPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, reproAnonBox, 0, SpringLayout.NORTH, reproAnon);
 		layout.putConstraint(SpringLayout.WEST, reproAnonBox, 6, SpringLayout.EAST, reproAnon);
 		
+		layout.putConstraint(SpringLayout.WEST, guardar, 210, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, guardar, -15, SpringLayout.SOUTH, this);
+		
 		this.setPreferredSize(new Dimension(800, 450));
 	}
 	
@@ -106,5 +114,34 @@ public class AdminPanel extends JPanel {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
+	}
+	
+	public void setControlador(ActionListener controlador){
+		this.pendientes.addActionListener(controlador);
+		this.guardar.addActionListener(controlador);
+	}
+	
+	public StandardButton getPendientes() {
+		return pendientes;
+	}
+
+	public StandardButton getGuardar() {
+		return guardar;
+	}
+
+	public JTextField getPremiumEurosBox() {
+		return premiumEurosBox;
+	}
+
+	public JTextField getPremiumReproBox() {
+		return premiumReproBox;
+	}
+
+	public JTextField getReproRegisBox() {
+		return reproRegisBox;
+	}
+
+	public JTextField getReproAnonBox() {
+		return reproAnonBox;
 	}
 }
