@@ -1,7 +1,5 @@
 package padsof.swing;
 
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -15,6 +13,10 @@ public class MainPanel extends JPanel {
 	private JPanel searchBar;
 	private SideBarPanel sideBar;
 	
+	static int buttonWidth = 127;
+	static int buttonHeight = 42;
+	static int buttonSep = 20;
+	
 	public MainPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
@@ -25,12 +27,8 @@ public class MainPanel extends JPanel {
 		this.searchBar = new SearchBarPanel();
 		this.add(searchBar);
 		
-		ScrollableJTable tablita = new ScrollableJTable(new String[]{"a", "b", "c"}, 550, 278);
+		ScrollableJTablePlayable tablita = new ScrollableJTablePlayable(550, 278);
 		this.add(tablita);
-		
-		int buttonWidth = 127;
-		int buttonHeight = 42;
-		int buttonSep = 20;
 		
 		JButton play = new StandardButton("Play", buttonWidth, buttonHeight);		
 		this.add(play);
@@ -44,6 +42,7 @@ public class MainPanel extends JPanel {
 		JButton comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
 		this.add(comment);
 		
+		// Update
 		tablita.insertMultiple(System.getInstance().getSongList());
 		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
