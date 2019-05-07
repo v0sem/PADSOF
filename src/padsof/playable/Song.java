@@ -73,16 +73,7 @@ public class Song extends CommentableObject {
 		if (this.canUserPlay() == false) {
 			return Status.ERROR;
 		}
-
-		// Try to play it
-		try {
-			Mp3Player player = new Mp3Player(fileName);
-			this.songPlayer = player;
-			player.play();
-		} catch (FileNotFoundException | Mp3PlayerException e) {
-			java.lang.System.out.println("[ERROR] Error playing the song");
-		}
-
+		
 		// Remove one from song count of the logged user (unless admin or premium)
 		User u = System.getInstance().getLoggedUser();
 		if (u != null) {
@@ -94,6 +85,17 @@ public class Song extends CommentableObject {
 
 		// Add one to the plays of the author
 		this.getAuthor().increaseSongPlaycount();
+		
+		
+		System.getInstance().setSongPlayer(songPlayer);
+		// Try to play it
+		try {
+			Mp3Player player = new Mp3Player(fileName);
+			this.songPlayer = player;
+			player.play();
+		} catch (FileNotFoundException | Mp3PlayerException e) {
+			java.lang.System.out.println("[ERROR] Error playing the song");
+		}
 
 		return Status.OK;
 	}

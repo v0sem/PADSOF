@@ -3,6 +3,7 @@ package padsof.interactions;
 import java.time.LocalDate;
 
 import fechasimulada.FechaSimulada;
+import padsof.Status;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.system.System;
@@ -60,6 +61,8 @@ public class Report implements java.io.Serializable {
 		this.closed = true;
 		// cancion pasa de reportada a visible
 		reportedSong.setState(SongState.ACCEPTED);
+		if(System.getInstance().deleteReport(this) == Status.ERROR)
+			java.lang.System.out.println("hello");
 	}
 
 	/**

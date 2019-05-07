@@ -3,8 +3,12 @@ package padsof.swing;
 import javax.swing.*;
 
 import padsof.control.*;
+import padsof.system.System;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
 	
@@ -54,6 +58,7 @@ public class MainFrame extends JFrame {
 		addaudio.setControlador(new AddAudioControl(addaudio));
 		admin.setControlador(new AdminControl(admin));
 		pending.setControlador(new PendingControl(pending));
+		main.setControlador(new MainControl(main));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
@@ -69,7 +74,21 @@ public class MainFrame extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				JFrame frame = (JFrame) e.getSource();
+				try {
+					System.getInstance().saveData();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+		});
 		this.setResizable(false);
 	}
 	
@@ -82,6 +101,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void mostrarMainPanel() {
+		main.updateTables();
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), MAINPANEL);
 	}
@@ -117,6 +137,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void mostrarPending() {
+		pending.updateTables();
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), PENDINGPANEL);
 	}

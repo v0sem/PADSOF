@@ -1,20 +1,27 @@
 package padsof.swing;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import padsof.control.MainControl;
+import padsof.playable.Album;
+import padsof.playable.PlayableObject;
 import padsof.playable.Song;
+import padsof.playable.SongState;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
 
-	private JPanel searchBar;
+	private SpringLayout layout;
+	
+	private SearchBarPanel searchBar;
 	private SideBarPanel sideBar;
 	private StandardButton play;
 	private StandardButton report;
@@ -27,7 +34,7 @@ public class MainPanel extends JPanel {
 	static int buttonSep = 20;
 	
 	public MainPanel() {
-		SpringLayout layout = new SpringLayout();
+		layout = new SpringLayout();
 		this.setLayout(layout);
 		
 		this.sideBar = new SideBarPanel();
@@ -50,15 +57,10 @@ public class MainPanel extends JPanel {
 		
 		comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
 		this.add(comment);
-				
-		// Update
-		tablita.insertSingle(new Song("nepe", "music/bejito.mp3"));
-		tablita.insertMultiple(System.getInstance().getSongList());
+		
+		updateTables();
 		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
-		
-		layout.putConstraint(SpringLayout.EAST, tablita, 0, SpringLayout.EAST, this);
-		layout.putConstraint(SpringLayout.SOUTH, tablita, -buttonHeight - buttonSep, SpringLayout.SOUTH, this);
 		
 		layout.putConstraint(SpringLayout.EAST, play, -buttonSep * 3 - buttonWidth * 3, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, play, 0, SpringLayout.SOUTH, this);
@@ -73,6 +75,44 @@ public class MainPanel extends JPanel {
 		layout.putConstraint(SpringLayout.SOUTH, comment, 0, SpringLayout.SOUTH, this);
 	}
 	
+	public void updateTables() {
+		if(tablita != null)
+			this.remove(tablita);
+		
+		tablita.resetTable();
+		
+		List<PlayableObject> input = new ArrayList<>();
+		List<PlayableObject> output = new ArrayList<>();
+		input.addAll(System.getInstance().getSongList());
+		input.addAll(System.getInstance().getAlbumList());
+		
+		for(PlayableObject po: input) {
+			if(po.getClass() == Album.class || ((Song) po).getState() == SongState.ACCEPTED)
+				output.add(po);
+		}
+		
+		tablita.insertMultiple(output);
+		
+		this.add(tablita);
+		
+		layout.putConstraint(SpringLayout.EAST, tablita, 0, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, tablita, -buttonHeight - buttonSep, SpringLayout.SOUTH, this);
+	}
+	
+	public void updateTables(List<PlayableObject> list) {
+		if(tablita != null)
+			this.remove(tablita);
+		
+		tablita.resetTable();
+
+		tablita.insertMultiple(list);
+		
+		this.add(tablita);
+		
+		layout.putConstraint(SpringLayout.EAST, tablita, 0, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, tablita, -buttonHeight - buttonSep, SpringLayout.SOUTH, this);
+	}
+	
 	public SideBarPanel getSideBar() {
 		return this.sideBar;
 	}
@@ -85,14 +125,14 @@ public class MainPanel extends JPanel {
 
 	public void setControlador(ActionListener controlador){
 		this.play.addActionListener(controlador);
+		this.report.addActionListener(controlador);
+		this.follow.addActionListener(controlador);
+		this.comment.addActionListener(controlador);
+		this.searchBar.setControlador(controlador);
 	}
 
-	public JPanel getSearchBar() {
+	public SearchBarPanel getSearchBar() {
 		return searchBar;
-	}
-
-	public void setSearchBar(JPanel searchBar) {
-		this.searchBar = searchBar;
 	}
 
 	public StandardButton getPlay() {

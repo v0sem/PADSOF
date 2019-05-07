@@ -28,6 +28,8 @@ import padsof.user.UserType;
 @SuppressWarnings("serial")
 public class System implements java.io.Serializable {
 
+	private transient Mp3Player songPlayer;
+
 	/**
 	 * Instancia del sistema
 	 */
@@ -247,6 +249,10 @@ public class System implements java.io.Serializable {
 			}
 		}
 	}
+	
+	public void stop() {
+		this.songPlayer.stop();
+	}
 
 	/************************** Getters ***************************/
 
@@ -316,8 +322,16 @@ public class System implements java.io.Serializable {
 		return playsToPremium;
 	}
 
+	public Mp3Player getSongPlayer() {
+		return songPlayer;
+	}
+
 	/*************************** Setters ***************************/
 
+	public void setSongPlayer(Mp3Player songPlayer) {
+		this.songPlayer = songPlayer;
+	}
+	
 	/**
 	 * Decreases by one anonSongCount
 	 */

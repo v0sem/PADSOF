@@ -17,6 +17,8 @@ import padsof.playable.SongState;
 @SuppressWarnings("serial")
 public class PendingAdminPanel extends JPanel{
 	
+	private SpringLayout layout;
+	
 	private StandardButton approveSong;
 	private StandardButton setExplicit;
 	private StandardButton rejectSong;
@@ -30,7 +32,7 @@ public class PendingAdminPanel extends JPanel{
 	private SideBarPanel sideBar;
 	
 	public PendingAdminPanel() {
-		SpringLayout layout = new SpringLayout();
+		layout = new SpringLayout();
 		this.setLayout(layout);
 		
 		this.sideBar = new SideBarPanel();
@@ -51,20 +53,9 @@ public class PendingAdminPanel extends JPanel{
 		this.add(punish);
 		
 		canciones = new ScrollableJTablePlayable(500, 150);
-		List<Song> pending = new ArrayList<>();
+		reportes = new ScrollableJTableReport(500, 150);
 		
-		for(Song s: System.getInstance().getSongList()) {
-			if(s.getState() == SongState.REVISION_PENDING) {
-				pending.add(s);
-			}
-		}
-		
-		canciones.insertMultiple(pending);
-		
-		this.add(canciones);
-		
-		layout.putConstraint(SpringLayout.WEST, canciones, 250, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, canciones, 10, SpringLayout.NORTH, this);
+		updateTables();
 		
 		layout.putConstraint(SpringLayout.WEST, approveSong, 0, SpringLayout.WEST, canciones);
 		layout.putConstraint(SpringLayout.NORTH, approveSong, 5, SpringLayout.SOUTH, canciones);
@@ -75,7 +66,36 @@ public class PendingAdminPanel extends JPanel{
 		layout.putConstraint(SpringLayout.WEST, play, 20, SpringLayout.EAST, rejectSong);
 		layout.putConstraint(SpringLayout.NORTH, play, 5, SpringLayout.SOUTH, canciones);
 		
-		reportes = new ScrollableJTableReport(500, 150);
+		layout.putConstraint(SpringLayout.WEST, approveReport, 0, SpringLayout.WEST, reportes);
+		layout.putConstraint(SpringLayout.NORTH, approveReport, 5, SpringLayout.SOUTH, reportes);
+		layout.putConstraint(SpringLayout.WEST, punish, 20, SpringLayout.EAST, approveReport);
+		layout.putConstraint(SpringLayout.NORTH, punish, 5, SpringLayout.SOUTH, reportes);
+		
+		this.setPreferredSize(new Dimension(800, 450));
+	}
+	
+	public void updateTables() {
+		if(reportes != null)
+			this.remove(reportes);
+		if(canciones != null)
+			this.remove(canciones);
+		
+		canciones.resetTable();
+		reportes.resetTable();
+		
+		List<Song> pending = new ArrayList<>();
+		for(Song s: System.getInstance().getSongList()) {
+			if(s.getState() == SongState.REVISION_PENDING) {
+				pending.add(s);
+			}
+		}
+		canciones.insertMultiple(pending);
+		
+		this.add(canciones);
+		
+		layout.putConstraint(SpringLayout.WEST, canciones, 250, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, canciones, 10, SpringLayout.NORTH, this);
+		
 		List<Report> reportList = System.getInstance().getReportList();
 		reportes.insertMultiple(reportList);
 		
@@ -83,13 +103,6 @@ public class PendingAdminPanel extends JPanel{
 		
 		layout.putConstraint(SpringLayout.WEST, reportes, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, reportes, 0, SpringLayout.VERTICAL_CENTER, this);
-		
-		layout.putConstraint(SpringLayout.WEST, approveReport, 0, SpringLayout.WEST, reportes);
-		layout.putConstraint(SpringLayout.NORTH, approveReport, 5, SpringLayout.SOUTH, reportes);
-		layout.putConstraint(SpringLayout.WEST, punish, 20, SpringLayout.EAST, approveReport);
-		layout.putConstraint(SpringLayout.NORTH, punish, 5, SpringLayout.SOUTH, reportes);
-		
-		this.setPreferredSize(new Dimension(800, 450));
 	}
 	
 	public void updateSideBar() {

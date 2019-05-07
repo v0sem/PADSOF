@@ -1,6 +1,7 @@
 package padsof.swing;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -70,5 +71,29 @@ public class SearchBarPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, albumLabel, 40, SpringLayout.NORTH, this);
 		
 		this.setPreferredSize(new Dimension(600, 65));
+	}
+	
+	public void setControlador(ActionListener controlador){
+		this.searchButton.addActionListener(controlador);
+	}
+	
+	public JTextField getSearchField() {
+		return searchField;
+	}
+
+	public JCheckBox getAuthor() {
+		return author;
+	}
+
+	public JCheckBox getAudio() {
+		return audio;
+	}
+
+	public JCheckBox getAlbum() {
+		return album;
+	}
+
+	public StandardButton getSearchButton() {
+		return searchButton;
 	}
 }
