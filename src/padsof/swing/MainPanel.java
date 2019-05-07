@@ -1,9 +1,13 @@
 package padsof.swing;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import padsof.control.MainControl;
+import padsof.playable.Song;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
@@ -12,7 +16,12 @@ public class MainPanel extends JPanel {
 
 	private JPanel searchBar;
 	private SideBarPanel sideBar;
-	
+	private StandardButton play;
+	private StandardButton report;
+	private StandardButton follow;
+	private StandardButton comment;
+	private ScrollableJTablePlayable tablita;
+
 	static int buttonWidth = 127;
 	static int buttonHeight = 42;
 	static int buttonSep = 20;
@@ -27,22 +36,23 @@ public class MainPanel extends JPanel {
 		this.searchBar = new SearchBarPanel();
 		this.add(searchBar);
 		
-		ScrollableJTablePlayable tablita = new ScrollableJTablePlayable(550, 278);
+		tablita = new ScrollableJTablePlayable(550, 278);
 		this.add(tablita);
 		
-		JButton play = new StandardButton("Play", buttonWidth, buttonHeight);		
+		play = new StandardButton("Play", buttonWidth, buttonHeight);		
 		this.add(play);
 		
-		JButton report = new StandardButton("Report", buttonWidth, buttonHeight);		
+		report = new StandardButton("Report", buttonWidth, buttonHeight);		
 		this.add(report);
 		
-		JButton follow = new StandardButton("Follow", buttonWidth, buttonHeight);		
+		follow = new StandardButton("Follow", buttonWidth, buttonHeight);		
 		this.add(follow);
 		
-		JButton comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
+		comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
 		this.add(comment);
-		
+				
 		// Update
+		tablita.insertSingle(new Song("nepe", "music/bejito.mp3"));
 		tablita.insertMultiple(System.getInstance().getSongList());
 		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
@@ -71,5 +81,49 @@ public class MainPanel extends JPanel {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
+	}
+
+	public void setControlador(ActionListener controlador){
+		this.play.addActionListener(controlador);
+	}
+
+	public JPanel getSearchBar() {
+		return searchBar;
+	}
+
+	public void setSearchBar(JPanel searchBar) {
+		this.searchBar = searchBar;
+	}
+
+	public StandardButton getPlay() {
+		return play;
+	}
+
+	public StandardButton getReport() {
+		return report;
+	}
+
+	public StandardButton getFollow() {
+		return follow;
+	}
+
+	public StandardButton getComment() {
+		return comment;
+	}
+
+	public static void setButtonWidth(int buttonWidth) {
+		MainPanel.buttonWidth = buttonWidth;
+	}
+
+	public static void setButtonHeight(int buttonHeight) {
+		MainPanel.buttonHeight = buttonHeight;
+	}
+
+	public static void setButtonSep(int buttonSep) {
+		MainPanel.buttonSep = buttonSep;
+	}
+	
+	public ScrollableJTablePlayable getTablita() {
+		return tablita;
 	}
 }

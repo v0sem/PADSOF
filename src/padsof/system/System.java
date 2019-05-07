@@ -308,9 +308,9 @@ public class System implements java.io.Serializable {
 	}
 
 	/**
-	 * Getter de MaxRegisteredSong
+	 * Getter de PlaysToPremium
 	 * 
-	 * @return numero maximo de reproducciones de los registrados
+	 * @return numero de reproducciones para que un usuario pase a ser premium
 	 */
 	public long getPlaysToPremium() {
 		return playsToPremium;

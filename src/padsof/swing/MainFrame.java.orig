@@ -12,24 +12,18 @@ public class MainFrame extends JFrame {
 	final static String LOGINPANEL = "Carta con el LOGIN";
 	final static String MAINPANEL = "Main";
 	final static String REGISTERPANEL = "Register";
-	final static String NOTIFICATIONSPANEL = "Notifications";
+	final static String ABOUTPANEL = "About";
 	final static String GOPREMIUMPANEL = "Go premium";
 	final static String ADDAUDIOPANEL = "Add audio";
-	final static String MYSONGSPANEL = "My Songs";
-	final static String MYPLAYLISTSPANEL = "My Playlists";
-	final static String MYALBUMSPANEL = "My Albums";
 	final static String ADMINPANEL = "Admin basic config";
 	final static String PENDINGPANEL = "Pending song review";
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
 	private RegisterPanel register;
-	private NotificationsPanel notifications;
+	private AboutPanel about;
 	private GoPremiumPanel gopremium;
 	private AddAudioPanel addaudio;
-	private MySongsPanel mysongs;
-	private MyPlaylistsPanel myplaylists;
-	private MyAlbumsPanel myalbums;
 	private AdminPanel admin;
 	private PendingAdminPanel pending;
 	
@@ -48,12 +42,9 @@ public class MainFrame extends JFrame {
 		login = new LoginPanel();
 		main = new MainPanel();
 		register = new RegisterPanel();
-		notifications = new NotificationsPanel();
+		about = new AboutPanel();
 		gopremium = new GoPremiumPanel();
 		addaudio = new AddAudioPanel();
-		mysongs = new MySongsPanel();
-		myplaylists = new MyPlaylistsPanel();
-		myalbums = new MyAlbumsPanel();
 		admin = new AdminPanel();
 		pending = new PendingAdminPanel();
 		
@@ -61,20 +52,18 @@ public class MainFrame extends JFrame {
 		register.setControlador(new RegisterControl(register));
 		gopremium.setControlador(new GoPremiumControl(gopremium));
 		addaudio.setControlador(new AddAudioControl(addaudio));
-		//TODO: mysongs.setControlador(new MySongsControl(mysongs)); //Boton de deleteSong?
-		//myplaylists.setControlador(new MyPlaylistsControl(myplaylists));
-		//myalbums.setControlador(new MyAlbumsControl(myalbums));
+<<<<<<< HEAD
+		main.setControlador(new MainControl(main));
+=======
 		admin.setControlador(new AdminControl(admin));
+>>>>>>> 9771095f3e3ee93e3750d1c91220e48fad143e07
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
 		container.add(REGISTERPANEL, register);
-		container.add(NOTIFICATIONSPANEL, notifications);
+		container.add(ABOUTPANEL, about);
 		container.add(GOPREMIUMPANEL, gopremium);
 		container.add(ADDAUDIOPANEL, addaudio);
-		container.add(MYSONGSPANEL, mysongs);
-		container.add(MYPLAYLISTSPANEL, myplaylists);
-		container.add(MYALBUMSPANEL, myalbums);
 		container.add(ADMINPANEL, admin);
 		container.add(PENDINGPANEL, pending);
 	
@@ -110,9 +99,9 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), REGISTERPANEL);
 	}
 	
-	public void mostrarNotifications() {
+	public void mostrarAbout() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), NOTIFICATIONSPANEL);
+		cl.show(this.getContentPane(), ABOUTPANEL);
 	}
 
 	public void mostrarGoPremium() {
@@ -125,24 +114,6 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), ADDAUDIOPANEL);
 	}
 	
-	public void mostrarMySongs() {
-		this.mysongs.updateTables();
-		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), MYSONGSPANEL);
-	}
-	
-	public void mostrarMyPlaylists() {
-		this.myplaylists.updateTables();
-		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), MYPLAYLISTSPANEL);
-	}
-	
-	public void mostrarMyAlbums() {
-		this.myalbums.updateTables();
-		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), MYALBUMSPANEL);
-	}
-		
 	public void mostrarAdmin() {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), ADMINPANEL);
@@ -155,12 +126,9 @@ public class MainFrame extends JFrame {
 	
 	public void updateSideBar() {
 		this.main.updateSideBar();
-		this.notifications.updateSideBar();
+		this.about.updateSideBar();
 		this.gopremium.updateSideBar();
 		this.addaudio.updateSideBar();
-		this.mysongs.updateSideBar();
-		this.myplaylists.updateSideBar();
-		this.myalbums.updateSideBar();
 		this.admin.updateSideBar();
 		this.pending.updateSideBar();
 	}
