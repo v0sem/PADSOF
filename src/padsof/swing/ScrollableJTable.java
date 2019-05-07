@@ -15,16 +15,28 @@ import java.awt.*;
 public class ScrollableJTable extends JPanel {
 	JTable table;
 	DefaultTableModel tableModel;
-	List<PlayableObject> mapita;
+	List<PlayableObject> songList;
 	
 	public ScrollableJTable(String[] titulos) {
-		mapita = new ArrayList<PlayableObject>();
+		songList = new ArrayList<PlayableObject>();
 		
 		tableModel = new DefaultTableModel(0, titulos.length);
 		tableModel.setColumnIdentifiers(titulos);
 		
 		table = new JTable(tableModel);
 		table.setPreferredSize(new Dimension(550, 340));
+		
+		initializeUI(table);
+	}
+	
+	public ScrollableJTable(String[] titulos, int ancho, int altura) {
+		songList = new ArrayList<PlayableObject>();
+		
+		tableModel = new DefaultTableModel(0, titulos.length);
+		tableModel.setColumnIdentifiers(titulos);
+		
+		table = new JTable(tableModel);
+		table.setPreferredSize(new Dimension(ancho, altura));
 		
 		initializeUI(table);
 	}
@@ -42,8 +54,8 @@ public class ScrollableJTable extends JPanel {
 		add(pane, BorderLayout.CENTER);
 	}
 	
-	public void meteleCiervo(PlayableObject po) {
-		mapita.add(po);
+	public void insertSingle(PlayableObject po) {
+		songList.add(po);
 		tableModel.addRow(new Object[]{
 				po.getTitle(),
 				po.getAuthor().getName(),
@@ -51,24 +63,28 @@ public class ScrollableJTable extends JPanel {
 		});
 	}
 	
-	public void meteleCiervos(List<? extends PlayableObject> pos) {
+	public void insertMultiple(List<? extends PlayableObject> pos) {
 		for (PlayableObject po : pos) {
-			meteleCiervo(po);
+			insertSingle(po);
 		}
 	}
 	
-	public PlayableObject sacaleBrillo(int fila) {
-		return mapita.get(fila);
+	public PlayableObject getSongByIndex(int fila) {
+		return songList.get(fila);
 	}
 	
-	public void borrateLa(PlayableObject poo) {
-		if (!mapita.contains(poo)) {
+	public void resetTable() {
+		tableModel.setRowCount(0);
+	}
+	
+	public void delSongByIndex(PlayableObject poo) {
+		if (!songList.contains(poo)) {
 			return;
 		}
 		
-		int fila = mapita.indexOf(poo);
+		int fila = songList.indexOf(poo);
 		
-		mapita.remove(fila);
+		songList.remove(fila);
 		tableModel.removeRow(fila);
 	}
 }
