@@ -3,6 +3,7 @@ package padsof.user;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
@@ -386,7 +387,4 @@ public class User implements java.io.Serializable {
 	public ArrayList<Notification> getNotifications() {
 		return notifications;
 	}
-	
-	
-
 }

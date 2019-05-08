@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import padsof.control.AddAudioControl;
 import padsof.control.AdminControl;
+import padsof.control.AlbumControl;
 import padsof.control.FollowingControl;
 import padsof.control.GoPremiumControl;
 import padsof.control.LoginControl;
@@ -21,7 +22,10 @@ import padsof.control.MyAlbumsControl;
 import padsof.control.MyPlaylistsControl;
 import padsof.control.MySongsControl;
 import padsof.control.PendingControl;
+import padsof.control.PlaylistControl;
 import padsof.control.RegisterControl;
+import padsof.playable.Album;
+import padsof.playable.Playlist;
 import padsof.system.System;
 
 public class MainFrame extends JFrame {
@@ -41,6 +45,7 @@ public class MainFrame extends JFrame {
 	final static String PENDINGPANEL = "Pending song review";
 	final static String FOLLOWINGPANEL = "Following";
 	final static String PLAYLISTPANEL = "Playlist Table";
+	final static String ALBUMPANEL = "Album Table";
 	
 	private static MainFrame instance = null;
 	private	LoginPanel login;
@@ -56,6 +61,7 @@ public class MainFrame extends JFrame {
 	private PendingAdminPanel pending;
 	private FollowingPanel following;
 	private PlaylistPanel playlistpanel;
+	private AlbumPanel albumpanel;
 	
 	/**
 	 * Constructor de mainPanel
@@ -82,6 +88,7 @@ public class MainFrame extends JFrame {
 		pending = new PendingAdminPanel();
 		following = new FollowingPanel();
 		playlistpanel = new PlaylistPanel();
+		albumpanel = new AlbumPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
@@ -94,7 +101,8 @@ public class MainFrame extends JFrame {
 		pending.setControlador(new PendingControl(pending));
 		main.setControlador(new MainControl(main));
 		following.setControlador(new FollowingControl(following));
-		// playlist shit
+		playlistpanel.setControlador(new PlaylistControl(playlistpanel));
+		albumpanel.setControlador(new AlbumControl(albumpanel));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
@@ -109,6 +117,7 @@ public class MainFrame extends JFrame {
 		container.add(PENDINGPANEL, pending);
 		container.add(FOLLOWINGPANEL, following);
 		container.add(PLAYLISTPANEL, playlistpanel);
+		container.add(ALBUMPANEL, albumpanel);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -207,10 +216,16 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), FOLLOWINGPANEL);
 	}
 	
-	public void mostrarPlaylist() {
-		playlistpanel.updateTables();
+	public void mostrarPlaylist(Playlist p) {
+		playlistpanel.updateTables(p);
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), PLAYLISTPANEL);
+	}
+	
+	public void mostrarAlbum(Album p) {
+		albumpanel.updateTables(p);
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), ALBUMPANEL);
 	}
 	
 	public void updateSideBar() {
@@ -227,5 +242,6 @@ public class MainFrame extends JFrame {
 		this.register.updateSideBar();
 		this.following.updateSideBar();
 		this.playlistpanel.updateSideBar();
+		this.albumpanel.updateSideBar();
 	}
 }

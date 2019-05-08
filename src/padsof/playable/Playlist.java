@@ -99,4 +99,8 @@ public class Playlist extends PlayableObject {
 
 		return Status.ERROR;
 	}
+	
+	public ArrayList<PlayableObject> getList() {
+		return this.playableObjectList;
+	}
 }

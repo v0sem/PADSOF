@@ -117,4 +117,12 @@ public class Album extends CommentableObject {
 	public int getYear() {
 		return year;
 	}
+	
+	/**
+	 * Getter para la lista de canciones
+	 * @return lista de canciones
+	 */
+	public ArrayList<Song> getList() {
+		return this.songList;
+	}
 }
