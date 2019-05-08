@@ -70,7 +70,7 @@ public class Album extends CommentableObject {
 		// Try to play it
 		try {
 			Mp3Player player = new Mp3Player();
-			player.add((String[]) songs.toArray(new String[songs.size()]));
+			player.add(songs.toArray(new String[songs.size()]));
 			this.songPlayer = player;
 			System.getInstance().setSongPlayer(songPlayer);
 			player.play();
@@ -149,8 +149,11 @@ public class Album extends CommentableObject {
 	public int getYear() {
 		return year;
 	}
-
-
+  
+	/**
+	 * Getter para la lista de canciones
+	 * @return lista de canciones
+	 */
 	public List<String> getSongList() {
 		List<String> result = new ArrayList<String>();
 		
@@ -158,5 +161,10 @@ public class Album extends CommentableObject {
 			result.add(s.getFileName());
 		}
 		return result;
+	}
+
+
+	public List<Song> getList() {
+		return this.songList;
 	}
 }

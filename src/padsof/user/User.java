@@ -386,7 +386,4 @@ public class User implements java.io.Serializable {
 	public ArrayList<Notification> getNotifications() {
 		return notifications;
 	}
-	
-	
-
 }
