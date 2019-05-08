@@ -4,6 +4,13 @@ import java.util.List;
 
 import padsof.playable.PlayableObject;
 
+/**
+ * Panel de tabla con scroll para insercion de objetos
+ * reproducibles
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class ScrollableJTablePlayable extends ScrollableJTable<PlayableObject> {
 	private static String[] titulos = {"Titulo", "Autor", "Duracion"};

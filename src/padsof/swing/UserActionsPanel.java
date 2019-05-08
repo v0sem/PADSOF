@@ -8,6 +8,13 @@ import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel que muestra dos botones con acciones que varian 
+ * segun el tipo de usuario actual
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class UserActionsPanel extends JPanel {
 	private StandardButton button1;
