@@ -52,7 +52,7 @@ public class AddAudioPanel extends JPanel {
 		pathLabel = new JLabel("Ruta al archivo: ");
 		pathLabel.setFont(new Font("Roboto", Font.BOLD, 14));
 		this.add(pathLabel);
-		path = new StandardButton("Choose File", 120, 20);
+		path = new StandardButton("Elegir", 120, 20);
 		this.add(path);
 		pathField = new JTextField(20);
 		this.add(pathField);

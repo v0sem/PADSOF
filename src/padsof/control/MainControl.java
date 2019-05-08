@@ -79,7 +79,7 @@ public class MainControl implements ActionListener {
 			panel.updateTables(list);
 		} else if (event.getSource().equals(panel.getAddPlaylist())) {
 			Boolean found = false;
-			String title = JOptionPane.showInputDialog("Titulo de la playlist:");
+			String title = JOptionPane.showInputDialog("¿A que playlist lo quieres anadir?");
 			if (title != null) {
 				if (title.isEmpty()) {
 					JOptionPane.showMessageDialog(this.panel, "Es obligatorio rellenar el campo", "Error", JOptionPane.ERROR_MESSAGE);
@@ -87,13 +87,10 @@ public class MainControl implements ActionListener {
 				else {
 					List<Playlist> pl = System.getInstance().getPlaylistList();
 					for (Playlist p : pl) {
-						java.lang.System.out.println("Comparando " + title + " con " + p.getTitle());
 						if (p.getTitle().equals(title)) {
 							found = true;
 							// Meter objeto seleccionado
 							p.addPlayableObject(panel.getTablita().getSelected());
-							// Mostrar la otra mierda
-							MainFrame.getInstance().mostrarMyPlaylists();
 							break;
 						}
 					}
