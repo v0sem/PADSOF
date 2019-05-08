@@ -48,9 +48,9 @@ public class MySongsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
-		deleteButton = new StandardButton("Eliminar", 90, 25);
+		deleteButton = new StandardButton("Borrar", 90, 25);
 		playButton = new StandardButton("Play", 70, 25);
-		deletePendButton = new StandardButton("Eliminar", 90, 25);
+		deletePendButton = new StandardButton("Borrar", 90, 25);
 		this.add(deleteButton);
 		this.add(playButton);
 		this.add(deletePendButton);
