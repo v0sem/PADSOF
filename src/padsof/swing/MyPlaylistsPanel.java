@@ -35,7 +35,10 @@ public class MyPlaylistsPanel extends JPanel {
 	private JLabel title;
 	
 	private SpringLayout layout;
-	
+
+	/**
+	 * Constructor de MyPlaylistPanel
+	 */
 	// TODO: ADD SONG TO SELECTED PLAYLIST BUTTON. NEW PLAYLIST BUTTON
 	public MyPlaylistsPanel() {
 		layout = new SpringLayout();

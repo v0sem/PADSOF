@@ -29,6 +29,9 @@ public class LoginPanel extends JPanel {
 	private JLabel title;
 	private SideBarPanel sideBar;
 
+	/**
+	 * Constructor de LoginPanel
+	 */
 	public LoginPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);

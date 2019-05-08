@@ -24,7 +24,10 @@ public class MenuPanel extends JPanel {
 	private StandardButton audios;
 	private StandardButton following;
 	private StandardButton notif;
-	
+
+	/**
+	 * Constructor de MenuPanel
+	 */
 	public MenuPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);

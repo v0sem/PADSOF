@@ -41,7 +41,10 @@ public class MySongsPanel extends JPanel {
 	private JLabel title;
 	
 	private SpringLayout layout;
-	
+
+	/**
+	 * Constructor de MySongsPanel
+	 */
 	public MySongsPanel() {
 		layout = new SpringLayout();
 		this.setLayout(layout);

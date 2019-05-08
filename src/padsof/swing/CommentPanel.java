@@ -34,7 +34,10 @@ public class CommentPanel extends JPanel {
 	private SpringLayout layout;
 
 	private CommentableObject s;
-	
+
+	/**
+	 * Constructor de CommentPanel
+	 */
 	public CommentPanel() {
 		
 		layout = new SpringLayout();

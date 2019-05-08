@@ -28,6 +28,9 @@ public class GoPremiumPanel extends JPanel {
 	private JLabel title;
 	private SideBarPanel sideBar;
 
+	/**
+	 * Constructor de GoPremiumPanel
+	 */
 	public GoPremiumPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);

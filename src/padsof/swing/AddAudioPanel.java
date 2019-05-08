@@ -29,6 +29,9 @@ public class AddAudioPanel extends JPanel {
 	private JLabel title;
 	private SideBarPanel sideBar;
 
+	/**
+	 * Constructor de AddAudioPanel
+	 */
 	public AddAudioPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);

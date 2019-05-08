@@ -31,6 +31,9 @@ public class AlbumPanel extends JPanel {
 	static int buttonHeight = 42;
 	static int buttonSep = 17;
 	
+	/**
+	 * Constructor de AlbumPanel
+	 */
 	public AlbumPanel() {
 		layout = new SpringLayout();
 		this.setLayout(layout);

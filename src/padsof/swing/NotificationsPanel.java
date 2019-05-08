@@ -23,6 +23,9 @@ public class NotificationsPanel extends JPanel {
 	private ScrollableJTableNotification table;
 	private SpringLayout layout;
 
+	/**
+	 * Constructor de NotificationsPanel
+	 */
 	public NotificationsPanel() {
 		layout = new SpringLayout();
 		this.setLayout(layout);

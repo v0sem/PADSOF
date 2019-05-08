@@ -36,6 +36,9 @@ public class AdminPanel extends JPanel {
 	private JTextField reproRegisBox;
 	private JTextField reproAnonBox;
 	
+	/**
+	 * Constructor de AdminPanel
+	 */
 	public AdminPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);

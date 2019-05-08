@@ -30,7 +30,10 @@ public class FollowingPanel extends JPanel {
 	private JLabel title;
 	
 	private SpringLayout layout;
-	
+
+	/**
+	 * Constructor de FollowingPanel
+	 */
 	// TODO: ADD SONG TO SELECTED PLAYLIST BUTTON. NEW PLAYLIST BUTTON
 	public FollowingPanel() {
 		layout = new SpringLayout();

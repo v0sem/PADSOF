@@ -38,7 +38,10 @@ public class MainPanel extends JPanel {
 	static int buttonWidth = 106;
 	static int buttonHeight = 25;
 	static int buttonSep = 10;
-	
+
+	/**
+	 * Constructor de MainPanel
+	 */
 	public MainPanel() {		
 		layout = new SpringLayout();
 		this.setLayout(layout);
