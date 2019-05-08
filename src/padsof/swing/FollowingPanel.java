@@ -3,6 +3,7 @@ package padsof.swing;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,7 +48,7 @@ public class FollowingPanel extends JPanel {
 		
 		User u = System.getInstance().getLoggedUser();
 		if (u != null)
-			table.insertMultiple(u.getFollows());
+			table.insertMultiple((List<User>) u.getFollows());
 		
 		this.add(table);
 		
@@ -69,7 +70,7 @@ public class FollowingPanel extends JPanel {
 		
 		User u = System.getInstance().getLoggedUser();
 		if (u != null)
-			table.insertMultiple(u.getFollows());
+			table.insertMultiple((List<User>) u.getFollows());
 		
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);

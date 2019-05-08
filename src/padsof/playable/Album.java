@@ -149,8 +149,11 @@ public class Album extends CommentableObject {
 	public int getYear() {
 		return year;
 	}
-
-
+  
+	/**
+	 * Getter para la lista de canciones
+	 * @return lista de canciones
+	 */
 	public List<String> getSongList() {
 		List<String> result = new ArrayList<String>();
 		

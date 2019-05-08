@@ -19,14 +19,14 @@ import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
 @SuppressWarnings("serial")
-public class PlaylistPanel extends JPanel {
+public class AlbumPanel extends JPanel {
 
 	private SpringLayout layout;
 	private JLabel title;
 	private SearchBarPanel searchBar;
 	private SideBarPanel sideBar;
 	private ScrollableJTablePlayable tablita;
-	private Playlist current;
+	private Album current;
 	
 	private StandardButton backButton;
 
@@ -34,7 +34,7 @@ public class PlaylistPanel extends JPanel {
 	static int buttonHeight = 42;
 	static int buttonSep = 17;
 	
-	public PlaylistPanel() {
+	public AlbumPanel() {
 		layout = new SpringLayout();
 		this.setLayout(layout);
 		
@@ -42,7 +42,7 @@ public class PlaylistPanel extends JPanel {
 		this.add(sideBar);
 		
 		// PANEL DESCRIPTION / TITLE
-		title = new JLabel("Showing playlist contents");
+		title = new JLabel("Showing album contents");
 		title.setFont(new Font("Rockwell Extra Bold", Font.BOLD, 22));
 		this.add(title);
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
@@ -53,7 +53,6 @@ public class PlaylistPanel extends JPanel {
 		
 		backButton = new StandardButton("Back", 160, 25);
 		this.add(backButton);
-
 		
 		layout.putConstraint(SpringLayout.WEST, tablita, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, tablita, 80, SpringLayout.NORTH, this);
@@ -64,7 +63,7 @@ public class PlaylistPanel extends JPanel {
 		this.setPreferredSize(new Dimension(800, 450));
 	}
 	
-	public void updateTables(Playlist list) {
+	public void updateTables(Album list) {
 		if(tablita != null)
 			this.remove(tablita);
 		
@@ -95,15 +94,15 @@ public class PlaylistPanel extends JPanel {
 	}
 
 	public static void setButtonWidth(int buttonWidth) {
-		PlaylistPanel.buttonWidth = buttonWidth;
+		AlbumPanel.buttonWidth = buttonWidth;
 	}
 
 	public static void setButtonHeight(int buttonHeight) {
-		PlaylistPanel.buttonHeight = buttonHeight;
+		AlbumPanel.buttonHeight = buttonHeight;
 	}
 
 	public static void setButtonSep(int buttonSep) {
-		PlaylistPanel.buttonSep = buttonSep;
+		AlbumPanel.buttonSep = buttonSep;
 	}
 	
 	public ScrollableJTablePlayable getTablita() {

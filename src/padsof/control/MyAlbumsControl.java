@@ -6,9 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import padsof.playable.Album;
+import padsof.playable.Playlist;
 import padsof.swing.MainFrame;
 import padsof.swing.MyAlbumsPanel;
-import padsof.swing.items.AlbumCreationPanel;
+import padsof.swing.items.AlbumCreationPanel;import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
 public class MyAlbumsControl implements ActionListener {
@@ -24,13 +25,13 @@ public class MyAlbumsControl implements ActionListener {
 		if (event.getSource().equals(panel.getPlayButton())) {
 			panel.getTable().getSelected().play();
 		}
-		if (event.getSource().equals(panel.getDeleteButton())) {
+		else if (event.getSource().equals(panel.getDeleteButton())) {
 			if(panel.getTable().getSelected().getClass() == Album.class) {
 				System.getInstance().deleteAlbum((Album) panel.getTable().getSelected());
 				MainFrame.getInstance().mostrarMyAlbums();
 			}
 		}
-		if (event.getSource().equals(panel.getCreateButton())) {
+		else if (event.getSource().equals(panel.getCreateButton())) {
 			AlbumCreationPanel popup = new AlbumCreationPanel();
 			int option = JOptionPane.showConfirmDialog(null, popup, "Nuevo album", JOptionPane.OK_CANCEL_OPTION);
 			String title = popup.getTitulo().getText();
@@ -46,6 +47,9 @@ public class MyAlbumsControl implements ActionListener {
 				}	
 			}
 		}
+		else if (event.getSource().equals(panel.getShowButton())) {
+			Album p = (Album) panel.getTable().getSelected();
+			MainFrame.getInstance().mostrarAlbum(p);
+		}
 	}
-
 }
