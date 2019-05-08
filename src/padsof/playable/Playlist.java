@@ -71,7 +71,7 @@ public class Playlist extends PlayableObject {
 		// Try to play it
 		try {
 			Mp3Player player = new Mp3Player();
-			player.add((String[]) songs.toArray());
+			player.add((String[]) songs.toArray(new String[songs.size()]));
 			this.songPlayer = player;
 			System.getInstance().setSongPlayer(songPlayer);
 			player.play();
