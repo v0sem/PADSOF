@@ -7,14 +7,31 @@ import padsof.swing.MainFrame;
 import padsof.swing.MenuPanel;
 import padsof.system.System;
 
+/**
+ * Controlador de Menu Panel
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class MenuControl implements ActionListener {
 
+	/**
+	 * Panel Menu
+	 */
 	private MenuPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel Menu
+	 */
 	public MenuControl(MenuPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos del menu
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getHome())) {

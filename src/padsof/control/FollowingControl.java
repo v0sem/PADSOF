@@ -8,14 +8,31 @@ import padsof.swing.MainFrame;
 import padsof.system.System;
 import padsof.user.User;
 
+/**
+ * Controlador de Following Panel
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class FollowingControl implements ActionListener {
 
+	/**
+	 * Panel Following
+	 */
 	private FollowingPanel panel;
 
+	/**
+	 * Constructor de Clase
+	 * 
+	 * @param panel Following Panel
+	 */
 	public FollowingControl(FollowingPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de Following
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		User u = System.getInstance().getLoggedUser();

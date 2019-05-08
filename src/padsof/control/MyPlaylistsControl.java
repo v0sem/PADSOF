@@ -10,14 +10,31 @@ import padsof.swing.MainFrame;
 import padsof.swing.MyPlaylistsPanel;
 import padsof.system.System;
 
+/**
+ * Controlador de My Playlists
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class MyPlaylistsControl implements ActionListener {
 
+	/**
+	 * Panel My PlayLists
+	 */
 	private MyPlaylistsPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel My Playlists
+	 */
 	public MyPlaylistsControl(MyPlaylistsPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de My Playlists
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getPlayButton())) {

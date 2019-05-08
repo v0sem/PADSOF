@@ -11,14 +11,32 @@ import padsof.playable.Song;
 import padsof.swing.AddAudioPanel;
 import padsof.system.System;
 
+/**
+ * Controlador de AddAudioPanel
+ * 
+ *@author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class AddAudioControl implements ActionListener {
 
+	
+	/**
+	 * Panel a controlar
+	 */
 	private AddAudioPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel Add Audio Panel
+	 */
 	public AddAudioControl(AddAudioPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accion de los botones de add audio. Genera un file chooser
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		

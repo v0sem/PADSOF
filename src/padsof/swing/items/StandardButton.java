@@ -6,6 +6,12 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+/**
+ * Standarizado de los JButtons para que tengan todos el mismo formato
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class StandardButton extends JButton{
 

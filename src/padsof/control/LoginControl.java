@@ -10,14 +10,31 @@ import padsof.swing.LoginPanel;
 import padsof.swing.MainFrame;
 import padsof.system.System;
 
+/**
+ * Controlador de eventos de Login
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class LoginControl implements ActionListener {
 
+	/**
+	 * Panel de Login
+	 */
 	private LoginPanel panel;
 
+	/**
+	 * Constructor de Clase
+	 * 
+	 * @param panel Login
+	 */
 	public LoginControl(LoginPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de Login
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String nick = this.panel.getNick().getText();
