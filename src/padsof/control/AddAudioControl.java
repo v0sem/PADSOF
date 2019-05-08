@@ -59,7 +59,7 @@ public class AddAudioControl implements ActionListener {
 			else if (System.getInstance().addSong(new Song(title, path)) == Status.OK) {
 				JOptionPane.showMessageDialog(this.panel, "Se anadio la cancion", "Congrats", JOptionPane.INFORMATION_MESSAGE);
 				this.panel.getSongTitle().setText("");
-				this.panel.getPath().setText("");
+				this.panel.getPathField().setText("");
 			}
 			else {
 				JOptionPane.showMessageDialog(this.panel, "No se ha podido subir la cancion, comprueba que no exista ya", "Error", JOptionPane.ERROR_MESSAGE);
