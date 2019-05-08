@@ -3,7 +3,6 @@ package padsof.swing;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

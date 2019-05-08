@@ -51,7 +51,7 @@ public class MyAlbumsPanel extends JPanel {
 		deleteButton = new StandardButton("Borrar", 90, 25);
 		playButton = new StandardButton("Play", 70, 25);
 		createButton = new StandardButton("Nuevo album", 160, 25);
-		showButton = new StandardButton("Show", 100, 25);
+		showButton = new StandardButton("Mostrar", 100, 25);
 		this.add(deleteButton);
 		this.add(playButton);
 		this.add(createButton);
