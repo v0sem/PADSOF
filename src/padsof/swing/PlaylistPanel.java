@@ -16,9 +16,7 @@ public class PlaylistPanel extends JPanel {
 	private JLabel title;
 	private SearchBarPanel searchBar;
 	private SideBarPanel sideBar;
-	private ScrollableJTablePlayable tablita;
-	private Playlist current;
-	
+	private ScrollableJTablePlayable tablita;	
 	private StandardButton backButton;
 
 	static int buttonWidth = 100;
@@ -58,13 +56,9 @@ public class PlaylistPanel extends JPanel {
 	public void updateTables(Playlist list) {
 		if(tablita != null)
 			this.remove(tablita);
-		
-		current = list;
-		
+				
 		tablita.resetTable();
-
 		tablita.insertMultiple(list.getList());
-		
 		this.add(tablita);
 		
 		layout.putConstraint(SpringLayout.WEST, tablita, 250, SpringLayout.WEST, this);
