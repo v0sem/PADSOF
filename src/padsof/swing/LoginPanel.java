@@ -49,8 +49,8 @@ public class LoginPanel extends JPanel {
 		this.add(passwordLabel);
 		passwordField = new JPasswordField(20);
 		this.add(passwordField);
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, passwordLabel, -28, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.VERTICAL_CENTER, passwordLabel, 5, SpringLayout.VERTICAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, passwordLabel, 5, SpringLayout.SOUTH, nickLabel);
+		layout.putConstraint(SpringLayout.EAST, passwordLabel, 0, SpringLayout.EAST, nickLabel);
 		layout.putConstraint(SpringLayout.NORTH, passwordField, 0, SpringLayout.NORTH, passwordLabel);
 		layout.putConstraint(SpringLayout.WEST, passwordField, 6, SpringLayout.EAST, passwordLabel);
 	
@@ -61,6 +61,13 @@ public class LoginPanel extends JPanel {
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, loginButton, 70, SpringLayout.VERTICAL_CENTER, this);
 		this.setPreferredSize(new Dimension(400, 150));
 	}
+	
+	public void updateSideBar() {
+		this.remove(sideBar);
+		this.sideBar = new SideBarPanel();
+		this.add(sideBar);
+	}
+	
 	
 	public void setControlador(ActionListener controlador){
 		this.loginButton.addActionListener(controlador);

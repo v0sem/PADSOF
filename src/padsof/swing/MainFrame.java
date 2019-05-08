@@ -185,5 +185,7 @@ public class MainFrame extends JFrame {
 		this.myalbums.updateSideBar();
 		this.admin.updateSideBar();
 		this.pending.updateSideBar();
+		this.login.updateSideBar();
+		this.register.updateSideBar();
 	}
 }

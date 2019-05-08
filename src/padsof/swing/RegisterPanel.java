@@ -53,8 +53,8 @@ public class RegisterPanel extends JPanel {
 		this.add(nameLabel);
 		nameField = new JTextField(20);
 		this.add(nameField);
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, nameLabel, -17, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.VERTICAL_CENTER, nameLabel, 5, SpringLayout.VERTICAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, nameLabel, 5, SpringLayout.SOUTH, nickLabel);
+		layout.putConstraint(SpringLayout.EAST, nameLabel, 0, SpringLayout.EAST, nickLabel);
 		layout.putConstraint(SpringLayout.NORTH, nameField, 0, SpringLayout.NORTH, nameLabel);
 		layout.putConstraint(SpringLayout.WEST, nameField, 6, SpringLayout.EAST, nameLabel);
 		
@@ -64,8 +64,8 @@ public class RegisterPanel extends JPanel {
 		this.add(dateLabel);
 		dateField = new JTextField(20);
 		this.add(dateField);
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, dateLabel, -30, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.VERTICAL_CENTER, dateLabel, 32, SpringLayout.VERTICAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, dateLabel, 5, SpringLayout.SOUTH, nameLabel);
+		layout.putConstraint(SpringLayout.EAST, dateLabel, 0, SpringLayout.EAST, nameLabel);
 		layout.putConstraint(SpringLayout.NORTH, dateField, 0, SpringLayout.NORTH, dateLabel);
 		layout.putConstraint(SpringLayout.WEST, dateField, 6, SpringLayout.EAST, dateLabel);		
 		
@@ -75,8 +75,8 @@ public class RegisterPanel extends JPanel {
 		this.add(passwordLabel);
 		passwordField = new JPasswordField(20);
 		this.add(passwordField);
-		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, passwordLabel, 0, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.VERTICAL_CENTER, passwordLabel, 59, SpringLayout.VERTICAL_CENTER, this);
+		layout.putConstraint(SpringLayout.NORTH, passwordLabel, 5, SpringLayout.SOUTH, dateLabel);
+		layout.putConstraint(SpringLayout.EAST, passwordLabel, 0, SpringLayout.EAST, dateLabel);
 		layout.putConstraint(SpringLayout.NORTH, passwordField, 0, SpringLayout.NORTH, passwordLabel);
 		layout.putConstraint(SpringLayout.WEST, passwordField, 6, SpringLayout.EAST, passwordLabel);
 
@@ -86,6 +86,12 @@ public class RegisterPanel extends JPanel {
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, regButton, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, regButton, 130, SpringLayout.VERTICAL_CENTER, this);
 		this.setPreferredSize(new Dimension(400, 150));
+	}
+	
+	public void updateSideBar() {
+		this.remove(sideBar);
+		this.sideBar = new SideBarPanel();
+		this.add(sideBar);
 	}
 	
 	public void setControlador(ActionListener controlador){

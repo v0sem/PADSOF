@@ -12,9 +12,10 @@ public class UserInfoControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		System.getInstance().stop();
 		System.getInstance().logout();
-		MainFrame.getInstance().mostrarLogin();
 		MainFrame.getInstance().updateSideBar();
+		MainFrame.getInstance().mostrarLogin();
 	}
 
 }

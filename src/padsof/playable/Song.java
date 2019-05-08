@@ -92,6 +92,7 @@ public class Song extends CommentableObject {
 		try {
 			Mp3Player player = new Mp3Player(fileName);
 			this.songPlayer = player;
+			System.getInstance().setSongPlayer(songPlayer);
 			player.play();
 		} catch (FileNotFoundException | Mp3PlayerException e) {
 			java.lang.System.out.println("[ERROR] Error playing the song");

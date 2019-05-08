@@ -251,7 +251,8 @@ public class System implements java.io.Serializable {
 	}
 	
 	public void stop() {
-		this.songPlayer.stop();
+		if(this.songPlayer != null)
+			this.songPlayer.stop();
 	}
 
 	/************************** Getters ***************************/
