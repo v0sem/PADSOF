@@ -32,7 +32,7 @@ public class UserActionsPanel extends JPanel {
 
 	/**
 	 * Anade el boton superior del panel dado su texto de boton
-	 * @param buttonText
+	 * @param buttonText boton 
 	 */
 	public void addButton1(String buttonText) {
 		this.button1 = new StandardButton(buttonText, 200, 42);
@@ -70,7 +70,7 @@ public class UserActionsPanel extends JPanel {
 
 	/**
 	 * Establece el controlador del panel
-	 * @param controlador
+	 * @param controlador controlador
 	 */
 	public void setControlador(ActionListener controlador){
 		button1.addActionListener(controlador);

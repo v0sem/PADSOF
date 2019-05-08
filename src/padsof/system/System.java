@@ -333,7 +333,10 @@ public class System implements java.io.Serializable {
 	}
 
 	/*************************** Setters ***************************/
-
+	/**
+	 * Song player
+	 * @param songPlayer player de la cancion
+	 */
 	public void setSongPlayer(Mp3Player songPlayer) {
 		this.songPlayer = songPlayer;
 	}

@@ -63,7 +63,7 @@ public class UserInfoPanel extends JPanel {
 	
 	/**
 	 * Establece el controlador del panel
-	 * @param controlador
+	 * @param controlador controlador
 	 */
 	public void setControlador(ActionListener controlador){
 		this.button.addActionListener(controlador);
