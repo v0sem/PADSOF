@@ -9,6 +9,12 @@ import javax.swing.SpringLayout;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel lateral
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
 	

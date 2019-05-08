@@ -11,6 +11,12 @@ import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel para convertirse en un usuario premium
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class GoPremiumPanel extends JPanel {
 

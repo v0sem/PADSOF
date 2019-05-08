@@ -12,6 +12,12 @@ import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel para conectarte con tu cuenta
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel {
 

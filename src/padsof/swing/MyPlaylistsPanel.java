@@ -14,6 +14,12 @@ import padsof.playable.Playlist;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel para mostrar las playlists del usuario
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class MyPlaylistsPanel extends JPanel {
 

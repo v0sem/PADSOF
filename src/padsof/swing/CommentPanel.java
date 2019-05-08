@@ -12,6 +12,12 @@ import javax.swing.SpringLayout;
 import padsof.playable.CommentableObject;
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel para agregar comentarios
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class CommentPanel extends JPanel {
 

@@ -15,6 +15,12 @@ import padsof.playable.SongState;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel para mostrar las canciones del usuario
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class MySongsPanel extends JPanel {
 

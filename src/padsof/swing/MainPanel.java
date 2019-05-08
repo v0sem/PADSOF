@@ -15,6 +15,12 @@ import padsof.playable.SongState;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel principal
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
 

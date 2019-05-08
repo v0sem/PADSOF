@@ -9,6 +9,12 @@ import javax.swing.SpringLayout;
 import padsof.system.System;
 import padsof.user.User;
 
+/**
+ * Panel para mostrar las notificaciones
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class NotificationsPanel extends JPanel {
 

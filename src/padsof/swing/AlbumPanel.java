@@ -11,6 +11,12 @@ import javax.swing.SpringLayout;
 import padsof.playable.Album;
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel para ver los audios que hay dentro de un album
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class AlbumPanel extends JPanel {
 

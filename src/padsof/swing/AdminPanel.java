@@ -12,6 +12,12 @@ import javax.swing.SpringLayout;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel para que los administradores hagan sus tareas
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class AdminPanel extends JPanel {
 	

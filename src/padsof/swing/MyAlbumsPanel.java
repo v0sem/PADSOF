@@ -14,6 +14,12 @@ import padsof.playable.Album;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel para mostrar los albumes
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class MyAlbumsPanel extends JPanel {
 

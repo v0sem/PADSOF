@@ -12,6 +12,12 @@ import padsof.swing.items.StandardButton;
 import padsof.system.System;
 import padsof.user.User;
 
+/**
+ * Panel para ver la gente a la que sigues
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class FollowingPanel extends JPanel {
 

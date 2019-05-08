@@ -31,6 +31,12 @@ import padsof.control.RegisterControl;
 import padsof.playable.Album;
 import padsof.playable.Playlist;
 
+/**
+ * Panel principal de construccion
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
