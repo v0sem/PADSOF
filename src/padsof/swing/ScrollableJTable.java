@@ -1,13 +1,16 @@
 package padsof.swing;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import padsof.playable.PlayableObject;
 
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import padsof.playable.PlayableObject;
 
 @SuppressWarnings("serial")
 public abstract class ScrollableJTable<T> extends JPanel {

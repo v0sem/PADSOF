@@ -2,11 +2,12 @@ package padsof.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
+import javax.swing.JOptionPane;
+
+import padsof.Status;
 import padsof.swing.GoPremiumPanel;
 import padsof.swing.MainFrame;
-import padsof.Status;
 import padsof.system.System;
 
 public class GoPremiumControl implements ActionListener {

@@ -1,6 +1,11 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,13 +16,13 @@ import org.junit.Test;
 
 import fechasimulada.FechaSimulada;
 import padsof.Status;
+import padsof.interactions.Report;
 import padsof.playable.Album;
 import padsof.playable.Playlist;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.system.System;
 import padsof.user.User;
-import padsof.interactions.Report;
 
 public class SystemTest {
 

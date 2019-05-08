@@ -2,7 +2,6 @@ package padsof.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -10,7 +9,6 @@ import padsof.interactions.Report;
 import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.swing.PendingAdminPanel;
-import padsof.system.System;
 
 public class PendingControl implements ActionListener{
 

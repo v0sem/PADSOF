@@ -8,11 +8,11 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.swing.items.StandardButton;
-import padsof.system.System;
 import padsof.interactions.Report;
 import padsof.playable.Song;
 import padsof.playable.SongState;
+import padsof.swing.items.StandardButton;
+import padsof.system.System;
 
 @SuppressWarnings("serial")
 public class PendingAdminPanel extends JPanel{

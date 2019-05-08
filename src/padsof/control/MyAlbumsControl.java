@@ -3,7 +3,7 @@ package padsof.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import padsof.playable.Album;
 import padsof.swing.MainFrame;

@@ -5,20 +5,16 @@
 
 package padsof.playable;
 
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+
+import pads.musicPlayer.Mp3Player;
+import pads.musicPlayer.exceptions.Mp3PlayerException;
 import padsof.Status;
 import padsof.interactions.Report;
 import padsof.system.System;
 import padsof.user.User;
 import padsof.user.UserType;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.time.LocalDate;
-
-import pads.musicPlayer.*;
-import pads.musicPlayer.exceptions.*;
 
 @SuppressWarnings("serial")
 public class Song extends CommentableObject {

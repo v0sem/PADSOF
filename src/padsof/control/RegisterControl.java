@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import padsof.swing.RegisterPanel;
-import padsof.swing.MainFrame;
 import padsof.Status;
+import padsof.swing.MainFrame;
+import padsof.swing.RegisterPanel;
 import padsof.system.System;
 
 public class RegisterControl implements ActionListener {

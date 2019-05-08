@@ -1,6 +1,9 @@
 package padsof.swing.items;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AlbumCreationPanel extends JPanel {
 	

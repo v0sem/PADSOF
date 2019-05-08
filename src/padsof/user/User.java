@@ -1,12 +1,11 @@
 package padsof.user;
 
-import java.util.ArrayList;
-
-import es.uam.eps.padsof.telecard.*;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
+import es.uam.eps.padsof.telecard.OrderRejectedException;
+import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import padsof.Status;
 import padsof.interactions.Notification;
 import padsof.system.System;

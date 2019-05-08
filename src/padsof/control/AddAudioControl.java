@@ -3,11 +3,12 @@ package padsof.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
-import padsof.swing.AddAudioPanel;
 import padsof.Status;
 import padsof.playable.Song;
+import padsof.swing.AddAudioPanel;
 import padsof.system.System;
 
 public class AddAudioControl implements ActionListener {
