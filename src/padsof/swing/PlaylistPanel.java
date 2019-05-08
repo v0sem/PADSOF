@@ -60,6 +60,10 @@ public class PlaylistPanel extends JPanel {
 		this.setPreferredSize(new Dimension(800, 450));
 	}
 	
+	/**
+	 * Actualiza las tablas del panel
+	 * @param list
+	 */
 	public void updateTables(Playlist list) {
 		if(tablita != null)
 			this.remove(tablita);
@@ -76,6 +80,9 @@ public class PlaylistPanel extends JPanel {
 		return this.sideBar;
 	}
 
+	/**
+	 * Actualiza la barra lateral
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();

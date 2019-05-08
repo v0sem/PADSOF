@@ -28,6 +28,9 @@ public class UserInfoPanel extends JPanel {
 	
 	private StandardButton button;
 	
+	/**
+	 * Constructor de UserInfoPanel
+	 */
 	public UserInfoPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
@@ -58,6 +61,10 @@ public class UserInfoPanel extends JPanel {
 		this.setPreferredSize(new Dimension(200, 65));
 	}
 	
+	/**
+	 * Establece el controlador del panel
+	 * @param controlador
+	 */
 	public void setControlador(ActionListener controlador){
 		this.button.addActionListener(controlador);
 	}

@@ -24,6 +24,9 @@ public class SideBarPanel extends JPanel {
 	private MenuPanel menu;
 	private UserActionsPanel userActions;
 	
+	/**
+	 * Constructor del panel lateral
+	 */
 	public SideBarPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);

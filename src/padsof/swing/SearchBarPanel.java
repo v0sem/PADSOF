@@ -29,6 +29,9 @@ public class SearchBarPanel extends JPanel {
 	private JCheckBox album;
 	private JLabel albumLabel;
 	
+	/**
+	 * Constructor del panel de busqueda
+	 */
 	public SearchBarPanel() {
 		SpringLayout layout = new SpringLayout();
 		this.setLayout(layout);
@@ -83,22 +86,42 @@ public class SearchBarPanel extends JPanel {
 		this.searchButton.addActionListener(controlador);
 	}
 	
+	/**
+	 * Getter del campo de busqueda
+	 * @return campo de busqueda
+	 */
 	public JTextField getSearchField() {
 		return searchField;
 	}
 
+	/**
+	 * Getter del checkBox del autor
+	 * @return checkBox del autor
+	 */
 	public JCheckBox getAuthor() {
 		return author;
 	}
 
+	/**
+	 * Getter del checkBox del audio
+	 * @return checkBox del audio
+	 */
 	public JCheckBox getAudio() {
 		return audio;
 	}
 
+	/**
+	 * Getter del checkBox del album
+	 * @return checkBox del album
+	 */
 	public JCheckBox getAlbum() {
 		return album;
 	}
 
+	/**
+	 * Getter del boton de busqueda
+	 * @return boton de busqueda
+	 */
 	public StandardButton getSearchButton() {
 		return searchButton;
 	}
