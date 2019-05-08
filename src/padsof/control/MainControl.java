@@ -25,7 +25,6 @@ public class MainControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		java.lang.System.out.println("NEPEEE00");
 		if (event.getSource().equals(panel.getPlay()))
 		{ // PLAY
 			PlayableObject p = panel.getTablita().getSelected();
@@ -68,12 +67,14 @@ public class MainControl implements ActionListener {
 				else {
 					List<Playlist> pl = System.getInstance().getPlaylistList();
 					for (Playlist p : pl) {
-						if (p.getTitle() == title) {
+						java.lang.System.out.println("Comparando " + title + " con " + p.getTitle());
+						if (p.getTitle().equals(title)) {
+							found = true;
 							// Meter objeto seleccionado
 							p.addPlayableObject(panel.getTablita().getSelected());
 							// Mostrar la otra mierda
 							MainFrame.getInstance().mostrarMyPlaylists();
-							found = true;
+							break;
 						}
 					}
 				}
