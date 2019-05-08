@@ -48,7 +48,7 @@ public class AddAudioControl implements ActionListener {
 			}
 			
 			this.panel.getSongTitle().setText("");
-			this.panel.getPath().setText("");
+			this.panel.getPathField().setText("");
 		}
 	}
 
