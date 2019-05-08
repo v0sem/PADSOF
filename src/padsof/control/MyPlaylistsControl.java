@@ -3,6 +3,8 @@ package padsof.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import padsof.playable.Playlist;
 import padsof.swing.MainFrame;
 import padsof.swing.MyPlaylistsPanel;
@@ -28,7 +30,16 @@ public class MyPlaylistsControl implements ActionListener {
 			}
 		}
 		if (event.getSource().equals(panel.getCreateButton())) {
-			// MOSTRAR PANEL DE CREAR
+			String title = JOptionPane.showInputDialog("Titulo para la nueva lista:");
+			if (title != null) { 
+				if (title.isEmpty()) {
+					JOptionPane.showMessageDialog(this.panel, "Es obligatorio rellenar el campo", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					System.getInstance().addPlaylist(new Playlist(title));
+					MainFrame.getInstance().mostrarMyPlaylists();
+				}
+			}
 		}
 	}
 
