@@ -10,7 +10,6 @@ import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.swing.PendingAdminPanel;
 
-
 public class PendingControl implements ActionListener{
 
 	private PendingAdminPanel panel;

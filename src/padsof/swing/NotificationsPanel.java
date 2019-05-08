@@ -1,8 +1,11 @@
 package padsof.swing;
 
-import java.awt.*;
+import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+
 import padsof.system.System;
 import padsof.user.User;
 

@@ -29,7 +29,9 @@ public class MySongsPanel extends JPanel {
 	private StandardButton playButton;
 	
 	private StandardButton deletePendButton;
-
+	
+	private StandardButton addToAlbumButton;
+	
 	private JLabel title;
 	
 	private SpringLayout layout;
@@ -48,11 +50,13 @@ public class MySongsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
-		deleteButton = new StandardButton("Eliminar", 90, 25);
+		deleteButton = new StandardButton("Borrar", 90, 25);
 		playButton = new StandardButton("Play", 70, 25);
-		deletePendButton = new StandardButton("Eliminar", 90, 25);
+		addToAlbumButton = new StandardButton("Anadir a album", 160, 25);
+		deletePendButton = new StandardButton("Borrar", 90, 25);
 		this.add(deleteButton);
 		this.add(playButton);
+		this.add(addToAlbumButton);
 		this.add(deletePendButton);
 		
 		acceptedTable = new ScrollableJTablePlayable(500, 120);
@@ -66,6 +70,8 @@ public class MySongsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, deleteButton, 5, SpringLayout.SOUTH, acceptedTable);
 		layout.putConstraint(SpringLayout.WEST, playButton, 20, SpringLayout.EAST, deleteButton);
 		layout.putConstraint(SpringLayout.NORTH, playButton, 5, SpringLayout.SOUTH, acceptedTable);
+		layout.putConstraint(SpringLayout.WEST, addToAlbumButton, 20, SpringLayout.EAST, playButton);
+		layout.putConstraint(SpringLayout.NORTH, addToAlbumButton, 5, SpringLayout.SOUTH, acceptedTable);
 		
 		layout.putConstraint(SpringLayout.WEST, pendingTable, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, pendingTable, 20, SpringLayout.SOUTH, playButton);
@@ -89,6 +95,7 @@ public class MySongsPanel extends JPanel {
 		this.deleteButton.addActionListener(controlador);
 		this.playButton.addActionListener(controlador);
 		this.deletePendButton.addActionListener(controlador);
+		this.addToAlbumButton.addActionListener(controlador);
 	}
 	
 	public void updateTables(){
@@ -134,4 +141,9 @@ public class MySongsPanel extends JPanel {
 	public StandardButton getDeletePendButton() {
 		return deletePendButton;
 	}
+
+	public StandardButton getAddToAlbumButton() {
+		return addToAlbumButton;
+	}
+
 }

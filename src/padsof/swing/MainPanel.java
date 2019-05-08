@@ -25,13 +25,14 @@ public class MainPanel extends JPanel {
 	private StandardButton report;
 	private StandardButton follow;
 	private StandardButton comment;
+	private StandardButton addPlaylist;
 	private ScrollableJTablePlayable tablita;
 
-	static int buttonWidth = 127;
+	static int buttonWidth = 100;
 	static int buttonHeight = 42;
-	static int buttonSep = 20;
+	static int buttonSep = 17;
 	
-	public MainPanel() {
+	public MainPanel() {		
 		layout = new SpringLayout();
 		this.setLayout(layout);
 		
@@ -56,21 +57,27 @@ public class MainPanel extends JPanel {
 		comment = new StandardButton("Comment", buttonWidth, buttonHeight);		
 		this.add(comment);
 		
+		addPlaylist = new StandardButton("Playlist", buttonWidth, buttonHeight);		
+		this.add(addPlaylist);
+		
 		updateTables();
 		
 		layout.putConstraint(SpringLayout.EAST, searchBar, 10, SpringLayout.EAST, this);
 		
-		layout.putConstraint(SpringLayout.EAST, play, -buttonSep * 3 - buttonWidth * 3, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.EAST, play, -buttonSep * 4 - buttonWidth * 4, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, play, 0, SpringLayout.SOUTH, this);
 		
-		layout.putConstraint(SpringLayout.EAST, report, -buttonSep * 2 - buttonWidth * 2, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.EAST, report, -buttonSep * 3 - buttonWidth * 3, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, report, 0, SpringLayout.SOUTH, this);
 		
-		layout.putConstraint(SpringLayout.EAST, follow, -buttonSep - buttonWidth, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.EAST, follow, -buttonSep * 2 - buttonWidth * 2, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, follow, 0, SpringLayout.SOUTH, this);
 		
-		layout.putConstraint(SpringLayout.EAST, comment, 0, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.EAST, comment, -buttonSep - buttonWidth, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, comment, 0, SpringLayout.SOUTH, this);
+		
+		layout.putConstraint(SpringLayout.EAST, addPlaylist, 0, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, addPlaylist, 0, SpringLayout.SOUTH, this);
 	}
 	
 	public void updateTables() {
@@ -126,6 +133,7 @@ public class MainPanel extends JPanel {
 		this.report.addActionListener(controlador);
 		this.follow.addActionListener(controlador);
 		this.comment.addActionListener(controlador);
+		this.addPlaylist.addActionListener(controlador);
 		this.searchBar.setControlador(controlador);
 	}
 
@@ -147,6 +155,10 @@ public class MainPanel extends JPanel {
 
 	public StandardButton getComment() {
 		return comment;
+	}
+
+	public StandardButton getAddPlaylist() {
+		return addPlaylist;
 	}
 
 	public static void setButtonWidth(int buttonWidth) {

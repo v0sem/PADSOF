@@ -26,7 +26,7 @@ public class MyAlbumsPanel extends JPanel {
 	private StandardButton playButton;
 	
 	private StandardButton createButton;
-
+	
 	private JLabel title;
 	
 	private SpringLayout layout;
@@ -46,24 +46,24 @@ public class MyAlbumsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 100, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, title, 20, SpringLayout.NORTH, this);
 		
-		deleteButton = new StandardButton("Eliminar", 90, 25);
+		deleteButton = new StandardButton("Borrar", 90, 25);
 		playButton = new StandardButton("Play", 70, 25);
-		createButton = new StandardButton("Nuevo Album", 90, 25);
+		createButton = new StandardButton("Nuevo album", 160, 25);
 		this.add(deleteButton);
 		this.add(playButton);
 		this.add(createButton);
 		
-		table = new ScrollableJTablePlayable(500, 290);
+		table = new ScrollableJTablePlayable(500, 285);
 		this.add(table);
 		
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, deleteButton, 0, SpringLayout.WEST, table);
-		layout.putConstraint(SpringLayout.NORTH, deleteButton, 5, SpringLayout.SOUTH, table);
+		layout.putConstraint(SpringLayout.NORTH, deleteButton, 10, SpringLayout.SOUTH, table);
 		layout.putConstraint(SpringLayout.WEST, playButton, 20, SpringLayout.EAST, deleteButton);
-		layout.putConstraint(SpringLayout.NORTH, playButton, 5, SpringLayout.SOUTH, table);
-		layout.putConstraint(SpringLayout.WEST, createButton, 20, SpringLayout.EAST, playButton);
-		layout.putConstraint(SpringLayout.NORTH, createButton, 5, SpringLayout.SOUTH, table);
+		layout.putConstraint(SpringLayout.NORTH, playButton, 10, SpringLayout.SOUTH, table);
+		layout.putConstraint(SpringLayout.EAST, createButton, -20, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, createButton, 10, SpringLayout.SOUTH, table);
 		
 		this.setPreferredSize(new Dimension(800, 450));
 	}

@@ -3,9 +3,12 @@ package padsof.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import padsof.playable.Album;
 import padsof.swing.MainFrame;
 import padsof.swing.MyAlbumsPanel;
+import padsof.swing.items.AlbumCreationPanel;
 import padsof.system.System;
 
 public class MyAlbumsControl implements ActionListener {
@@ -28,7 +31,20 @@ public class MyAlbumsControl implements ActionListener {
 			}
 		}
 		if (event.getSource().equals(panel.getCreateButton())) {
-			// MOSTRAR PANEL DE CREAR
+			AlbumCreationPanel popup = new AlbumCreationPanel();
+			int option = JOptionPane.showConfirmDialog(null, popup, "Nuevo album", JOptionPane.OK_CANCEL_OPTION);
+			String title = popup.getTitulo().getText();
+			String ano = popup.getAno().getText();
+			if (option == JOptionPane.OK_OPTION) {
+				if (title.isEmpty() || ano.isEmpty()) {
+					JOptionPane.showMessageDialog(this.panel, "Es obligatorio rellenar los campos", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					int realAno = Integer.parseInt(ano);
+					System.getInstance().addAlbum(new Album(title, realAno));
+					MainFrame.getInstance().mostrarMyAlbums();
+				}	
+			}
 		}
 	}
 

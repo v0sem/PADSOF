@@ -7,13 +7,34 @@ import padsof.playable.CommentableObject;
 import padsof.system.System;
 
 import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+import padsof.control.AddAudioControl;
+import padsof.control.AdminControl;
+import padsof.control.FollowingControl;
+import padsof.control.GoPremiumControl;
+import padsof.control.LoginControl;
+import padsof.control.MainControl;
+import padsof.control.MyAlbumsControl;
+import padsof.control.MyPlaylistsControl;
+import padsof.control.MySongsControl;
+import padsof.control.PendingControl;
+import padsof.control.RegisterControl;
+import padsof.system.System;
+
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
+	
 	final static String LOGINPANEL = "Carta con el LOGIN";
 	final static String MAINPANEL = "Main";
 	final static String REGISTERPANEL = "Register";
@@ -27,6 +48,8 @@ public class MainFrame extends JFrame {
 	final static String PENDINGPANEL = "Pending song review";
 	final static String FOLLOWINGPANEL = "Following";
 	final static String COMMENTPANEL = "Comments";
+	final static String PLAYLISTPANEL = "Playlist Table";
+
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
@@ -41,6 +64,7 @@ public class MainFrame extends JFrame {
 	private PendingAdminPanel pending;
 	private FollowingPanel following;
 	private CommentPanel comment;
+	private PlaylistPanel playlistpanel;
 	
 	/**
 	 * Constructor de mainPanel
@@ -67,6 +91,7 @@ public class MainFrame extends JFrame {
 		pending = new PendingAdminPanel();
 		following = new FollowingPanel();
 		comment = new CommentPanel();
+		playlistpanel = new PlaylistPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
@@ -94,6 +119,7 @@ public class MainFrame extends JFrame {
 		container.add(PENDINGPANEL, pending);
 		container.add(FOLLOWINGPANEL, following);
 		container.add(COMMENTPANEL, comment);
+		container.add(PLAYLISTPANEL, playlistpanel);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -187,7 +213,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void mostrarFollowing() {
-		pending.updateTables();
+		following.updateTable();
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), FOLLOWINGPANEL);
 	}
@@ -196,6 +222,12 @@ public class MainFrame extends JFrame {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), COMMENTPANEL);
 		this.comment.updateTables(song);
+	}
+	
+	public void mostrarPlaylist() {
+		playlistpanel.updateTables();
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), PLAYLISTPANEL);
 	}
 	
 	public void updateSideBar() {
@@ -212,6 +244,6 @@ public class MainFrame extends JFrame {
 		this.register.updateSideBar();
 		this.following.updateSideBar();
 		this.comment.updateSideBar();
-
+		this.playlistpanel.updateSideBar();
 	}
 }

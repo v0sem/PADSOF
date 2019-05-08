@@ -8,9 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import padsof.swing.items.StandardButton;
 import padsof.system.System;
 import padsof.user.User;
-import padsof.swing.items.StandardButton;
 
 @SuppressWarnings("serial")
 public class UserInfoPanel extends JPanel {
