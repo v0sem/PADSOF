@@ -18,10 +18,6 @@ import padsof.user.UserType;
 
 @SuppressWarnings("serial")
 public class Song extends CommentableObject {
-	/**
-	 * Guarda el player de esta cancion
-	 */
-	private transient Mp3Player songPlayer;
 	
 	/**
 	 * Guarda si la cancion tiene contenido explicito o no

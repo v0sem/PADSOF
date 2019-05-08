@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import padsof.playable.Album;
+import padsof.playable.CommentableObject;
 import padsof.playable.PlayableObject;
 import padsof.playable.Playlist;
 import padsof.playable.Song;
@@ -48,7 +49,9 @@ public class MainControl implements ActionListener {
 			u.follow(p.getAuthor());
 			JOptionPane.showMessageDialog(this.panel, u.getName() + " esta siguiendo a " + p.getAuthor().getName());
 		} else if(event.getSource().equals(panel.getComment())) {
-			MainFrame.getInstance().mostrarMainPanel(); //TODO:Comment panel
+			PlayableObject p = panel.getTablita().getSelected();
+			
+			MainFrame.getInstance().mostrarComment((CommentableObject) p); //TODO:Comment panel
 		} else if(event.getSource().equals(panel.getSearchBar().getSearchButton())) {
 			List<PlayableObject> list = System.getInstance().search(
 					panel.getSearchBar().getSearchField().getText()
