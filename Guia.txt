@@ -1,0 +1,36 @@
+Crear un nuevo usuario: -Boton de Registrarse del Side Bar
+			-Introducir campos (fecha en formato dd/mm/yyyy)
+			-Boton de Registrarse del Panel
+
+Iniciar Sesion:		-Boton Iniciar Sesion del Side Bar
+			-Introducir campos
+			-Boton del panel
+
+Añadir un audio:	-Boton añadir un audio Side Bar (Debes estar loggeado)
+			-Rellenar campos con el boton de elegir fichero. Elegir un archivo.mp3
+			-Boton del panel
+
+Crear Playlist:		-Boton Mis Listas del Side Bar
+			-Crear nueva Playlist. Introducir Titulo 
+
+Crear Album:		-Boton Mis Albums del Side Bar
+			-Crear nuevo Album. Introducir Titulo y año
+
+Añadir un audio/album a una playlist:
+			-Buscarlo en inicio, seleccionar
+			-Boton de Añadir A
+			-Introducir nombre exacto de la Playlist 
+
+Añadir un audio a un album:
+			-Buscarlo en mis audios, seleccionar
+			-Boton de Añadir A Album
+			-Introducir nombre exacto del Album
+
+Comentar y ver los comentarios de una cancion:
+			-Buscarla en inicio, seleccionar
+			-Boton de Comentar
+			-Para comentar rellenar TextField y darle al boton a la derecha del TextField
+
+Seguir un usuario:
+			-Buscar una cancion o album suyo en inicio, seleccionar
+			-Boton de seguir
