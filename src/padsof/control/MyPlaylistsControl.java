@@ -22,14 +22,12 @@ public class MyPlaylistsControl implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getPlayButton())) {
 			panel.getTable().getSelected().play();
-		}
-		if (event.getSource().equals(panel.getDeleteButton())) {
+		} else if (event.getSource().equals(panel.getDeleteButton())) {
 			if(panel.getTable().getSelected().getClass() == Playlist.class) {
 				System.getInstance().deletePlaylist((Playlist) panel.getTable().getSelected());
 				MainFrame.getInstance().mostrarMyPlaylists();
 			}
-		}
-		if (event.getSource().equals(panel.getCreateButton())) {
+		} else if (event.getSource().equals(panel.getCreateButton())) {
 			String title = JOptionPane.showInputDialog("Titulo para la nueva lista:");
 			if (title != null) { 
 				if (title.isEmpty()) {
@@ -40,6 +38,9 @@ public class MyPlaylistsControl implements ActionListener {
 					MainFrame.getInstance().mostrarMyPlaylists();
 				}
 			}
+		} else if (event.getSource().equals(panel.getShowButton())) {
+			Playlist p = (Playlist) panel.getTable().getSelected();
+			MainFrame.getInstance().mostrarPlaylist(p);
 		}
 	}
 

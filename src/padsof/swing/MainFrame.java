@@ -1,12 +1,5 @@
 package padsof.swing;
 
-import javax.swing.*;
-
-import padsof.control.*;
-import padsof.playable.CommentableObject;
-import padsof.system.System;
-
-import java.awt.*;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,9 +10,12 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import padsof.control.AddAudioControl;
 import padsof.control.AdminControl;
+import padsof.control.AlbumControl;
+import padsof.control.CommentControl;
 import padsof.control.FollowingControl;
 import padsof.control.GoPremiumControl;
 import padsof.control.LoginControl;
@@ -28,7 +24,11 @@ import padsof.control.MyAlbumsControl;
 import padsof.control.MyPlaylistsControl;
 import padsof.control.MySongsControl;
 import padsof.control.PendingControl;
+import padsof.control.PlaylistControl;
 import padsof.control.RegisterControl;
+import padsof.playable.Album;
+import padsof.playable.CommentableObject;
+import padsof.playable.Playlist;
 import padsof.system.System;
 
 public class MainFrame extends JFrame {
@@ -49,7 +49,8 @@ public class MainFrame extends JFrame {
 	final static String FOLLOWINGPANEL = "Following";
 	final static String COMMENTPANEL = "Comments";
 	final static String PLAYLISTPANEL = "Playlist Table";
-
+	final static String ALBUMPANEL = "Album Table";
+  
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
@@ -65,6 +66,7 @@ public class MainFrame extends JFrame {
 	private FollowingPanel following;
 	private CommentPanel comment;
 	private PlaylistPanel playlistpanel;
+	private AlbumPanel albumpanel;
 	
 	/**
 	 * Constructor de mainPanel
@@ -92,6 +94,7 @@ public class MainFrame extends JFrame {
 		following = new FollowingPanel();
 		comment = new CommentPanel();
 		playlistpanel = new PlaylistPanel();
+		albumpanel = new AlbumPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
@@ -104,6 +107,8 @@ public class MainFrame extends JFrame {
 		pending.setControlador(new PendingControl(pending));
 		main.setControlador(new MainControl(main));
 		following.setControlador(new FollowingControl(following));
+		playlistpanel.setControlador(new PlaylistControl(playlistpanel));
+		albumpanel.setControlador(new AlbumControl(albumpanel));
 		comment.setControlador(new CommentControl(comment));
 		
 		container.add(MAINPANEL, main);
@@ -120,13 +125,14 @@ public class MainFrame extends JFrame {
 		container.add(FOLLOWINGPANEL, following);
 		container.add(COMMENTPANEL, comment);
 		container.add(PLAYLISTPANEL, playlistpanel);
+		container.add(ALBUMPANEL, albumpanel);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -138,7 +144,7 @@ public class MainFrame extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			}
 		});
 		this.setResizable(false);
@@ -218,16 +224,22 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), FOLLOWINGPANEL);
 	}
 	
+	public void mostrarPlaylist(Playlist p) {
+		playlistpanel.updateTables(p);
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), PLAYLISTPANEL);
+	}
+  
 	public void mostrarComment(CommentableObject song) {
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), COMMENTPANEL);
 		this.comment.updateTables(song);
 	}
 	
-	public void mostrarPlaylist() {
-		playlistpanel.updateTables();
+	public void mostrarAlbum(Album p) {
+		albumpanel.updateTables(p);
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
-		cl.show(this.getContentPane(), PLAYLISTPANEL);
+		cl.show(this.getContentPane(), ALBUMPANEL);
 	}
 	
 	public void updateSideBar() {
@@ -245,5 +257,6 @@ public class MainFrame extends JFrame {
 		this.following.updateSideBar();
 		this.comment.updateSideBar();
 		this.playlistpanel.updateSideBar();
+		this.albumpanel.updateSideBar();
 	}
 }

@@ -22,10 +22,9 @@ public class MyPlaylistsPanel extends JPanel {
 	private ScrollableJTablePlayable table;
 	
 	private StandardButton deleteButton;
-	
 	private StandardButton playButton;
-	
 	private StandardButton createButton;
+	private StandardButton showButton;
 	
 	private JLabel title;
 	
@@ -49,9 +48,11 @@ public class MyPlaylistsPanel extends JPanel {
 		deleteButton = new StandardButton("Borrar", 90, 25);
 		playButton = new StandardButton("Play", 70, 25);
 		createButton = new StandardButton("Nueva lista", 160, 25);
+		showButton = new StandardButton("Show", 100, 25);
 		this.add(deleteButton);
 		this.add(playButton);
 		this.add(createButton);
+		this.add(showButton);
 		
 		table = new ScrollableJTablePlayable(500, 285);
 		this.add(table);
@@ -64,6 +65,8 @@ public class MyPlaylistsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, playButton, 10, SpringLayout.SOUTH, table);
 		layout.putConstraint(SpringLayout.EAST, createButton, -20, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.NORTH, createButton, 10, SpringLayout.SOUTH, table);
+		layout.putConstraint(SpringLayout.EAST, showButton, -220, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, showButton, 10, SpringLayout.SOUTH, table);
 		
 		this.setPreferredSize(new Dimension(800, 450));
 	}
@@ -82,6 +85,7 @@ public class MyPlaylistsPanel extends JPanel {
 		this.deleteButton.addActionListener(controlador);
 		this.playButton.addActionListener(controlador);
 		this.createButton.addActionListener(controlador);
+		this.showButton.addActionListener(controlador);
 	}
 	
 	public void updateTables(){
@@ -114,5 +118,8 @@ public class MyPlaylistsPanel extends JPanel {
 	public StandardButton getCreateButton() {
 		return createButton;
 	}
-	
+
+	public StandardButton getShowButton() {
+		return showButton;
+	}
 }
