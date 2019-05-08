@@ -5,6 +5,7 @@
 
 package padsof.playable;
 
+import pads.musicPlayer.Mp3Player;
 import padsof.Status;
 import padsof.system.System;
 import padsof.user.User;
@@ -12,6 +13,11 @@ import padsof.user.User;
 @SuppressWarnings("serial")
 public abstract class PlayableObject implements java.io.Serializable {
 
+	/**
+	 * Guarda el player de esta cancion
+	 */
+	protected transient Mp3Player songPlayer;
+	
 	/**
 	 * Constructor de playable object
 	 * 
