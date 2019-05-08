@@ -99,12 +99,19 @@ public class RegisterPanel extends JPanel {
 		this.setPreferredSize(new Dimension(400, 150));
 	}
 	
+	/**
+	 * Actualiza la barra lateral del panel
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
 	}
 	
+	/**
+	 * Establece el controlador del panel
+	 * @param controlador
+	 */
 	public void setControlador(ActionListener controlador){
 		this.regButton.addActionListener(controlador);
 	}

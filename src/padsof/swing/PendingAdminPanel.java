@@ -38,6 +38,9 @@ public class PendingAdminPanel extends JPanel{
 	
 	private SideBarPanel sideBar;
 	
+	/**
+	 * Constructor de PendingAdminPanel
+	 */
 	public PendingAdminPanel() {
 		layout = new SpringLayout();
 		this.setLayout(layout);
@@ -81,6 +84,9 @@ public class PendingAdminPanel extends JPanel{
 		this.setPreferredSize(new Dimension(800, 450));
 	}
 	
+	/**
+	 * Actualiza las tablas del panel
+	 */
 	public void updateTables() {
 		if(reportes != null)
 			this.remove(reportes);
@@ -112,12 +118,19 @@ public class PendingAdminPanel extends JPanel{
 		layout.putConstraint(SpringLayout.NORTH, reportes, 0, SpringLayout.VERTICAL_CENTER, this);
 	}
 	
+	/**
+	 * Actualiza la barra lateral del panel
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
 	}
 	
+	/**
+	 * Establece el controlador del panel
+	 * @param controlador
+	 */
 	public void setControlador(ActionListener controlador){
 		this.approveSong.addActionListener(controlador);
 		this.setExplicit.addActionListener(controlador);
@@ -127,34 +140,66 @@ public class PendingAdminPanel extends JPanel{
 		this.punish.addActionListener(controlador);
 	}
 
+	/**
+	 * Getter del boton de verificar la cancion
+	 * @return boton de verificar la cancion
+	 */
 	public StandardButton getApproveSong() {
 		return approveSong;
 	}
-
+	
+	/**
+	 * Getter del boton de establecer explicita
+	 * @return boton de establecer explicita
+	 */
 	public StandardButton getSetExplicit() {
 		return setExplicit;
 	}
 
+	/**
+	 * Getter del boton de rechazar la cancion
+	 * @return boton de rechazar la cancion
+	 */
 	public StandardButton getRejectSong() {
 		return rejectSong;
 	}
 
+	/**
+	 * Getter del boton de reproducir
+	 * @return boton de reproducir
+	 */
 	public StandardButton getPlay() {
 		return play;
 	}
 
+	/**
+	 * Getter del boton de aceptar el reporte
+	 * @return boton de aceptar el reporte
+	 */
 	public StandardButton getApproveReport() {
 		return approveReport;
 	}
 
+	/**
+	 * Getter del boton de rechazar el reporte
+	 * @return boton de rechazar el reporte
+	 */
 	public StandardButton getPunish() {
 		return punish;
 	}
 
+	/**
+	 * Getter de la tabla de canciones pendientes
+	 * @return tabla de canciones pendientes
+	 */
 	public ScrollableJTablePlayable getCanciones() {
 		return canciones;
 	}
 
+	/**
+	 * Getter de la tabla de reportes pendientes
+	 * @return tabla de reportes
+	 */
 	public ScrollableJTableReport getReportes() {
 		return reportes;
 	}

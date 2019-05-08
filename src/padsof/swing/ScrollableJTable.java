@@ -25,6 +25,10 @@ public abstract class ScrollableJTable<T> extends JPanel {
 	DefaultTableModel tableModel;
 	List<T> objectList;
 
+	/**
+	 * Constructor de la tabla con scroll
+	 * @param titulos Cabeceras de la tabla
+	 */
 	public ScrollableJTable(String[] titulos) {
 		objectList = new ArrayList<T>();
 		
@@ -45,6 +49,12 @@ public abstract class ScrollableJTable<T> extends JPanel {
 		initializeUI(table);
 	}
 	
+	/**
+	 * Constructor de la tabla con scroll
+	 * @param titulos Cabeceras de la tabla
+	 * @param ancho Anchura de la tabla
+	 * @param altura Altura de la tabla
+	 */
 	public ScrollableJTable(String[] titulos, int ancho, int altura) {
 		objectList = new ArrayList<T>();
 		
@@ -65,6 +75,10 @@ public abstract class ScrollableJTable<T> extends JPanel {
 		initializeUI(table);
 	}
 
+	/**
+	 * Inicializa la interfaz dada la tabla
+	 * @param table Tabla a inicializar
+	 */
 	private void initializeUI(JTable table) {
 		BorderLayout layout = new BorderLayout();
 		setLayout(layout);
@@ -78,24 +92,41 @@ public abstract class ScrollableJTable<T> extends JPanel {
 		add(pane, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Insertar un solo elemento
+	 */
 	abstract public void insertSingle(T a);
 	
+	/**
+	 * Insertar una lista de elementos
+	 */
 	abstract public void insertMultiple(List<? extends T> a);
 	
 	public T getByIndex(int fila) {
 		return objectList.get(fila);
 	}
 	
+	/**
+	 * Obtener el elemento seleccionado de la tabla
+	 * @return Elemento seleccionado de la tabla
+	 */
 	public T getSelected() {
 		int index = table.getSelectedRow();
 		
 		return objectList.get(index);
 	}
 	
+	/**
+	 * Eliminar los contenidos de la tabla
+	 */
 	public void resetTable() {
 		tableModel.setRowCount(0);
 	}
 	
+	/**
+	 * Eliminar un elemento de la tabla dado su indice
+	 * @param poo elemento a eliminar
+	 */
 	public void delByIndex(PlayableObject poo) {
 		if (!objectList.contains(poo)) {
 			return;

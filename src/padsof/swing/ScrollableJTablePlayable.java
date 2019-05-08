@@ -15,14 +15,25 @@ import padsof.playable.PlayableObject;
 public class ScrollableJTablePlayable extends ScrollableJTable<PlayableObject> {
 	private static String[] titulos = {"Titulo", "Autor", "Duracion"};
 
+	/**
+	 * Constructor de la tabla
+	 */
 	public ScrollableJTablePlayable() {
 		super(titulos);
 	}
 
+	/**
+	 * Constructor de la tabla
+	 * @param ancho Anchura de la tabla
+	 * @param altura Altura de la tabla
+	 */
 	public ScrollableJTablePlayable(int ancho, int altura) {
 		super(titulos, ancho, altura);
 	}
-	
+
+	/**
+	 * Insertar un solo reproducible
+	 */
 	@Override
 	public void insertSingle(PlayableObject po) {
 		objectList.add(po);
