@@ -1,5 +1,6 @@
 package padsof.swing;
 
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,8 @@ public class MainPanel extends JPanel {
 		
 		layout.putConstraint(SpringLayout.EAST, addPlaylist, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, addPlaylist, 0, SpringLayout.SOUTH, this);
+
+		this.setPreferredSize(new Dimension(800, 450));
 	}
 	
 	public void updateTables() {
