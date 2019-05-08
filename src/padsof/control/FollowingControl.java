@@ -3,10 +3,8 @@ package padsof.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import padsof.playable.Album;
 import padsof.swing.FollowingPanel;
 import padsof.swing.MainFrame;
-import padsof.swing.MyAlbumsPanel;
 import padsof.system.System;
 import padsof.user.User;
 

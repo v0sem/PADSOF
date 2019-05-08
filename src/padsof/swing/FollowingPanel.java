@@ -3,14 +3,11 @@ package padsof.swing;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.playable.Album;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 import padsof.user.User;
