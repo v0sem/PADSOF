@@ -15,6 +15,7 @@ public class AddAudioPanel extends JPanel {
 	private StandardButton button;
 	private JLabel pathLabel;
 	private JTextField pathField;
+	private StandardButton path;
 	private JLabel title;
 	private SideBarPanel sideBar;
 
@@ -47,13 +48,17 @@ public class AddAudioPanel extends JPanel {
 		pathLabel = new JLabel("Ruta al archivo: ");
 		pathLabel.setFont(new Font("Roboto", Font.BOLD, 14));
 		this.add(pathLabel);
+		path = new StandardButton("Choose File", 150, 40);
+		this.add(path);
 		pathField = new JTextField(20);
 		this.add(pathField);
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, pathLabel, -17, SpringLayout.HORIZONTAL_CENTER, this);
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, pathLabel, 5, SpringLayout.VERTICAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, pathField, 0, SpringLayout.NORTH, pathLabel);
 		layout.putConstraint(SpringLayout.WEST, pathField, 6, SpringLayout.EAST, pathLabel);
-	
+		layout.putConstraint(SpringLayout.NORTH, path, 0, SpringLayout.NORTH, pathField);
+		layout.putConstraint(SpringLayout.WEST, path, 6, SpringLayout.EAST, pathField);
+		
 		// BUTTON
 		button = new StandardButton("Anadir audio", 150, 50);
 		this.add(button);
@@ -64,14 +69,19 @@ public class AddAudioPanel extends JPanel {
 	
 	public void setControlador(ActionListener controlador) {
 		this.button.addActionListener(controlador);
+		this.path.addActionListener(controlador);
+	}
+	
+	public JTextField getPathField() {
+		return pathField;
 	}
 	
 	public JTextField getSongTitle() {
 		return songTitleField;
 	}
 	
-	public JTextField getPath() {
-		return pathField;
+	public StandardButton getPath() {
+		return path;
 	}
 	
 	public void updateSideBar() {
