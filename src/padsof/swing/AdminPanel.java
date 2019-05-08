@@ -117,7 +117,10 @@ public class AdminPanel extends JPanel {
 		
 		this.setPreferredSize(new Dimension(800, 450));
 	}
-	
+
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
@@ -128,27 +131,51 @@ public class AdminPanel extends JPanel {
 		this.pendientes.addActionListener(controlador);
 		this.guardar.addActionListener(controlador);
 	}
-	
+
+	/**
+	 * Getter del boton de pendientes
+	 * @return
+	 */
 	public StandardButton getPendientes() {
 		return pendientes;
 	}
 
+	/**
+	 * Getter del boton de guardar
+	 * @return boton de guardar
+	 */
 	public StandardButton getGuardar() {
 		return guardar;
 	}
 
+	/**
+	 * Getter del boton de premium
+	 * @return boton de premium
+	 */
 	public JTextField getPremiumEurosBox() {
 		return premiumEurosBox;
 	}
 
+	/**
+	 * Getter del boton de reproducciones
+	 * @return boton de reproducciones
+	 */
 	public JTextField getPremiumReproBox() {
 		return premiumReproBox;
 	}
 
+	/**
+	 * Getter del boton de reproducciones
+	 * @return boton de reproducciones
+	 */
 	public JTextField getReproRegisBox() {
 		return reproRegisBox;
 	}
 
+	/**
+	 * Getter del boton de reproducciones
+	 * @return boton de reproducciones
+	 */
 	public JTextField getReproAnonBox() {
 		return reproAnonBox;
 	}

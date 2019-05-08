@@ -62,7 +62,10 @@ public class AlbumPanel extends JPanel {
 		
 		this.setPreferredSize(new Dimension(800, 450));
 	}
-	
+
+	/**
+	 * Updater de las tablas
+	 */
 	public void updateTables(Album list) {
 		if(tablita != null)
 			this.remove(tablita);
@@ -74,11 +77,14 @@ public class AlbumPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, tablita, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, tablita, 80, SpringLayout.NORTH, this);
 	}
-	
+
 	public SideBarPanel getSideBar() {
 		return this.sideBar;
 	}
 
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
@@ -92,7 +98,7 @@ public class AlbumPanel extends JPanel {
 	public static void setButtonWidth(int buttonWidth) {
 		AlbumPanel.buttonWidth = buttonWidth;
 	}
-
+	
 	public static void setButtonHeight(int buttonHeight) {
 		AlbumPanel.buttonHeight = buttonHeight;
 	}

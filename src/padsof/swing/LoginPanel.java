@@ -75,7 +75,10 @@ public class LoginPanel extends JPanel {
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, loginButton, 70, SpringLayout.VERTICAL_CENTER, this);
 		this.setPreferredSize(new Dimension(400, 150));
 	}
-	
+
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();

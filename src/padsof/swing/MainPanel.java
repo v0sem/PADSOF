@@ -91,7 +91,10 @@ public class MainPanel extends JPanel {
 
 		this.setPreferredSize(new Dimension(800, 450));
 	}
-	
+
+	/**
+	 * Updater de las tablas sin parametros
+	 */
 	public void updateTables() {
 		if(tablita != null)
 			this.remove(tablita);
@@ -115,7 +118,10 @@ public class MainPanel extends JPanel {
 		layout.putConstraint(SpringLayout.EAST, tablita, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, tablita, -buttonHeight - 2 * buttonSep, SpringLayout.SOUTH, this);
 	}
-	
+
+	/**
+	 * Updater de las tablas con una lista para actualizarlas
+	 */
 	public void updateTables(List<PlayableObject> list) {
 		if(tablita != null)
 			this.remove(tablita);

@@ -86,7 +86,10 @@ public class GoPremiumPanel extends JPanel {
 	public JTextField getCreditCard() {
 		return creditField;
 	}
-	
+
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();

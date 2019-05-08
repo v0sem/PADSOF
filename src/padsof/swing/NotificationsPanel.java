@@ -48,14 +48,13 @@ public class NotificationsPanel extends JPanel {
 		layout.putConstraint(SpringLayout.EAST, table, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, table, 0, SpringLayout.SOUTH, this);
 	}
-	
+
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
 		this.add(sideBar);
-	}
-	
-	public void updateTable() {
-
 	}
 }

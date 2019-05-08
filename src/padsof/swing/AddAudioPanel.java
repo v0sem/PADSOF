@@ -85,18 +85,33 @@ public class AddAudioPanel extends JPanel {
 		this.path.addActionListener(controlador);
 	}
 	
+	/**
+	 * Getter del path
+	 * @return path
+	 */
 	public JTextField getPathField() {
 		return pathField;
 	}
-	
+
+	/**
+	 * Getter del titulo de la cancion
+	 * @return titulo de la cancion
+	 */
 	public JTextField getSongTitle() {
 		return songTitleField;
 	}
-	
+
+	/**
+	 * Getter del boton path
+	 * @returnpath
+	 */
 	public StandardButton getPath() {
 		return path;
 	}
 	
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();

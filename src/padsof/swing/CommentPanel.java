@@ -76,6 +76,9 @@ public class CommentPanel extends JPanel {
 		return this.sideBar;
 	}
 
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
@@ -85,7 +88,10 @@ public class CommentPanel extends JPanel {
 	public void setControlador(ActionListener controlador){
 		this.add.addActionListener(controlador);
 	}
-	
+
+	/**
+	 * Updater de las tablas
+	 */
 	public void updateTables(CommentableObject song){
 		this.s = song;
 		this.remove(table);

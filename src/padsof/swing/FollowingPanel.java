@@ -67,7 +67,10 @@ public class FollowingPanel extends JPanel {
 		
 		this.setPreferredSize(new Dimension(800, 450));
 	}
-	
+
+	/**
+	 * Updater de las tablas
+	 */
 	public void updateTable() {
 		if (table == null)
 			return;
@@ -90,6 +93,9 @@ public class FollowingPanel extends JPanel {
 		return this.sideBar;
 	}
 
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();

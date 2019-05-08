@@ -87,6 +87,9 @@ public class MyAlbumsPanel extends JPanel {
 		return this.sideBar;
 	}
 
+	/**
+	 * Updater del sidebar
+	 */
 	public void updateSideBar() {
 		this.remove(sideBar);
 		this.sideBar = new SideBarPanel();
@@ -99,7 +102,10 @@ public class MyAlbumsPanel extends JPanel {
 		this.createButton.addActionListener(controlador);
 		this.showButton.addActionListener(controlador);
 	}
-	
+
+	/**
+	 * Updater de las tablas
+	 */
 	public void updateTables(){
 		this.remove(table);
 		table.resetTable();
