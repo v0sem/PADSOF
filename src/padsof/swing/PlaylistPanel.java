@@ -1,7 +1,6 @@
 package padsof.swing;
 
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Song;
 import padsof.playable.SongState;
-import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
 @SuppressWarnings("serial")

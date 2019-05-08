@@ -1,12 +1,9 @@
 package padsof.swing;
 
-import javax.swing.*;
-
 import padsof.control.*;
 import padsof.playable.CommentableObject;
 import padsof.system.System;
 
-import java.awt.*;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -29,7 +26,6 @@ import padsof.control.MyPlaylistsControl;
 import padsof.control.MySongsControl;
 import padsof.control.PendingControl;
 import padsof.control.RegisterControl;
-import padsof.system.System;
 
 public class MainFrame extends JFrame {
 	
