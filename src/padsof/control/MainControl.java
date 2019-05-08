@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import padsof.playable.Album;
 import padsof.playable.PlayableObject;
+import padsof.playable.Playlist;
 import padsof.playable.Song;
 import padsof.swing.MainFrame;
 import padsof.swing.MainPanel;
@@ -24,6 +25,7 @@ public class MainControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		java.lang.System.out.println("NEPEEE00");
 		if (event.getSource().equals(panel.getPlay()))
 		{ // PLAY
 			PlayableObject p = panel.getTablita().getSelected();
@@ -56,7 +58,30 @@ public class MainControl implements ActionListener {
 					, panel.getSearchBar().getAlbum().isSelected());
 			
 			panel.updateTables(list);
+		} else if (event.getSource().equals(panel.getAddPlaylist())) {
+			Boolean found = false;
+			String title = JOptionPane.showInputDialog("Titulo de la playlist:");
+			if (title != null) {
+				if (title.isEmpty()) {
+					JOptionPane.showMessageDialog(this.panel, "Es obligatorio rellenar el campo", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					List<Playlist> pl = System.getInstance().getPlaylistList();
+					for (Playlist p : pl) {
+						if (p.getTitle() == title) {
+							// Meter objeto seleccionado
+							p.addPlayableObject(panel.getTablita().getSelected());
+							// Mostrar la otra mierda
+							MainFrame.getInstance().mostrarMyPlaylists();
+							found = true;
+						}
+					}
+				}
+				
+				if (!found) {
+					JOptionPane.showMessageDialog(this.panel, "Esa playlist no existe", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		}
 	}
-
 }
