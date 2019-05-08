@@ -251,7 +251,8 @@ public class System implements java.io.Serializable {
 	}
 	
 	public void stop() {
-		this.songPlayer.stop();
+		if(this.songPlayer != null)
+			this.songPlayer.stop();
 	}
 
 	/************************** Getters ***************************/
@@ -423,12 +424,12 @@ public class System implements java.io.Serializable {
 			File newPath = new File("music" + File.separator + oldName);
 					
 			try {
-				Files.copy(oldPath.toPath(), newPath.toPath());
+				Files.copy(oldPath.toPath(), newPath.getAbsoluteFile().toPath());
 			} catch (IOException e) {
 				java.lang.System.out.println("[ERROR] Failed to copy MP3 to local library, file probably already in the library");
 				return Status.ERROR;
 			}
-			
+			s.setFileName(newPath.toPath().toString());
 			this.songList.add(s);
 
 			for (User u : loggedUser.getIsFollowed()) {

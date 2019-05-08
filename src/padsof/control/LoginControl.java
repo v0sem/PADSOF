@@ -29,6 +29,7 @@ public class LoginControl implements ActionListener {
 			this.panel.getPassword().setText("");
 			MainFrame.getInstance().updateSideBar();
 			MainFrame.getInstance().mostrarMainPanel(); //Actualiza sidebar por inicio de sesion
+			panel.updateSideBar();
 		} else {
 			JOptionPane.showMessageDialog(this.panel, "Usuario o contrasena incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
 			this.panel.getNick().setText("");

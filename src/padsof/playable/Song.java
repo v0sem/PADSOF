@@ -90,8 +90,10 @@ public class Song extends CommentableObject {
 	
 		// Try to play it
 		try {
-			Mp3Player player = new Mp3Player(fileName);
+			Mp3Player player = new Mp3Player();
+			player.add(fileName);
 			this.songPlayer = player;
+			System.getInstance().setSongPlayer(songPlayer);
 			player.play();
 		} catch (FileNotFoundException | Mp3PlayerException e) {
 			java.lang.System.out.println("[ERROR] Error playing the song");
@@ -247,6 +249,10 @@ public class Song extends CommentableObject {
 	@Override
 	public Boolean canUserPlay() {
 		// Check if song is in a playable state
+		if(System.getInstance().adminIsLogged()) {
+			return true;
+		}
+		
 		if (state != SongState.ACCEPTED) {
 			return false;
 		}
