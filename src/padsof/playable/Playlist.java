@@ -40,6 +40,7 @@ public class Playlist extends PlayableObject {
 	 * 
 	 * @return status de la operacion
 	 */
+	@Override
 	public Status play() {
 		if (this.canUserPlay() == false) {
 			return Status.ERROR;
@@ -71,7 +72,7 @@ public class Playlist extends PlayableObject {
 		// Try to play it
 		try {
 			Mp3Player player = new Mp3Player();
-			player.add((String[]) songs.toArray(new String[songs.size()]));
+			player.add(songs.toArray(new String[songs.size()]));
 			this.songPlayer = player;
 			System.getInstance().setSongPlayer(songPlayer);
 			player.play();

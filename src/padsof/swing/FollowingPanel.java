@@ -48,7 +48,7 @@ public class FollowingPanel extends JPanel {
 		
 		User u = System.getInstance().getLoggedUser();
 		if (u != null)
-			table.insertMultiple((List<User>) u.getFollows());
+			table.insertMultiple(u.getFollows());
 		
 		this.add(table);
 		
@@ -70,7 +70,7 @@ public class FollowingPanel extends JPanel {
 		
 		User u = System.getInstance().getLoggedUser();
 		if (u != null)
-			table.insertMultiple((List<User>) u.getFollows());
+			table.insertMultiple(u.getFollows());
 		
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);

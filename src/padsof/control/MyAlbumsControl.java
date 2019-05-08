@@ -6,10 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import padsof.playable.Album;
-import padsof.playable.Playlist;
 import padsof.swing.MainFrame;
 import padsof.swing.MyAlbumsPanel;
-import padsof.swing.items.AlbumCreationPanel;import padsof.swing.items.StandardButton;
+import padsof.swing.items.AlbumCreationPanel;
 import padsof.system.System;
 
 public class MyAlbumsControl implements ActionListener {

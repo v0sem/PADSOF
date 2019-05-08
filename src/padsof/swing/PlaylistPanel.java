@@ -3,20 +3,13 @@ package padsof.swing;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.playable.Album;
-import padsof.playable.PlayableObject;
 import padsof.playable.Playlist;
-import padsof.playable.Song;
-import padsof.playable.SongState;
 import padsof.swing.items.StandardButton;
-import padsof.system.System;
 
 @SuppressWarnings("serial")
 public class PlaylistPanel extends JPanel {

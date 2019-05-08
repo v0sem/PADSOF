@@ -1,12 +1,5 @@
 package padsof.swing;
 
-import javax.swing.*;
-
-import padsof.control.*;
-import padsof.playable.CommentableObject;
-import padsof.system.System;
-
-import java.awt.*;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,10 +10,12 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import padsof.control.AddAudioControl;
 import padsof.control.AdminControl;
 import padsof.control.AlbumControl;
+import padsof.control.CommentControl;
 import padsof.control.FollowingControl;
 import padsof.control.GoPremiumControl;
 import padsof.control.LoginControl;
@@ -32,6 +27,7 @@ import padsof.control.PendingControl;
 import padsof.control.PlaylistControl;
 import padsof.control.RegisterControl;
 import padsof.playable.Album;
+import padsof.playable.CommentableObject;
 import padsof.playable.Playlist;
 import padsof.system.System;
 
@@ -136,7 +132,7 @@ public class MainFrame extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -148,7 +144,7 @@ public class MainFrame extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			}
 		});
 		this.setResizable(false);
