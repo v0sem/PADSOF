@@ -369,6 +369,15 @@ public class User implements java.io.Serializable {
 	public ArrayList<User> getIsFollowed() {
 		return isFollowed;
 	}
+	
+	/**
+	 * Getter de la lista de seguidos
+	 * 
+	 * @return ArrayList de seguidos
+	 */
+	public ArrayList<User> getFollows() {
+		return follows;
+	}
 
 	/**
 	 * Getter de la lista de notificaciones
