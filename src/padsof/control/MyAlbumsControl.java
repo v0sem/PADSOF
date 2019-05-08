@@ -11,14 +11,31 @@ import padsof.swing.MyAlbumsPanel;
 import padsof.swing.items.AlbumCreationPanel;
 import padsof.system.System;
 
+/**
+ * Controlador de eventos de My Albums
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class MyAlbumsControl implements ActionListener {
 
+	/**
+	 * Panel My Albums
+	 */
 	private MyAlbumsPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel My Albums
+	 */
 	public MyAlbumsControl(MyAlbumsPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de My Album Panel
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getPlayButton())) {

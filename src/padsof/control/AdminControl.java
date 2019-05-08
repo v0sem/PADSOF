@@ -10,14 +10,31 @@ import padsof.swing.AdminPanel;
 import padsof.swing.MainFrame;
 import padsof.system.System;
 
+/**
+ * Controlador de Admin Panel
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class AdminControl implements ActionListener {
 
+	/**
+	 * Panel de Admin
+	 */
 	private AdminPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel Admin Panel
+	 */
 	public AdminControl(AdminPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos del panel de Admin.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		

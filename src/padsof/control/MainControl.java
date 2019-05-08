@@ -16,14 +16,31 @@ import padsof.swing.MainPanel;
 import padsof.system.System;
 import padsof.user.User;
 
+/**
+ * Controlador de Main Panel
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class MainControl implements ActionListener {
 
+	/**
+	 * Panel Main
+	 */
 	private MainPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel Main
+	 */
 	public MainControl(MainPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos del main
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getPlay()))

@@ -13,14 +13,31 @@ import padsof.swing.MainFrame;
 import padsof.swing.RegisterPanel;
 import padsof.system.System;
 
+/**
+ * Controlador de eventos de Register Panel
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class RegisterControl implements ActionListener {
 
+	/**
+	 * Panel Register
+	 */
 	private RegisterPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel Register
+	 */
 	public RegisterControl(RegisterPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de Register
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String nick = this.panel.getNick().getText();

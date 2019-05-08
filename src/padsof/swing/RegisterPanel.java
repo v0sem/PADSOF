@@ -12,6 +12,12 @@ import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel de registro de un nuevo usuario
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class RegisterPanel extends JPanel {
 

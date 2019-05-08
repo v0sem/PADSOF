@@ -9,6 +9,13 @@ import javax.swing.SpringLayout;
 import padsof.playable.Playlist;
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel donde se muestra el contenido de una lista
+ * de reproduccion
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class PlaylistPanel extends JPanel {
 

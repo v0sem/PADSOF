@@ -10,14 +10,31 @@ import padsof.playable.Song;
 import padsof.playable.SongState;
 import padsof.swing.PendingAdminPanel;
 
+/**
+ * Controlador de PendingPanel
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class PendingControl implements ActionListener{
 
+	/**
+	 * Panel Pending
+	 */
 	private PendingAdminPanel panel;
 
+	/**
+	 * Constructor de Clase
+	 * 
+	 * @param panel Pending Admin
+	 */
 	public PendingControl(PendingAdminPanel panel) {
 		this.panel = panel;
 	}
 	
+	/**
+	 * Accionador de Eventos de Pending
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource().equals(panel.getApproveSong())) {

@@ -10,14 +10,31 @@ import padsof.swing.GoPremiumPanel;
 import padsof.swing.MainFrame;
 import padsof.system.System;
 
+/**
+ * Controlador de Go Premium
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class GoPremiumControl implements ActionListener {
 
+	/**
+	 * Panel Go Premium
+	 */
 	private GoPremiumPanel panel;
 
+	/**
+	 * Constructor de clase
+	 *  
+	 * @param panel Go premium panel
+	 */
 	public GoPremiumControl(GoPremiumPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de Go Premium
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String fullname = this.panel.getFullName().getText();

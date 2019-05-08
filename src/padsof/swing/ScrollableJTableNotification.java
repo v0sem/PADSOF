@@ -4,6 +4,12 @@ import java.util.List;
 
 import padsof.interactions.Notification;
 
+/**
+ * Panel de tabla con scroll para insercion de notificaciones
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class ScrollableJTableNotification extends ScrollableJTable<Notification> {
 	private static String[] titulos = {};
