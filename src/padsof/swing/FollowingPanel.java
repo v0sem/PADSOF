@@ -44,7 +44,11 @@ public class FollowingPanel extends JPanel {
 		this.add(unfollowButton);
 		
 		table = new ScrollableJTableUser(500, 290);
-		table.insertMultiple(System.getInstance().getLoggedUser().getFollows());
+		
+		User u = System.getInstance().getLoggedUser();
+		if (u != null)
+			table.insertMultiple(u.getFollows());
+		
 		this.add(table);
 		
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);

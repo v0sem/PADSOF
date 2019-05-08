@@ -43,7 +43,7 @@ public class AddAudioControl implements ActionListener {
 				this.panel.getPath().setText("");
 			}
 			else {
-				JOptionPane.showMessageDialog(this.panel, "No hemos podido validar el pago. Vuelve a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this.panel, "No se ha podido subir la cancion, comprueba que no exista ya", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			this.panel.getSongTitle().setText("");
