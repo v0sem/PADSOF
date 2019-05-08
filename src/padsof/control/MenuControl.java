@@ -27,7 +27,7 @@ public class MenuControl implements ActionListener {
 			if (event.getSource().equals(panel.getAudios()))
 				MainFrame.getInstance().mostrarMySongs();
 			if (event.getSource().equals(panel.getFollowing()))
-				MainFrame.getInstance().mostrarMainPanel();
+				MainFrame.getInstance().mostrarFollowing();
 			if (event.getSource().equals(panel.getNotif()))
 				MainFrame.getInstance().mostrarNotifications();
 		}

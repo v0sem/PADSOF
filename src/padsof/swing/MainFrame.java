@@ -24,6 +24,7 @@ public class MainFrame extends JFrame {
 	final static String MYALBUMSPANEL = "My Albums";
 	final static String ADMINPANEL = "Admin basic config";
 	final static String PENDINGPANEL = "Pending song review";
+	final static String FOLLOWINGPANEL = "Following";
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
@@ -36,6 +37,7 @@ public class MainFrame extends JFrame {
 	private MyAlbumsPanel myalbums;
 	private AdminPanel admin;
 	private PendingAdminPanel pending;
+	private FollowingPanel following;
 	
 	/**
 	 * Constructor de mainPanel
@@ -60,6 +62,7 @@ public class MainFrame extends JFrame {
 		myalbums = new MyAlbumsPanel();
 		admin = new AdminPanel();
 		pending = new PendingAdminPanel();
+		following = new FollowingPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
@@ -71,6 +74,7 @@ public class MainFrame extends JFrame {
 		admin.setControlador(new AdminControl(admin));
 		pending.setControlador(new PendingControl(pending));
 		main.setControlador(new MainControl(main));
+		following.setControlador(new FollowingControl(following));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
@@ -83,6 +87,7 @@ public class MainFrame extends JFrame {
 		container.add(MYALBUMSPANEL, myalbums);
 		container.add(ADMINPANEL, admin);
 		container.add(PENDINGPANEL, pending);
+		container.add(FOLLOWINGPANEL, following);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -175,6 +180,12 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), PENDINGPANEL);
 	}
 	
+	public void mostrarFollowing() {
+		pending.updateTables();
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), FOLLOWINGPANEL);
+	}
+	
 	public void updateSideBar() {
 		this.main.updateSideBar();
 		this.notifications.updateSideBar();
@@ -185,5 +196,6 @@ public class MainFrame extends JFrame {
 		this.myalbums.updateSideBar();
 		this.admin.updateSideBar();
 		this.pending.updateSideBar();
+		this.following.updateSideBar();
 	}
 }
