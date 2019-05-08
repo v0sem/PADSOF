@@ -12,6 +12,13 @@ import padsof.swing.items.StandardButton;
 import padsof.system.System;
 import padsof.user.User;
 
+/**
+ * Panel que muestra el usuario logueado y el boton 
+ * de cerrar sesion si esta logueado
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class UserInfoPanel extends JPanel {
 	

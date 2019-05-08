@@ -4,6 +4,12 @@ import java.util.List;
 
 import padsof.user.User;
 
+/**
+ * Panel de tabla con scroll para insercion de usuarios
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class ScrollableJTableUser extends ScrollableJTable<User> {
 	private static String[] titulos = {"Nombre", "Nick"};

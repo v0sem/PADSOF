@@ -4,6 +4,12 @@ import java.util.List;
 
 import padsof.interactions.Report;
 
+/**
+ * Panel de tabla con scroll para insercion de reportes
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class ScrollableJTableReport extends ScrollableJTable<Report> {
 	private static String[] titulos = {"Cancion", "Usuario"};

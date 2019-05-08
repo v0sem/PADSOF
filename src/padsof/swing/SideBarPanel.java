@@ -10,6 +10,13 @@ import padsof.control.UserActionsControl;
 import padsof.control.UserInfoControl;
 import padsof.system.System;
 
+/**
+ * Panel de barra lateral que contiene los paneles de
+ * informacion del usuario, acciones de usuario y menu 
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class SideBarPanel extends JPanel {
 

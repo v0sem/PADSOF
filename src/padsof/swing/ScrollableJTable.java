@@ -12,6 +12,13 @@ import javax.swing.table.DefaultTableModel;
 
 import padsof.playable.PlayableObject;
 
+/**
+ * Panel abstracto de tabla con scroll. Permite la 
+ * insercion de elementos genericos
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public abstract class ScrollableJTable<T> extends JPanel {
 	JTable table;

@@ -14,6 +14,13 @@ import padsof.playable.SongState;
 import padsof.swing.items.StandardButton;
 import padsof.system.System;
 
+/**
+ * Panel de administrador que contiene las subidas 
+ * y los reportes pendientes de verificacion 
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class PendingAdminPanel extends JPanel{
 	

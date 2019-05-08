@@ -11,6 +11,12 @@ import javax.swing.SpringLayout;
 
 import padsof.swing.items.StandardButton;
 
+/**
+ * Panel con la barra de busqueda 
+ *  
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 @SuppressWarnings("serial")
 public class SearchBarPanel extends JPanel {
 
