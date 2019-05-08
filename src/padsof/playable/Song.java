@@ -11,10 +11,7 @@ import padsof.system.System;
 import padsof.user.User;
 import padsof.user.UserType;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDate;
 
 import pads.musicPlayer.*;
@@ -22,10 +19,6 @@ import pads.musicPlayer.exceptions.*;
 
 @SuppressWarnings("serial")
 public class Song extends CommentableObject {
-	/**
-	 * Guarda el player de esta cancion
-	 */
-	private transient Mp3Player songPlayer;
 	
 	/**
 	 * Guarda si la cancion tiene contenido explicito o no

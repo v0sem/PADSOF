@@ -2,15 +2,11 @@ package padsof.swing;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import padsof.control.MainControl;
 import padsof.playable.Album;
 import padsof.playable.PlayableObject;
 import padsof.playable.Song;

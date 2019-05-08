@@ -3,6 +3,7 @@ package padsof.swing;
 import javax.swing.*;
 
 import padsof.control.*;
+import padsof.playable.CommentableObject;
 import padsof.system.System;
 
 import java.awt.*;
@@ -25,6 +26,7 @@ public class MainFrame extends JFrame {
 	final static String ADMINPANEL = "Admin basic config";
 	final static String PENDINGPANEL = "Pending song review";
 	final static String FOLLOWINGPANEL = "Following";
+	final static String COMMENTPANEL = "Comments";
 	private static MainFrame instance = null;
 	private	LoginPanel login;
 	private MainPanel main;
@@ -38,6 +40,7 @@ public class MainFrame extends JFrame {
 	private AdminPanel admin;
 	private PendingAdminPanel pending;
 	private FollowingPanel following;
+	private CommentPanel comment;
 	
 	/**
 	 * Constructor de mainPanel
@@ -63,6 +66,7 @@ public class MainFrame extends JFrame {
 		admin = new AdminPanel();
 		pending = new PendingAdminPanel();
 		following = new FollowingPanel();
+		comment = new CommentPanel();
 		
 		login.setControlador(new LoginControl(login));
 		register.setControlador(new RegisterControl(register));
@@ -75,6 +79,7 @@ public class MainFrame extends JFrame {
 		pending.setControlador(new PendingControl(pending));
 		main.setControlador(new MainControl(main));
 		following.setControlador(new FollowingControl(following));
+		comment.setControlador(new CommentControl(comment));
 		
 		container.add(MAINPANEL, main);
 		container.add(LOGINPANEL, login);
@@ -88,6 +93,7 @@ public class MainFrame extends JFrame {
 		container.add(ADMINPANEL, admin);
 		container.add(PENDINGPANEL, pending);
 		container.add(FOLLOWINGPANEL, following);
+		container.add(COMMENTPANEL, comment);
 	
 		//Colocar los componentes de acuerdo a sus tamanios
 		this.setPreferredSize(new Dimension(800, 450));
@@ -186,6 +192,12 @@ public class MainFrame extends JFrame {
 		cl.show(this.getContentPane(), FOLLOWINGPANEL);
 	}
 	
+	public void mostrarComment(CommentableObject song) {
+		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
+		cl.show(this.getContentPane(), COMMENTPANEL);
+		this.comment.updateTables(song);
+	}
+	
 	public void updateSideBar() {
 		this.main.updateSideBar();
 		this.notifications.updateSideBar();
@@ -199,6 +211,7 @@ public class MainFrame extends JFrame {
 		this.login.updateSideBar();
 		this.register.updateSideBar();
 		this.following.updateSideBar();
+		this.comment.updateSideBar();
 
 	}
 }

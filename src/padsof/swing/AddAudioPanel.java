@@ -48,7 +48,7 @@ public class AddAudioPanel extends JPanel {
 		pathLabel = new JLabel("Ruta al archivo: ");
 		pathLabel.setFont(new Font("Roboto", Font.BOLD, 14));
 		this.add(pathLabel);
-		path = new StandardButton("Choose File", 150, 40);
+		path = new StandardButton("Choose File", 120, 20);
 		this.add(path);
 		pathField = new JTextField(20);
 		this.add(pathField);
@@ -56,14 +56,14 @@ public class AddAudioPanel extends JPanel {
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, pathLabel, 5, SpringLayout.VERTICAL_CENTER, this);
 		layout.putConstraint(SpringLayout.NORTH, pathField, 0, SpringLayout.NORTH, pathLabel);
 		layout.putConstraint(SpringLayout.WEST, pathField, 6, SpringLayout.EAST, pathLabel);
-		layout.putConstraint(SpringLayout.NORTH, path, 0, SpringLayout.NORTH, pathField);
-		layout.putConstraint(SpringLayout.WEST, path, 6, SpringLayout.EAST, pathField);
+		layout.putConstraint(SpringLayout.NORTH, path, 5, SpringLayout.SOUTH, pathField);
+		layout.putConstraint(SpringLayout.WEST, path, 0, SpringLayout.WEST, pathField);
 		
 		// BUTTON
-		button = new StandardButton("Anadir audio", 150, 50);
+		button = new StandardButton("Anadir audio", 200, 60);
 		this.add(button);
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, button, 100, SpringLayout.HORIZONTAL_CENTER, this);
-		layout.putConstraint(SpringLayout.VERTICAL_CENTER, button, 70, SpringLayout.VERTICAL_CENTER, this);
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, button, 110, SpringLayout.VERTICAL_CENTER, this);
 		this.setPreferredSize(new Dimension(400, 150));
 	}
 	

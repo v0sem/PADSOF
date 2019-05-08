@@ -5,9 +5,16 @@
 
 package padsof.playable;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
+import pads.musicPlayer.Mp3Player;
+import pads.musicPlayer.exceptions.Mp3PlayerException;
 import padsof.Status;
+import padsof.system.System;
+import padsof.user.User;
+import padsof.user.UserType;
 
 @SuppressWarnings("serial")
 public class Playlist extends PlayableObject {
@@ -33,13 +40,45 @@ public class Playlist extends PlayableObject {
 	 * 
 	 * @return status de la operacion
 	 */
-	@Override
 	public Status play() {
-		for (PlayableObject p : playableObjectList) {
-			if (p.play() == Status.ERROR) {
-				continue;
-			}
+		if (this.canUserPlay() == false) {
+			return Status.ERROR;
 		}
+		
+		if(songPlayer != null)
+			songPlayer.stop();
+		// Remove one from song count of the logged user (unless admin or premium)
+		User u = System.getInstance().getLoggedUser();
+		if (u != null) {
+			if (u.getUserType() == UserType.STANDARD)
+				u.increaseSongCount();
+		} else {
+			System.getInstance().increaseAnonSongCount();
+		}
+
+		// Add one to the plays of the author
+		this.getAuthor().increaseSongPlaycount();
+	
+		List<String> songs =  new ArrayList<>();
+		
+		for(PlayableObject s: playableObjectList) {
+			if(s.getClass() == Song.class)
+				songs.add(((Song) s).getFileName());
+			if(s.getClass() == Album.class)
+				songs.addAll(((Album) s).getSongList());
+		}
+		
+		// Try to play it
+		try {
+			Mp3Player player = new Mp3Player();
+			player.add((String[]) songs.toArray());
+			this.songPlayer = player;
+			System.getInstance().setSongPlayer(songPlayer);
+			player.play();
+		} catch (FileNotFoundException | Mp3PlayerException e) {
+			java.lang.System.out.println("[ERROR] Error playing the Album");
+		}
+
 		return Status.OK;
 	}
 

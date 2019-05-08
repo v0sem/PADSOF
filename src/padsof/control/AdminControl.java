@@ -6,9 +6,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import padsof.Status;
 import padsof.swing.AdminPanel;
-import padsof.swing.LoginPanel;
 import padsof.swing.MainFrame;
 import padsof.system.System;
 
