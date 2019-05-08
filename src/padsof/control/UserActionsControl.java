@@ -8,14 +8,31 @@ import padsof.swing.UserActionsPanel;
 import padsof.system.System;
 import padsof.user.UserType;
 
+/**
+ * Controlador de eventos de User Actions
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class UserActionsControl implements ActionListener {
 
+	/**
+	 * Panel User Actions
+	 */
 	private UserActionsPanel panel;
-
+	
+	/**
+	 * Constructor de Clase
+	 * 
+	 * @param panel User Actions
+	 */
 	public UserActionsControl(UserActionsPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de User Actions
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getButton1())) {

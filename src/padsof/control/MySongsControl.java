@@ -13,14 +13,31 @@ import padsof.swing.MySongsPanel;
 import padsof.system.System;
 import padsof.user.User;
 
+/**
+ * Controlador de eventos de My Songs
+ * 
+ * @author David Palomo, Pablo Sanchez, Antonio Solana
+ *
+ */
 public class MySongsControl implements ActionListener {
 
+	/**
+	 * Panel My Songs
+	 */
 	private MySongsPanel panel;
 
+	/**
+	 * Constructor de clase
+	 * 
+	 * @param panel My Songs
+	 */
 	public MySongsControl(MySongsPanel panel) {
 		this.panel = panel;
 	}
 
+	/**
+	 * Accionador de eventos de My Songs Panel
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(panel.getPlayButton())) {
