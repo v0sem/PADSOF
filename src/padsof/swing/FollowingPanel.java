@@ -44,6 +44,7 @@ public class FollowingPanel extends JPanel {
 		this.add(unfollowButton);
 		
 		table = new ScrollableJTableUser(500, 290);
+		table.insertMultiple(System.getInstance().getLoggedUser().getFollows());
 		this.add(table);
 		
 		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
@@ -52,6 +53,24 @@ public class FollowingPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, unfollowButton, 5, SpringLayout.SOUTH, table);
 		
 		this.setPreferredSize(new Dimension(800, 450));
+	}
+	
+	public void updateTable() {
+		if (table == null)
+			return;
+		
+		this.remove(table);
+		
+		table.resetTable();
+		
+		User u = System.getInstance().getLoggedUser();
+		if (u != null)
+			table.insertMultiple(u.getFollows());
+		
+		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);
+		
+		this.add(table);
 	}
 	
 	public SideBarPanel getSideBar() {
@@ -66,17 +85,6 @@ public class FollowingPanel extends JPanel {
 	
 	public void setControlador(ActionListener controlador){
 		this.unfollowButton.addActionListener(controlador);
-	}
-	
-	public void updateTables(){
-		this.remove(table);
-		table.resetTable();
-		User u = System.getInstance().getLoggedUser();
-		if (u != null) table.insertMultiple(u.getFollows());
-		this.add(table);
-		
-		layout.putConstraint(SpringLayout.WEST, table, 250, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, table, 80, SpringLayout.NORTH, this);
 	}
 
 	public StandardButton getUnfollowButton() {

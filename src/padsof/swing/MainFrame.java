@@ -181,7 +181,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void mostrarFollowing() {
-		pending.updateTables();
+		following.updateTable();
 		CardLayout cl = (CardLayout)(this.getContentPane().getLayout());
 		cl.show(this.getContentPane(), FOLLOWINGPANEL);
 	}

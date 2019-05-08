@@ -19,7 +19,12 @@ public class FollowingControl implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		User u = System.getInstance().getLoggedUser();
-		if (u != null) u.unfollow(panel.getTable().getSelected());
+		
+		if (u != null)
+			if (panel.getTable().getSelected() != null)
+				u.unfollow(panel.getTable().getSelected());
+
+		panel.updateTable();
 		MainFrame.getInstance().mostrarFollowing();
 	}
 

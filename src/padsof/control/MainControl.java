@@ -46,7 +46,7 @@ public class MainControl implements ActionListener {
 				return;
 			}
 			u.follow(p.getAuthor());
-			JOptionPane.showMessageDialog(this.panel, "Siguiendo");
+			JOptionPane.showMessageDialog(this.panel, u.getName() + " esta siguiendo a " + p.getAuthor().getName());
 		} else if(event.getSource().equals(panel.getComment())) {
 			MainFrame.getInstance().mostrarMainPanel(); //TODO:Comment panel
 		} else if(event.getSource().equals(panel.getSearchBar().getSearchButton())) {
